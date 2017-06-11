@@ -2,8 +2,6 @@
 ## Assignment 5: Investing Application
 :moneybag: :dollar: :pound: :euro: :yen: :money_with_wings:
 
-[Yahoo
-
 ### General Functions
 
 We could possibly have a class called *StockDataQuery*. A static member of that class would be the singleton *util.StockDataRetriever*. Members of *StockDataQuery* could be like *String queryString*, *Map<Integer, PriceRecord> priceRecords*, *Integer startDate*, and *Integer endDate*.
@@ -32,7 +30,7 @@ We could possibly have a class called *StockDataQuery*. A static member of that 
 
 * :+1: or :ok_hand: or :bowtie: or :fist: working code
 * :recycle: major refactoring
-* :black-nib: documentation, style edits, and logistics
+* :black_nib: documentation, style edits, and logistics
 * :exclamation: or :warning: or :construction: work in progress, broken or unfinished, untested code
 * :thought_balloon: brainstorming or "There may be a better way to do this."
 * :trollface: "I like my way better"
