@@ -29,16 +29,19 @@ We could possibly have a class called *StockDataQuery*. A static member of that 
 * Decide how to do the 5 things
 * Implement StockDataQuery like Expression from assignment 4, i.e. cannot change query once it is made, you would need to make a new query
 * <del>Actually query something!</del>
-- @steventhan to look at JUnit documentation about synchronicity
-- <del>Make interface from model to controller</del> (IStockDataQuery)
-- <del>Decide how to implement getPriceOnDay()</del>
+* @steventhan to look at JUnit documentation about synchronicity
+* <del>Make interface from model to controller</del> (IStockDataQuery)
+* <del>Decide how to implement getPriceOnDay()</del>
+* Complete the _Basket_ class
 
-### Other Other Notes
+### Emoji Meanings
+_*more than emoji one may be used at a time*_
 #### Frequent
+* :simple_smile: progress made
+* :heavy_check_mark: task completed
 * :+1: working code
 * :black_nib: documentation, style edits, and logistics
 * :recycle: major refactoring
-* :heavy_check_mark: task completed
 * :warning: untested code
 * :exclamation: broken code
 * :thought_balloon: brainstorming
