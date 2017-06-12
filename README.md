@@ -7,7 +7,7 @@
 * Look up the price of a stock or basket on a certain day
 * Determine if there is a buying opportunity for a certain stock on a certain day
 * Get historical (closing) prices for a stock for a certain date range.
-    *Historical prices are available only for business days.
+    * Historical prices are available only for business days.
 * Create a basket of stocks comprising of shares of one or more stocks.
     * Determine its price on a certain date.
 * Determine if a stock or a basket trends up during a certain date range.
@@ -17,9 +17,9 @@
 * *IStockDataQuery* is the super interface for *ISingleStockDataQuery* and *IBasketStockDataQuery*.
 * Queries should work with anything that implements the *StockDataRetriever* interface.
 
-### Other Notes
+### Optional
 
-* (Optional) Try out different investment strategies: periodically investing a fixed amount of money, buying and selling to maintain a specific balance in a basket, etc.
+* Try out different investment strategies: periodically investing a fixed amount of money, buying and selling to maintain a specific balance in a basket, etc.
 * Graph the outputs
 * Interactivity
 
