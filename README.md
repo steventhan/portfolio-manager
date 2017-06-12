@@ -25,13 +25,13 @@ We could possibly have a class called *StockDataQuery*. A static member of that 
 
 ### TODO
 
-[] Split workload with steventhan
-[] Decide how to do the 5 things
-[] Implement StockDataQuery like Expression from assignment 4, i.e. cannot change query once it is made, you would need to make a new query
-[] Actually query something!
-[] steventhan to look at JUnit documentation about synchronicity
-[X] Make interface from model to controller (IStockDataQuery)
-[] Implement how to implement getPriceOnDay()
+- [] Split workload with steventhan
+- [] Decide how to do the 5 things
+- [] Implement StockDataQuery like Expression from assignment 4, i.e. cannot change query once it is made, you would need to make a new query
+- [] Actually query something!
+- [] steventhan to look at JUnit documentation about synchronicity
+- [X] Make interface from model to controller (IStockDataQuery)
+- [] Implement how to implement getPriceOnDay()
 
 ### Other Other Notes
 
