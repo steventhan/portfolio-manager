@@ -15,16 +15,11 @@ public class GenericTest {
     IStockDataQuery myDataQuery = new StockDataQuery();
     System.out.println(myRetriever.getCurrentPrice("AAPL"));
 
-//    myRetriever.getDate(""); // Don't use the result of this directly
-//    System.out.println(myRetriever
-//            .getHistoricalPrices("MSFT", 27, 8, 1990,
-//                    1, 11, 1993));
-
     System.out.println(myRetriever
             .getHistoricalPrices("MSFT", 27, 8, 1990,
                     27, 8, 1990));
 
-    System.out.println(myRetriever.getDate("08-Aug-1990"));
+
 
   }
 

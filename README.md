@@ -34,21 +34,20 @@ We could possibly have a class called *StockDataQuery*. A static member of that 
 - <del>Decide how to implement getPriceOnDay()</del>
 
 ### Other Other Notes
-
-* :+1: or :ok_hand: or :bowtie: or :fist: working code
-* :recycle: major refactoring
+#### Frequent
+* :+1: working code
 * :black_nib: documentation, style edits, and logistics
-* :exclamation: or :warning: or :construction: work in progress, broken or unfinished, untested code
-* :thought_balloon: brainstorming or "There may be a better way to do this."
+* :recycle: major refactoring
 * :heavy_check_mark: task completed
+* :warning: untested code
+* :exclamation: broken code
+* :thought_balloon: brainstorming
+#### Infrequent
+* :scream: panic mode
+* :godmode: god mode
+* :zzz: going to bed
 * :trollface: "I like my way better"
-* :scream: or :fire: panic mode commits
-* :godmode: god mode... self explanatory
-* :zzz: signing off for the day
 
-### Cool IntelliJ Shortcuts
-sout
-pvsm
 
 
 
