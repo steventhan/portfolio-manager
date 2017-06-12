@@ -37,7 +37,7 @@ We could possibly have a class called *StockDataQuery*. A static member of that 
 ### Emoji Meanings
 _*more than emoji one may be used at a time*_
 #### Frequent
-* :simple_smile: progress made
+* :smile: progress made
 * :heavy_check_mark: task completed
 * :+1: working code
 * :black_nib: documentation, style edits, and logistics
