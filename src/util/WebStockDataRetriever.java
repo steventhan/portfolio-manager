@@ -13,14 +13,14 @@ import java.util.TreeMap;
  */
 public class WebStockDataRetriever implements StockDataRetriever {
 
-  private final WebStockDataRetriever instance = new WebStockDataRetriever();
+  private static final WebStockDataRetriever instance = new WebStockDataRetriever();
 
   private WebStockDataRetriever() {
 
   }
 
-  public WebStockDataRetriever getStockDataRetriever() {
-    return this.instance;
+  public static WebStockDataRetriever getStockDataRetriever() {
+    return instance;
   }
 
   public double getCurrentPrice(String stockSymbol) throws Exception {
