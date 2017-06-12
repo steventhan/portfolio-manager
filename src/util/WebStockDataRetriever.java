@@ -1,4 +1,3 @@
-//TODO: change access back after testing
 package util;
 
 import java.net.URL;
@@ -43,15 +42,14 @@ public class WebStockDataRetriever implements StockDataRetriever {
     return output;
   }
 
-  //TODO: if from same as to date only one record returned
   public Map<Integer, PriceRecord> getHistoricalPrices(
           String stockSymbol,
-          int fromDate, //TODO: be careful 04-Jun-17
+          int fromDate,
           int fromMonth,
           int fromYear,
           int toDate,
           int toMonth,
-          int toYear) //TODO: 2017 (maybe just 17)
+          int toYear)
           throws
           Exception {
 
@@ -90,8 +88,7 @@ public class WebStockDataRetriever implements StockDataRetriever {
 
   }
 
-  //TODO: this is just a helper, shouldn't have to call directly
-  public int toMonth(String month) {
+  private int toMonth(String month) {
     switch (month) {
       case "Jan":
         return 1;
@@ -122,8 +119,7 @@ public class WebStockDataRetriever implements StockDataRetriever {
     }
   }
 
-  //TODO: this is just a helper, shouldn't have to call directly
-  public Integer getDate(String date) {
+  private Integer getDate(String date) {
     String[] splitdate = date.split("-");
     int actualDate = Integer.parseInt(splitdate[0]);
     int actualYear = Integer.parseInt(splitdate[2]);

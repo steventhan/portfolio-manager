@@ -9,6 +9,10 @@ public class BasketStockDataQuery implements IBasketStockDataQuery {
 
   //TODO: Ask about nested maps.
 
+  public BasketStockDataQuery() {
+
+  }
+
   @Override
   public PriceRecord getPriceOnDay(Integer date) {
     return null;
@@ -19,8 +23,4 @@ public class BasketStockDataQuery implements IBasketStockDataQuery {
     return false;
   }
 
-  @Override
-  public PriceRecord getBasketPriceOnDay(Map<String, Integer> basket, Integer date) {
-    return null;
-  }
 }

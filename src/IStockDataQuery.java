@@ -6,11 +6,8 @@ import java.util.Map;
  */
 public interface IStockDataQuery {
 
-  //TODO: Date format YYYYMMDD
-
   /**
    * Looks up the price of a stock on a certain day.
-   * @param symbol
    * @param date
    * @return
    */
