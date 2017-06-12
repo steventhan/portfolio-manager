@@ -25,13 +25,13 @@ We could possibly have a class called *StockDataQuery*. A static member of that 
 
 ### TODO
 
-- [] Split workload with steventhan
-- [] Decide how to do the 5 things
-- [] Implement StockDataQuery like Expression from assignment 4, i.e. cannot change query once it is made, you would need to make a new query
-- [] Actually query something!
-- [] steventhan to look at JUnit documentation about synchronicity
-- [X] Make interface from model to controller (IStockDataQuery)
-- [] Implement how to implement getPriceOnDay()
+* Split workload with @steventhan
+* Decide how to do the 5 things
+* Implement StockDataQuery like Expression from assignment 4, i.e. cannot change query once it is made, you would need to make a new query
+* <del>Actually query something!</del>
+- @steventhan to look at JUnit documentation about synchronicity
+- <del>Make interface from model to controller</del> (IStockDataQuery)
+- <del>Decide how to implement getPriceOnDay()</del>
 
 ### Other Other Notes
 
@@ -40,6 +40,7 @@ We could possibly have a class called *StockDataQuery*. A static member of that 
 * :black_nib: documentation, style edits, and logistics
 * :exclamation: or :warning: or :construction: work in progress, broken or unfinished, untested code
 * :thought_balloon: brainstorming or "There may be a better way to do this."
+* :heavy_check_mark: task completed
 * :trollface: "I like my way better"
 * :scream: or :fire: panic mode commits
 * :godmode: god mode... self explanatory
