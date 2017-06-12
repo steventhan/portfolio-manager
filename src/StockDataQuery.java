@@ -9,11 +9,11 @@ import util.WebStockDataRetriever;
  */
 public class StockDataQuery implements IStockDataQuery {
 
-  private static StockDataRetriever dataRetriever = new WebStockDataRetriever();
-  Map<Integer, PriceRecord> prices;
+  Map<String, Integer> basket;
 
   //TODO: K.I.S.S.
   public StockDataQuery() {
+
   }
 
   @Override
@@ -32,7 +32,8 @@ public class StockDataQuery implements IStockDataQuery {
   }
 
   @Override
-  public Map<String, Basket> makeBasketGetPriceOnDay() {
+  //TODO: this is a weighted average
+  public PriceRecord getBasketPriceOnDay(Map<String, Integer> basket, Integer date) {
     return null;
   }
 
@@ -42,7 +43,7 @@ public class StockDataQuery implements IStockDataQuery {
   }
 
   @Override
-  public boolean trendsUp(Basket basket) {
+  public boolean trendsUp(Map<String, Integer> basket) {
     return false;
   }
 }

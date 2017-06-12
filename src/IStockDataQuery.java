@@ -40,8 +40,7 @@ public interface IStockDataQuery {
    * @return
    */
   //TODO: params here should echo params in Basket constructor (probably a map of symbols & shares)
-  Map<String, Basket> makeBasketGetPriceOnDay();
-
+  PriceRecord getBasketPriceOnDay(Map<String, Integer> basket, Integer date);
 
   /**
    * Determines if a stock trends up during a certain date range.
@@ -55,5 +54,5 @@ public interface IStockDataQuery {
    * @param basket
    * @return
    */
-  boolean trendsUp(Basket basket);
+  boolean trendsUp(Map<String, Integer> basket);
 }
