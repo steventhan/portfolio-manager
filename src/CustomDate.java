@@ -21,8 +21,8 @@ public class CustomDate implements Comparable<CustomDate> {
 
   public CustomDate() {
     this.date = new Date();
-    Calendar cal = Calendar.getInstance();
-    cal.setTime(this.date);
+    this.cal = Calendar.getInstance();
+    this.cal.setTime(this.date);
   }
 
   public int getDay() {
