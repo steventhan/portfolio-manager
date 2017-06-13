@@ -13,15 +13,9 @@ public class PriceRecord {
     this.lowest = lowest;
   }
 
-  public double getOpenPrice() { return open; }
-  public double getClosePrice() { return close; }
-  public double getLowestDayPrice() { return lowest; }
-  public double getHighestDayPrice() { return highest; }
-
-  @Override
-  public String toString() {
-    return String.format("{open: %f, close: %f, highest: %f, lowest: %f}",
-            open, close, highest, lowest);
-  }
+  public double getOpenPrice() { return open;}
+  public double getClosePrice() { return close;}
+  public double getLowestDayPrice() {return lowest;}
+  public double getHighestDayPrice() {return highest;}
 }
 

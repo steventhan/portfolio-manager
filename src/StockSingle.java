@@ -1,16 +1,15 @@
 import java.util.Map;
-
+import util.NewStockRetriever;
+import util.WebRetrieverSingleton;
 import util.PriceRecord;
-import util.StockDataRetriever;
-import util.WebStockDataRetriever;
 
 /**
  * Implementation of IStock
  */
-public class StockSingle implements IStockSingle {
+public class StockSingle extends StockAbstract implements IStockSingle {
   private final String symbol; // stock symbol
   private final String name; // company name
-  private final StockDataRetriever retriever;
+  private final NewStockRetriever retriever;
 
   /**
    * Constructs a new stock.
@@ -19,7 +18,7 @@ public class StockSingle implements IStockSingle {
    * @throws Exception if no symbol.
    */
   public StockSingle(String symbol) throws Exception {
-    this.retriever = WebStockDataRetriever.getStockDataRetriever();
+    this.retriever = WebRetrieverSingleton.getInstance();
     this.symbol = symbol;
     this.name = this.retriever.getName(symbol);
     if (this.name.equals("N/A")) {
@@ -35,7 +34,7 @@ public class StockSingle implements IStockSingle {
    * @param retriever retriever to be used to retrieve stock price
    * @throws Exception if no symbol.
    */
-  public StockSingle(String symbol, StockDataRetriever retriever) throws Exception {
+  public StockSingle(String symbol, NewStockRetriever retriever) throws Exception {
     this.symbol = symbol;
     this.retriever = retriever;
     this.name = this.retriever.getName(symbol);
@@ -85,19 +84,6 @@ public class StockSingle implements IStockSingle {
     return this.symbol.hashCode();
   }
 
-  /**
-   * Determines if a stock or basket trends up during a certain date range.
-   * Find the line that joins the first data point to the last data point, and find its trend.
-   * @param fromDate
-   * @param toDate
-   * @return
-   * @throws IllegalArgumentException if dates not valid.
-   */
-  @Override
-  public boolean trendsUp(String fromDate, String toDate) throws Exception {
-    return this.getPriceOnDay(fromDate) < this.getPriceOnDay(toDate);
-  }
-
   @Override
   public Map<String, Double> getClosingPrices
           (String fromDate, String toDate) throws IllegalArgumentException {
@@ -107,7 +93,7 @@ public class StockSingle implements IStockSingle {
   }
 
   private double getXDaysMovingAverage(int days) {
-
+    return 0;
   }
 
   @Override

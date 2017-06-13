@@ -15,11 +15,11 @@
 ### FYI
 
 * *IStock* is the super interface for *IStockSingle* and *IBasketStockDataRecord*.
-* Queries should work with anything that implements the *StockDataRetriever* interface.
+* Queries should work with anything that implements the *NewStockRetriever* interface.
 
 ### Optional
 
-* Be able to pass different StockDataRetrievers to implementations of IStocks
+* Be able to pass different NewStockRetrievers to implementations of IStocks
 * In the interest of implementing a Map<Strings, Stocks> in the controller, override the hasCode() and equals() methods later.
 * Try out different investment strategies: periodically investing a fixed amount of money, buying and selling to maintain a specific balance in a basket, etc.
 * Graph the outputs
@@ -48,8 +48,8 @@ _more than emoji one may be used at a time_
 * :heavy_check_mark: task completed
 * :smile: working code
 * :black_nib: documentation, style edits, and logistics
-* :recycle: major refactoring
 * :thought_balloon: brainstorming
+* :recycle: major refactoring
 * :warning: untested code
 * :exclamation: broken code
 #### Infrequent
