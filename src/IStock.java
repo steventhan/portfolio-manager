@@ -9,7 +9,7 @@ public interface IStock {
    * @return price record for that day.
    * @throws IllegalArgumentException if price not found.
    */
-  double getPriceOnDay(String date) throws IllegalArgumentException;
+  double getPriceOnDay(String date) throws Exception;
 
   /**
    * Determines if a stock or basket trends up during a certain date range.
