@@ -21,8 +21,8 @@ public class CustomDate implements Comparable<CustomDate> {
 
   public CustomDate() {
     this.date = new Date();
-    Calendar cal = Calendar.getInstance();
-    cal.setTime(this.date);
+    this.cal = Calendar.getInstance();
+    this.cal.setTime(this.date);
   }
 
   public int getDay() {
@@ -54,14 +54,24 @@ public class CustomDate implements Comparable<CustomDate> {
     return 0;
   }
 
+  public int toKeyInt() {
+    return Integer.parseInt(this.toString());
+  }
+
   @Override
   public boolean equals(Object d) {
     return d == this || (d instanceof CustomDate && this.equals((CustomDate) d));
   }
 
-  public int toKeyInt() {
-    return Integer.parseInt(String.format("%04d", this.getYear())
-            + String.format("%02d", this.getMonth()) + String.format("%02d", this.getDay()));
+  @Override
+  public String toString() {
+    return String.format("%04d", this.getYear())
+            + String.format("%02d", this.getMonth()) + String.format("%02d", this.getDay());
+  }
+
+  @Override
+  public int hashCode() {
+    return this.toString().hashCode();
   }
 }
 
