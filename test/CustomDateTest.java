@@ -11,6 +11,7 @@ public class CustomDateTest {
   private CustomDate date3;
   private CustomDate date4;
   private CustomDate date5;
+  private CustomDate date6;
 
   /**
    * Creates CustomDate objects for testing
@@ -22,6 +23,7 @@ public class CustomDateTest {
     this.date3 = new CustomDate("2000-02-01");
     this.date4 = new CustomDate("2000-01-17");
     this.date5 = new CustomDate("2007-12-22");
+    this.date6 = new CustomDate("2016-02-29");
   }
 
   @Test
@@ -81,6 +83,14 @@ public class CustomDateTest {
     Assert.assertEquals(20000201, this.date3.toKeyInt());
     Assert.assertEquals(20000117, this.date4.toKeyInt());
     Assert.assertEquals(20071222, this.date5.toKeyInt());
+  }
+
+  @Test
+  public void testGetXDaysAgo() throws Exception {
+    Assert.assertEquals("1999-11-12", this.date1.getXDaysBeforeOrAfter(-50).toString());
+    Assert.assertEquals("2004-06-15", this.date2.getXDaysBeforeOrAfter(-200).toString());
+    Assert.assertEquals("2007-02-25", this.date5.getXDaysBeforeOrAfter(-300).toString());
+    Assert.assertEquals("2016-02-19", this.date6.getXDaysBeforeOrAfter(-10).toString());
   }
 
 }
