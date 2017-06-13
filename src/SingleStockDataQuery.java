@@ -11,7 +11,7 @@ public class SingleStockDataQuery implements ISingleStockDataQuery {
 
   //TODO: K.I.S.S.
 
-  Map<Integer, PriceRecord> prices;
+  private final Map<Integer, PriceRecord> prices;
 
   /**
    * Retrieves {@code PriceRecord} for each day in the given range. The {@code fromDate} and
@@ -51,7 +51,7 @@ public class SingleStockDataQuery implements ISingleStockDataQuery {
   }
 
   @Override
-  public boolean isBuyingOpportunity(String symbol, Integer date) throws IllegalArgumentException {
+  public boolean isBuyingOpportunity(Integer date) throws IllegalArgumentException {
     return false;
   }
 
