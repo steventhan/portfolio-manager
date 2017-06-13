@@ -1,6 +1,8 @@
 package util;
 
 import java.io.FileWriter;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,7 +34,7 @@ public class WebStockDataRetriever implements StockDataRetriever {
     return instance;
   }
 
-  public double getCurrentPrice(String stockSymbol) throws Exception {
+  public double getCurrentPrice(String stockSymbol) throws IOException {
     URL url = new URL("https://download.finance.yahoo.com/d/quotes.csv?" +
             "s=" + stockSymbol + "&f=l1&e=.csv");
 
@@ -42,12 +44,11 @@ public class WebStockDataRetriever implements StockDataRetriever {
     return Double.parseDouble(output);
   }
 
-  public String getName(String stockSymbol) throws Exception {
+  public String getName(String stockSymbol) throws IOException {
     URL url = new URL("https://download.finance.yahoo.com/d/quotes.csv?" +
             "s=" + stockSymbol + "&f=n&e=.csv");
 
     String output = new Scanner(url.openStream()).next();
-
 
     return output;
   }
@@ -64,8 +65,8 @@ public class WebStockDataRetriever implements StockDataRetriever {
           Exception {
 
     // save a file for this query to refer back to later
-    File outFile = new File(stockSymbol
-            + LocalDateTime.now().toString().replaceAll("[:.]", "_") + ".txt");
+    File outFile = new File(stockSymbol + "-"
+            + LocalDateTime.now().toString().replaceAll("[:.]", "-") + ".txt");
     outFile.createNewFile();
     FileWriter outFileWriter = new FileWriter(outFile);
 

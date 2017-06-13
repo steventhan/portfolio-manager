@@ -11,15 +11,13 @@ import java.util.Scanner;
 public class FileStockDataRetriever implements StockDataRetriever {
 
   private static final FileStockDataRetriever instance = new FileStockDataRetriever();
-  private String filename;
-
+  private static final String filename = "MSFT2017-06-13T10_06_31_370.txt";
 
   private FileStockDataRetriever() {
 
   }
 
   public FileStockDataRetriever getFileStockDataRetriever() { return instance; }
-
 
   /**
    * Returns last closing price read from file.
@@ -30,8 +28,16 @@ public class FileStockDataRetriever implements StockDataRetriever {
   @Override
   public double getCurrentPrice(String stockSymbol) throws Exception {
     //TODO: finish after storing a historical prices query to a file
+    //TODO: figure out what WebStockDataRetriever.getCurrentPrice() returns if stock symbol not found
+    //TODO: figure out what WebStockDataRetriever.getCurrentPrice() returns if price for requested day not found
     File file = new File(this.filename);
-    Scanner sc = new Scanner(file).useDelimiter(",");
+    Scanner sc = new Scanner(file).useDelimiter("\\n");
+    String[] data;
+    while(sc.hasNextLine()) {
+      data = sc.next().split(",");
+
+    }
+
 
     String output = "";
 

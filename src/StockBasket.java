@@ -1,4 +1,5 @@
 import util.PriceRecord;
+import util.StockDataRetriever;
 import util.WebStockDataRetriever;
 
 import java.util.Map;
@@ -10,13 +11,37 @@ public class StockBasket implements IStock {
   //TODO: Ask about nested maps.
 
   private Map<StockSingle, Integer> basket;
+  StockDataRetriever retriever = WebStockDataRetriever.getStockDataRetriever();
+
+  /**
+   * Constructs an empty {@code StockBasket}.
+   */
+  public StockBasket() { }
 
   /**
    * Constructs a stock basket.
    * @param basket map with shares per symbol in basket.
    */
   public StockBasket(Map<StockSingle, Integer> basket) {
+    //TODO: take care of invalid stock symbols in StockSingle constructor and document it
     this.basket = basket;
+  }
+
+  /**
+   * Adds stock to the basket
+   * @param stock
+   * @param shares
+   * @throws IllegalArgumentException for null values.
+   */
+  public void add(StockSingle stock, Integer shares) throws Exception {
+    //TODO: check for valid symbol
+    if ((stock == null) || (shares == null)) throw new IllegalArgumentException();
+    if(retriever.getName(stock.toString()).equals("N/A")) throw new IllegalArgumentException();
+    if (this.basket.containsKey(stock)) {
+      this.basket.put(stock, shares + this.basket.get(stock)); }
+    else {
+      this.basket.put(stock, shares);
+    }
   }
 
   @Override
@@ -28,7 +53,7 @@ public class StockBasket implements IStock {
       res += s.getPriceOnDay(date) * this.basket.get(s);
     }
 
-    return 0.0;
+    return res;
   }
 
   @Override
