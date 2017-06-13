@@ -46,7 +46,7 @@ public class StockBasket implements IStock {
    * @throws IllegalArgumentException if
    */
   @Override
-  public double getPriceOnDay(String date) throws IllegalArgumentException {
+  public double getPriceOnDay(String date) throws Exception {
     double res = 0.0;
     for(StockSingle s : this.basket.keySet()) {
       res += s.getPriceOnDay(date) * this.basket.get(s);
@@ -55,7 +55,7 @@ public class StockBasket implements IStock {
   }
 
   @Override
-  public boolean trendsUp(String fromDate, String toDate) {
+  public boolean trendsUp(String fromDate, String toDate) throws Exception {
     double beforePrice = this.getPriceOnDay(fromDate);
     double afterPrice = this.getPriceOnDay(toDate);
     return beforePrice < afterPrice;
