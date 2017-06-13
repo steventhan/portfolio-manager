@@ -125,4 +125,5 @@ public class StockSingle implements IStockSingle {
   public String toString() {
     return this.symbol;
   }
+
 }

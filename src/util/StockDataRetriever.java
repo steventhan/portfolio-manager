@@ -1,5 +1,6 @@
 package util;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -14,7 +15,7 @@ public interface StockDataRetriever {
    * @return price.
    * @throws Exception if there is one.
    */
-  double getCurrentPrice(String stockSymbol) throws Exception;
+  double getCurrentPrice(String stockSymbol) throws IOException;
 
   /**
    * Get company name.
@@ -22,7 +23,7 @@ public interface StockDataRetriever {
    * @return name.
    * @throws Exception if there is one.
    */
-  String getName(String stockSymbol) throws Exception;
+  String getName(String stockSymbol) throws IOException;
 
   /**
    * Gets Historical prices.

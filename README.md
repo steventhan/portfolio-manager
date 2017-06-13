@@ -44,9 +44,9 @@
 ### Emoji Meanings
 _more than emoji one may be used at a time_
 #### Frequent
-* :smile: progress made
+* :construction: work in progress
 * :heavy_check_mark: task completed
-* :+1: working code
+* :smile: working code
 * :black_nib: documentation, style edits, and logistics
 * :recycle: major refactoring
 * :thought_balloon: brainstorming
