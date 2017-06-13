@@ -42,6 +42,10 @@ public class StockSingle implements IStockSingle {
     return this.symbol;
   }
 
+  public String getName() {
+    return this.name;
+  }
+
   @Override
   public int hashCode() {
     return this.symbol.hashCode();
