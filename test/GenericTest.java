@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import util.WebRetrieverSingleton;
+import util.NewStockRetriever;
+
 import java.time.LocalDate;
 
 public class GenericTest {
@@ -34,8 +37,8 @@ public class GenericTest {
   }
 
   @Test
-  public void testStockDataRetriever() throws Exception {
-    StockDataRetriever myRetriever = WebStockDataRetriever.getStockDataRetriever();
+  public void testNewStockRetriever() throws Exception {
+    NewStockRetriever myRetriever = WebRetrieverSingleton.getInstance();
 
     System.out.println(myRetriever.getName("AAPL"));
     System.out.println(myRetriever.getCurrentPrice("AAPL"));

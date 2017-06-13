@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import util.NewStockRetriever;
+import util.WebRetrieverSingleton;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,7 +11,7 @@ import java.util.Map;
  */
 public class StockBasketTest {
 
-  StockDataRetriever retriever = WebStockDataRetriever.getStockDataRetriever();
+  NewStockRetriever retriever = WebRetrieverSingleton.getInstance();
   IStock emptyBasket;
   IStock fullBasket;
 
@@ -26,7 +28,7 @@ public class StockBasketTest {
     temp.put(new StockSingle("VZ"), 387500);
     temp.put(new StockSingle("UPS"), 57000);
 
-    fullBasket = new StockBasket(temp, retriever);
+    fullBasket = new StockBasket(temp);
 
   }
 
