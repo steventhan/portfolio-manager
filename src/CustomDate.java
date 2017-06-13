@@ -9,6 +9,12 @@ public class CustomDate implements Comparable<CustomDate> {
   private Date date;
   private Calendar cal;
 
+  public CustomDate(Date date) {
+    this.date = date;
+    this.cal = Calendar.getInstance();
+    this.cal.setTime(this.date);
+  }
+
   public CustomDate(String strDate) {
     try {
       this.date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
@@ -20,9 +26,14 @@ public class CustomDate implements Comparable<CustomDate> {
   }
 
   public CustomDate() {
-    this.date = new Date();
-    this.cal = Calendar.getInstance();
-    this.cal.setTime(this.date);
+    this(new Date());
+  }
+
+  public CustomDate getXDaysBeforeOrAfter(int days) {
+    Calendar c = Calendar.getInstance();
+    c.setTime(this.date);
+    c.add(Calendar.DAY_OF_MONTH, days);
+    return new CustomDate(c.getTime());
   }
 
   public int getDay() {
@@ -55,7 +66,8 @@ public class CustomDate implements Comparable<CustomDate> {
   }
 
   public int toKeyInt() {
-    return Integer.parseInt(this.toString());
+    return Integer.parseInt(String.format("%04d", this.getYear())
+            + String.format("%02d", this.getMonth()) + String.format("%02d", this.getDay()));
   }
 
   @Override
@@ -63,10 +75,11 @@ public class CustomDate implements Comparable<CustomDate> {
     return d == this || (d instanceof CustomDate && this.equals((CustomDate) d));
   }
 
+
+
   @Override
   public String toString() {
-    return String.format("%04d", this.getYear())
-            + String.format("%02d", this.getMonth()) + String.format("%02d", this.getDay());
+    return new SimpleDateFormat("yyyy-MM-dd").format(this.date);
   }
 
   @Override
