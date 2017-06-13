@@ -18,6 +18,6 @@ public interface IStock {
    * @return true if up trend and false otherwise.
    * @throws IllegalArgumentException if dates not valid.
    */
-  boolean trendsUp(String fromDate, String toDate) throws IllegalArgumentException;
+  boolean trendsUp(String fromDate, String toDate) throws Exception;
 
 }
