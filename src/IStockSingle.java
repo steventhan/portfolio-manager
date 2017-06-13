@@ -1,7 +1,5 @@
 import java.util.Map;
 
-import util.PriceRecord;
-
 /**
  * Created by matthiasdenu on 6/12/2017.
  */
@@ -12,10 +10,10 @@ public interface IStockSingle extends IStock {
    * Historical prices are available only for business days.
    * @param fromDate start date.
    * @param toDate end date.
-   * @return Map of dates and price records. Date format is YYYY-MM-DD
+   * @return Map of dates and closing prices. Date format is YYYY-MM-DD
    * @throws IllegalArgumentException if dates not valid.
    */
-  Map<String, PriceRecord> getClosingPrices(String fromDate, String toDate)
+  Map<String, Double> getClosingPrices(String fromDate, String toDate)
           throws IllegalArgumentException;
 
   /**

@@ -1,5 +1,3 @@
-import util.PriceRecord;
-
 /**
  * Interface for all methods that a stock data query must implement.
  */
@@ -11,7 +9,7 @@ public interface IStock {
    * @return price record for that day.
    * @throws IllegalArgumentException if price not found.
    */
-  PriceRecord getPriceOnDay(String date) throws IllegalArgumentException;
+  double getPriceOnDay(String date) throws IllegalArgumentException;
 
   /**
    * Determines if a stock or basket trends up during a certain date range.
