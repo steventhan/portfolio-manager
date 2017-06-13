@@ -1,6 +1,4 @@
-import java.io.IOException;
 import java.util.Map;
-import java.util.Objects;
 
 import util.PriceRecord;
 import util.StockDataRetriever;
@@ -62,25 +60,17 @@ public class StockSingle implements IStockSingle {
   }
 
   @Override
-  public double getPriceOnDay(String dateStr) throws IllegalArgumentException {
+  public double getPriceOnDay(String dateStr) throws Exception {
     CustomDate date = new CustomDate(dateStr);
     Map<Integer, PriceRecord> priceRecords;
 
     // If the date is today date then return current price
     if (date.equals(new CustomDate())) {
-      try {
-        return retriever.getCurrentPrice(this.symbol);
-      } catch (Exception e) {
-        throw new IllegalArgumentException(e);
-      }
+      return retriever.getCurrentPrice(this.symbol);
     }
 
-    try {
-      priceRecords = retriever.getHistoricalPrices(this.symbol, date.getDay(), date.getMonth(),
-              date.getYear(), date.getDay(), date.getMonth(), date.getDay());
-    } catch (Exception e) {
-      throw new IllegalArgumentException(e);
-    }
+    priceRecords = retriever.getHistoricalPrices(this.symbol, date.getDay(), date.getMonth(),
+            date.getYear(), date.getDay(), date.getMonth(), date.getDay());
 
     PriceRecord result = priceRecords.get(date.toKeyInt());
 
@@ -104,26 +94,29 @@ public class StockSingle implements IStockSingle {
    * @throws IllegalArgumentException if dates not valid.
    */
   @Override
-  public boolean trendsUp(String fromDate, String toDate) throws IllegalArgumentException {
-    double beforePrice = this.getPriceOnDay(fromDate);
-    double afterPrice = this.getPriceOnDay(toDate);
-    return beforePrice < afterPrice;
+  public boolean trendsUp(String fromDate, String toDate) throws Exception {
+    return this.getPriceOnDay(fromDate) < this.getPriceOnDay(toDate);
   }
 
   @Override
   public Map<String, Double> getClosingPrices
           (String fromDate, String toDate) throws IllegalArgumentException {
+    CustomDate from = new CustomDate(fromDate);
+    CustomDate to = new CustomDate(toDate);
     return null;
+  }
+
+  private double getXDaysMovingAverage(int days) {
+
   }
 
   @Override
   public boolean isBuyingOpportunity(String date) throws IllegalArgumentException {
-    return false;
+    return this.getXDaysMovingAverage(50) > this.getXDaysMovingAverage(200);
   }
 
   @Override
   public String toString() {
     return this.symbol;
   }
-
 }
