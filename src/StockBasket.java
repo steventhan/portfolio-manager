@@ -61,7 +61,7 @@ public class StockBasket implements IStock {
   }
 
   @Override
-  public double getPriceOnDay(String date) throws IllegalArgumentException {
+  public double getPriceOnDay(String date) throws Exception {
     //TODO: Check the time and date, if current day, and markets open, return current price
     double res = 0.0;
 
