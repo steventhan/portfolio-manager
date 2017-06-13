@@ -1,4 +1,3 @@
-//TODO: remove unneccessary methods from interface
 package util;
 
 import java.util.Map;
@@ -20,9 +19,5 @@ public interface StockDataRetriever {
           int toDate,
           int toMonth,
           int toYear) throws Exception;
-
-  int toMonth(String month);
-
-  Integer getDate(String date);
 
 }
