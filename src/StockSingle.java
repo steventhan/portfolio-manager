@@ -2,17 +2,17 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
 
+import util.PriceRecord;
+import util.StockDataRetriever;
 import util.WebStockDataRetriever;
 
 /**
  * Implementation of IStock
  */
 public class StockSingle implements IStockSingle {
-
-  //TODO: K.I.S.S.
   private final String symbol; // stock symbol
   private final String name; // company name
-  private final WebStockDataRetriever retriever;
+  private final StockDataRetriever retriever;
 
   /**
    * Constructs a new stock.
@@ -20,35 +20,63 @@ public class StockSingle implements IStockSingle {
    * @param symbol stock.
    * @throws Exception if no symbol.
    */
-  public StockSingle(String symbol) throws IOException, IllegalArgumentException {
+  public StockSingle(String symbol) throws Exception {
     this.retriever = WebStockDataRetriever.getStockDataRetriever();
     this.symbol = symbol;
-    String temp;
-
-    try {
-      temp = this.retriever.getName(symbol);
-      if (temp.equals("N/A")) throw new IllegalArgumentException("invalid stock symbol");
-      this.name = temp;
-    } catch (IOException e) {
-      throw new IOException("unkown I/O exception", e);
+    this.name = this.retriever.getName(symbol);
+    if (this.name.equals("N/A")) {
+      throw new IllegalArgumentException("invalid stock symbol");
     }
   }
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof StockSingle)) return false;
-    return this.symbol.equals(((StockSingle) o).getSymbol());
-  }
-
-  @Override
-  public double getPriceOnDay(String date) throws IllegalArgumentException {
-    //TODO: if current day call retriever.getCurrentPrice();
-    return 0;
+  /**
+   * Constructs a new stock with the option to provide a retriever.
+   * The retriever is of type StockDateRetriever.
+   *
+   * @param symbol stock.
+   * @param retriever retriever to be used to retrieve stock price
+   * @throws Exception if no symbol.
+   */
+  public StockSingle(String symbol, StockDataRetriever retriever) throws Exception {
+    this.symbol = symbol;
+    this.retriever = retriever;
+    this.name = this.retriever.getName(symbol);
   }
 
   public String getSymbol() {
     return this.symbol;
+  }
+
+  public String getName() {
+    return this.name;
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    return this == o || (o instanceof StockSingle
+            && this.symbol.equals(((StockSingle) o).getSymbol()));
+  }
+
+  @Override
+  public double getPriceOnDay(String dateStr) throws Exception {
+    CustomDate date = new CustomDate(dateStr);
+    Map<Integer, PriceRecord> priceRecords;
+
+    // If the date is today date then return current price
+    if (date.equals(new CustomDate())) {
+      return retriever.getCurrentPrice(this.symbol);
+    }
+
+    priceRecords = retriever.getHistoricalPrices(this.symbol, date.getDay(), date.getMonth(),
+            date.getYear(), date.getDay(), date.getMonth(), date.getDay());
+
+    PriceRecord result = priceRecords.get(date.toKeyInt());
+
+    if (result != null) {
+      return result.getClosePrice();
+    }
+    throw new StockPriceNotFound("Check input date");
   }
 
   @Override
@@ -66,6 +94,9 @@ public class StockSingle implements IStockSingle {
    */
   @Override
   public boolean trendsUp(String fromDate, String toDate) throws IllegalArgumentException {
+    CustomDate from = new CustomDate(fromDate);
+    CustomDate to = new CustomDate(toDate);
+
     return false;
   }
 
