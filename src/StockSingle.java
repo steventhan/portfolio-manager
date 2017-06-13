@@ -20,17 +20,12 @@ public class StockSingle implements IStockSingle {
    * @param symbol stock.
    * @throws Exception if no symbol.
    */
-  public StockSingle(String symbol) throws IOException, IllegalArgumentException {
+  public StockSingle(String symbol) throws Exception {
     this.retriever = WebStockDataRetriever.getStockDataRetriever();
     this.symbol = symbol;
-    String temp;
-
-    try {
-      temp = this.retriever.getName(symbol);
-      if (temp.equals("N/A")) throw new IllegalArgumentException("invalid stock symbol");
-      this.name = temp;
-    } catch (IOException e) {
-      throw new IOException("unkown I/O exception", e);
+    this.name = this.retriever.getName(symbol);
+    if (this.name.equals("N/A")) {
+      throw new IllegalArgumentException("invalid stock symbol");
     }
   }
 
