@@ -6,7 +6,7 @@ import util.PriceRecord;
 /**
  * Implementation of IStock
  */
-public class StockSingle implements IStockSingle {
+public class StockSingle extends StockAbstract implements IStockSingle {
   private final String symbol; // stock symbol
   private final String name; // company name
   private final NewStockRetriever retriever;
@@ -82,19 +82,6 @@ public class StockSingle implements IStockSingle {
   @Override
   public int hashCode() {
     return this.symbol.hashCode();
-  }
-
-  /**
-   * Determines if a stock or basket trends up during a certain date range.
-   * Find the line that joins the first data point to the last data point, and find its trend.
-   * @param fromDate
-   * @param toDate
-   * @return
-   * @throws IllegalArgumentException if dates not valid.
-   */
-  @Override
-  public boolean trendsUp(String fromDate, String toDate) throws Exception {
-    return this.getPriceOnDay(fromDate) < this.getPriceOnDay(toDate);
   }
 
   @Override

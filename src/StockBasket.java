@@ -1,19 +1,26 @@
 import java.util.Map;
 
+import util.NewStockRetriever;
+import util.WebRetrieverSingleton;
+
 /**
  * Class to represent a basket of stocks.
  */
-public class StockBasket implements IStock {
+public class StockBasket extends StockAbstract {
 
   private Map<StockSingle, Integer> basket;
+  NewStockRetriever retriever;
 
   /**
-   * Constructs an empty {@code StockBasket}.
+   * Constructs an empty {@code StockBasket} with the default WebRetrieverSingleton.
    */
-  public StockBasket() { }
+  public StockBasket() {
+    this.retriever = WebRetrieverSingleton.getInstance();
+  }
 
   /**
    * Constructs a stock basket.
+   *
    * @param basket map with shares per symbol in basket.
    * @throws IllegalArgumentException if either argument is null.
    */
@@ -21,6 +28,28 @@ public class StockBasket implements IStock {
           throws IllegalArgumentException {
     if (basket == null) throw new IllegalArgumentException();
     this.basket = basket;
+    this.retriever = WebRetrieverSingleton.getInstance();
+  }
+
+  /**
+   * Constructs an empty {@code StockBasket} with the specified implementation of NewStockRetriever.
+   */
+  public StockBasket(NewStockRetriever retriever) {
+    this.retriever = retriever;
+  }
+
+  /**
+   * Constructs an empty {@code StockBasket} with the specified implementation of NewStockRetriever.
+   *
+   * @param basket    stock basket.
+   * @param retriever stock retriever.
+   * @throws IllegalArgumentException if either argument is null.
+   */
+  public StockBasket(Map<StockSingle, Integer> basket, NewStockRetriever retriever)
+          throws IllegalArgumentException {
+    if ((basket == null) || (retriever == null)) throw new IllegalArgumentException();
+    this.basket = basket;
+    this.retriever = retriever;
   }
 
   /**
@@ -52,13 +81,6 @@ public class StockBasket implements IStock {
       res += s.getPriceOnDay(date) * this.basket.get(s);
     }
     return res;
-  }
-
-  @Override
-  public boolean trendsUp(String fromDate, String toDate) throws Exception {
-    double beforePrice = this.getPriceOnDay(fromDate);
-    double afterPrice = this.getPriceOnDay(toDate);
-    return beforePrice < afterPrice;
   }
 
 }

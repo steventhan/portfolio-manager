@@ -39,7 +39,6 @@ public class FileStockRetriever implements NewStockRetriever {
 
     }
 
-
     String output = "";
 
     return Double.parseDouble(output);
