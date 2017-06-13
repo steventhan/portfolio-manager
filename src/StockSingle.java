@@ -27,9 +27,8 @@ public class StockSingle implements IStockSingle {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof StockSingle)) return false;
-    return this.symbol.equals(((StockSingle) o).getSymbol());
+    return this == o || (o instanceof StockSingle
+            && this.symbol.equals(((StockSingle) o).getSymbol()));
   }
 
   @Override
