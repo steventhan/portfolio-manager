@@ -1,6 +1,7 @@
 package util;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -26,7 +27,7 @@ public class FileStockDataRetriever implements StockDataRetriever {
    * @throws Exception
    */
   @Override
-  public double getCurrentPrice(String stockSymbol) throws Exception {
+  public double getCurrentPrice(String stockSymbol) throws FileNotFoundException {
     //TODO: finish after storing a historical prices query to a file
     //TODO: figure out what WebStockDataRetriever.getCurrentPrice() returns if stock symbol not found
     //TODO: figure out what WebStockDataRetriever.getCurrentPrice() returns if price for requested day not found
@@ -45,7 +46,7 @@ public class FileStockDataRetriever implements StockDataRetriever {
   }
 
   @Override
-  public String getName(String stockSymbol) throws Exception {
+  public String getName(String stockSymbol) {
     return null;
   }
 
