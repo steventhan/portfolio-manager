@@ -1,6 +1,9 @@
 import java.util.Map;
+import java.util.TreeMap;
+
 import util.NewStockRetriever;
 import util.WebRetrieverSingleton;
+
 import util.PriceRecord;
 
 /**
@@ -69,7 +72,7 @@ public class StockSingle extends StockAbstract implements IStockSingle {
     }
 
     priceRecords = retriever.getHistoricalPrices(this.symbol, date.getDay(), date.getMonth(),
-            date.getYear(), date.getDay(), date.getMonth(), date.getDay());
+            date.getYear(), date.getDay(), date.getMonth(), date.getYear());
 
     PriceRecord result = priceRecords.get(date.toKeyInt());
 
@@ -92,13 +95,33 @@ public class StockSingle extends StockAbstract implements IStockSingle {
     return null;
   }
 
-  private double getXDaysMovingAverage(int days) {
-    return 0;
+  private double getXDaysMovingAverage(CustomDate date, int days) throws Exception {
+    CustomDate pastDate = date.getXDaysBeforeOrAfter(days * (-2));
+    TreeMap<Integer, PriceRecord> priceRecords;
+    double total = 0;
+    int i = 0;
+
+    priceRecords = (TreeMap) retriever.getHistoricalPrices(this.symbol, pastDate.getDay(), pastDate.getMonth(),
+            pastDate.getYear(), date.getDay(), date.getMonth(), date.getYear());
+
+    for (Integer n : priceRecords.descendingKeySet()) {
+      if (i >= days) {
+        break;
+      }
+      total += priceRecords.get(n).getClosePrice();
+      i++;
+    }
+
+    if (total == 0) {
+      throw new StockPriceNotFound("Stock price not found");
+    }
+    return total / days;
   }
 
   @Override
-  public boolean isBuyingOpportunity(String date) throws IllegalArgumentException {
-    return this.getXDaysMovingAverage(50) > this.getXDaysMovingAverage(200);
+  public boolean isBuyingOpportunity(String date) throws Exception {
+    return this.getXDaysMovingAverage(new CustomDate(date), 50)
+            > this.getXDaysMovingAverage(new CustomDate(date), 200);
   }
 
   @Override

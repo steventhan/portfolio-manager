@@ -47,7 +47,8 @@ public class StockBasketTest {
   @Test
   public void testGetPriceOnDay() throws Exception {
 
-    System.out.println(fullBasket.getPriceOnDay("2017-06-13"));
+    System.out.format("%f", fullBasket.getPriceOnDay("2017-06-13"));
+
     //TODO: 11:52am  2017-06-13 returns 0.0
   }
 

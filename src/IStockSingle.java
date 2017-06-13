@@ -21,6 +21,6 @@ public interface IStockSingle extends IStock {
    * @param date format YYYY-MM-DD.
    * @return true if buying opportunity and false otherwise.
    */
-  boolean isBuyingOpportunity(String date);
+  boolean isBuyingOpportunity(String date) throws Exception;
 
 }
