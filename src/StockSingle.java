@@ -41,6 +41,9 @@ public class StockSingle implements IStockSingle {
     this.symbol = symbol;
     this.retriever = retriever;
     this.name = this.retriever.getName(symbol);
+    if (this.name.equals("N/A")) {
+      throw new IllegalArgumentException("invalid stock symbol");
+    }
   }
 
   public String getSymbol() {
@@ -59,17 +62,25 @@ public class StockSingle implements IStockSingle {
   }
 
   @Override
-  public double getPriceOnDay(String dateStr) throws Exception {
+  public double getPriceOnDay(String dateStr) throws IllegalArgumentException {
     CustomDate date = new CustomDate(dateStr);
     Map<Integer, PriceRecord> priceRecords;
 
     // If the date is today date then return current price
     if (date.equals(new CustomDate())) {
-      return retriever.getCurrentPrice(this.symbol);
+      try {
+        return retriever.getCurrentPrice(this.symbol);
+      } catch (Exception e) {
+        throw new IllegalArgumentException(e);
+      }
     }
 
-    priceRecords = retriever.getHistoricalPrices(this.symbol, date.getDay(), date.getMonth(),
-            date.getYear(), date.getDay(), date.getMonth(), date.getDay());
+    try {
+      priceRecords = retriever.getHistoricalPrices(this.symbol, date.getDay(), date.getMonth(),
+              date.getYear(), date.getDay(), date.getMonth(), date.getDay());
+    } catch (Exception e) {
+      throw new IllegalArgumentException(e);
+    }
 
     PriceRecord result = priceRecords.get(date.toKeyInt());
 
@@ -94,10 +105,9 @@ public class StockSingle implements IStockSingle {
    */
   @Override
   public boolean trendsUp(String fromDate, String toDate) throws IllegalArgumentException {
-    CustomDate from = new CustomDate(fromDate);
-    CustomDate to = new CustomDate(toDate);
-
-    return false;
+    double beforePrice = this.getPriceOnDay(fromDate);
+    double afterPrice = this.getPriceOnDay(toDate);
+    return beforePrice < afterPrice;
   }
 
   @Override
