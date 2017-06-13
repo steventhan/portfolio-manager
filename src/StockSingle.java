@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Map;
 import java.util.Objects;
 
@@ -19,10 +20,18 @@ public class StockSingle implements IStockSingle {
    * @param symbol stock.
    * @throws Exception if no symbol.
    */
-  public StockSingle(String symbol) throws Exception {
-    this.symbol = symbol;
+  public StockSingle(String symbol) throws IOException, IllegalArgumentException {
     this.retriever = WebStockDataRetriever.getStockDataRetriever();
-    this.name = this.retriever.getName(symbol);
+    this.symbol = symbol;
+    String temp;
+
+    try {
+      temp = this.retriever.getName(symbol);
+      if (temp.equals("N/A")) throw new IllegalArgumentException("invalid stock symbol");
+      this.name = temp;
+    } catch (IOException e) {
+      throw new IOException("unkown I/O exception", e);
+    }
   }
 
   /**

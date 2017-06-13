@@ -1,10 +1,15 @@
 package util;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.io.File;
 
 /**
  * This class represents a stock retriever module. It is a singleton, and so to
@@ -29,7 +34,7 @@ public class WebStockDataRetriever implements StockDataRetriever {
     return instance;
   }
 
-  public double getCurrentPrice(String stockSymbol) throws Exception {
+  public double getCurrentPrice(String stockSymbol) throws IOException {
     URL url = new URL("https://download.finance.yahoo.com/d/quotes.csv?" +
             "s=" + stockSymbol + "&f=l1&e=.csv");
 
@@ -39,12 +44,11 @@ public class WebStockDataRetriever implements StockDataRetriever {
     return Double.parseDouble(output);
   }
 
-  public String getName(String stockSymbol) throws Exception {
+  public String getName(String stockSymbol) throws IOException {
     URL url = new URL("https://download.finance.yahoo.com/d/quotes.csv?" +
             "s=" + stockSymbol + "&f=n&e=.csv");
 
     String output = new Scanner(url.openStream()).next();
-
 
     return output;
   }
@@ -60,6 +64,11 @@ public class WebStockDataRetriever implements StockDataRetriever {
           throws
           Exception {
 
+    // save a file for this query to refer back to later
+    File outFile = new File(stockSymbol + "-"
+            + LocalDateTime.now().toString().replaceAll("[:.]", "-") + ".txt");
+    outFile.createNewFile();
+    FileWriter outFileWriter = new FileWriter(outFile);
 
     URL url = new URL("https://www.google" +
             ".com/finance/historical?output=csv&q=" + stockSymbol + "&startdate=" +
@@ -79,6 +88,7 @@ public class WebStockDataRetriever implements StockDataRetriever {
 
     while (sc.hasNext()) {
       output = sc.next();
+      outFileWriter.append(output).append("\n");
       String[] data = output.split(",");
 
       PriceRecord record = new PriceRecord(
@@ -91,6 +101,7 @@ public class WebStockDataRetriever implements StockDataRetriever {
       Integer date = getDate(data[0]);
       prices.put(date, record);
     }
+    outFileWriter.close();
     return prices;
 
   }
