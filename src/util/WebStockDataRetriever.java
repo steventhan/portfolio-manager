@@ -1,10 +1,13 @@
 package util;
 
+import java.io.FileWriter;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.io.File;
 
 /**
  * This class represents a stock retriever module. It is a singleton, and so to
@@ -60,6 +63,11 @@ public class WebStockDataRetriever implements StockDataRetriever {
           throws
           Exception {
 
+    // save a file for this query to refer back to later
+    File outFile = new File(stockSymbol
+            + LocalDateTime.now().toString().replaceAll("[:.]", "_") + ".txt");
+    outFile.createNewFile();
+    FileWriter outFileWriter = new FileWriter(outFile);
 
     URL url = new URL("https://www.google" +
             ".com/finance/historical?output=csv&q=" + stockSymbol + "&startdate=" +
@@ -79,6 +87,7 @@ public class WebStockDataRetriever implements StockDataRetriever {
 
     while (sc.hasNext()) {
       output = sc.next();
+      outFileWriter.append(output).append("\n");
       String[] data = output.split(",");
 
       PriceRecord record = new PriceRecord(
@@ -91,6 +100,7 @@ public class WebStockDataRetriever implements StockDataRetriever {
       Integer date = getDate(data[0]);
       prices.put(date, record);
     }
+    outFileWriter.close();
     return prices;
 
   }
