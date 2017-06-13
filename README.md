@@ -14,24 +14,31 @@
 
 ### FYI
 
-* *IStockDataQuery* is the super interface for *ISingleStockDataQuery* and *IBasketStockDataQuery*.
+* *IStock* is the super interface for *IStockSingle* and *IBasketStockDataRecord*.
 * Queries should work with anything that implements the *StockDataRetriever* interface.
 
 ### Optional
 
+* Be able to pass different StockDataRetrievers to implementations of IStocks
+* In the interest of implementing a Map<Strings, Stocks> in the controller, override the hasCode() and equals() methods later.
 * Try out different investment strategies: periodically investing a fixed amount of money, buying and selling to maintain a specific balance in a basket, etc.
 * Graph the outputs
 * Interactivity
 
 ### TODO
 
+* @steventhan to write StockSingle class
+* @steventhan to write test for Basket class
+* @matthiasdenu to write Basket class
+* @matthiasdenu to write test for Stock class
 * Split workload with @steventhan
 * @steventhan to look at JUnit documentation about synchronicity
+* @steventhan to look at java.util.Date class
 * Complete the _Basket_ class
 * <del>Decide how to do the 5 things</del>
-* <del>Implement SingleStockDataQuery like Expression from assignment 4, i.e. cannot change query once it is made, you would need to make a new query</del>
+* <del>Implement StockSingle like Expression from assignment 4, i.e. cannot change query once it is made, you would need to make a new query</del>
 * <del>Actually query something!</del>
-* <del>Make interface from model to controller</del> (IStockDataQuery)
+* <del>Make interface from model to controller</del> (IStock)
 * <del>Decide how to implement getPriceOnDay()</del>
 
 ### Emoji Meanings
