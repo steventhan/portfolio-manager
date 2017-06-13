@@ -8,16 +8,23 @@ import java.util.TreeMap;
 
 /**
  * This class represents a stock retriever module. It is a singleton, and so to
- * get the one (and only) object call getStockDataRetriever()
+ * get the one (and only) object call getStockDataRetriever().
  */
 public class WebStockDataRetriever implements StockDataRetriever {
 
   private static final WebStockDataRetriever instance = new WebStockDataRetriever();
 
+  /**
+   * Private constructor.
+   */
   private WebStockDataRetriever() {
 
   }
 
+  /**
+   * Returns WebStockDataRetriever singleton.
+   * @return WebStockDataRetriever singleton.
+   */
   public static WebStockDataRetriever getStockDataRetriever() {
     return instance;
   }
@@ -88,6 +95,11 @@ public class WebStockDataRetriever implements StockDataRetriever {
 
   }
 
+  /**
+   * Converts string to month.
+   * @param month .
+   * @return .
+   */
   private int toMonth(String month) {
     switch (month) {
       case "Jan":
@@ -119,6 +131,11 @@ public class WebStockDataRetriever implements StockDataRetriever {
     }
   }
 
+  /**
+   * Get date.
+   * @param date .
+   * @return .
+   */
   private Integer getDate(String date) {
     String[] splitdate = date.split("-");
     int actualDate = Integer.parseInt(splitdate[0]);
@@ -131,6 +148,5 @@ public class WebStockDataRetriever implements StockDataRetriever {
     }
     return (actualYear * 100 + actualMonth) * 100 + actualDate;
   }
-
 
 }
