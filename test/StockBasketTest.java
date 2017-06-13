@@ -3,10 +3,6 @@ import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
-
-import util.StockDataRetriever;
-import util.WebStockDataRetriever;
 
 /**
  * Created by matthiasdenu on 6/12/2017.

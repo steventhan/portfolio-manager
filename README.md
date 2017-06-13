@@ -48,8 +48,8 @@ _more than emoji one may be used at a time_
 * :heavy_check_mark: task completed
 * :smile: working code
 * :black_nib: documentation, style edits, and logistics
-* :recycle: major refactoring
 * :thought_balloon: brainstorming
+* :recycle: major refactoring
 * :warning: untested code
 * :exclamation: broken code
 #### Infrequent
