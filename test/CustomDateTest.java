@@ -26,6 +26,15 @@ public class CustomDateTest {
     this.date6 = new CustomDate("2016-02-29");
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testConstructor() throws Exception {
+    new CustomDate("");
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void testConstructor0() throws Exception {
+    new CustomDate("12-27-2000");
+  }
   @Test
   public void testGetYear() throws Exception {
     Assert.assertEquals(2000, this.date1.getYear());
