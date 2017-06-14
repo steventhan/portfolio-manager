@@ -5,7 +5,7 @@
 abstract class StockAbstract implements IStock {
 
   protected void verifyDateInOrder(String fromDate, String toDate) {
-    if (new CustomDate(fromDate).compareTo(new CustomDate(toDate)) > 0) {
+    if (new CustomDate(fromDate).compareTo(new CustomDate(toDate)) >= 0) {
       throw new IllegalArgumentException("From date has to be before to date");
     }
   }

@@ -101,5 +101,9 @@ public class CustomDateTest {
     Assert.assertEquals("2004-06-15", this.date2.getXDaysBeforeOrAfter(-200).toString());
     Assert.assertEquals("2007-02-25", this.date5.getXDaysBeforeOrAfter(-300).toString());
     Assert.assertEquals("2016-02-19", this.date6.getXDaysBeforeOrAfter(-10).toString());
+
+    Assert.assertEquals("2000-05-11", this.date3.getXDaysBeforeOrAfter(100).toString());
+    Assert.assertEquals("2001-01-16", this.date4.getXDaysBeforeOrAfter(365).toString());
+    Assert.assertEquals("2017-07-13", this.date6.getXDaysBeforeOrAfter(500).toString());
   }
 }
