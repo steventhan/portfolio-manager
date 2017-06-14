@@ -35,6 +35,7 @@ public class CustomDateTest {
   public void testConstructor0() throws Exception {
     new CustomDate("12-27-2000");
   }
+
   @Test
   public void testGetYear() throws Exception {
     Assert.assertEquals(2000, this.date1.getYear());

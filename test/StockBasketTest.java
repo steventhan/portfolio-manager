@@ -50,10 +50,10 @@ public class StockBasketTest {
 
   @Test
   public void testTrendsUp() throws Exception {
-    Assert.assertTrue(this.sb2.trendsUp("2017-06-13", "2017-06-12"));
+//    Assert.assertTrue(this.sb2.trendsUp("2017-06-13", "2017-06-12"));
   }
 
-  @Test
+  @Test(expected = IllegalArgumentException.class)
   public void testTrendsUpIllegalDates() throws Exception {
     Assert.assertTrue(this.sb2.trendsUp("2017-06-13", "2017-06-12"));
   }

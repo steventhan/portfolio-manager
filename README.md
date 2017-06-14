@@ -27,16 +27,15 @@
 
 ### TODO
 
-* Document CustomDate
-* Change access to methods
+* Resolve internal TODO list items
+* Resolve all failing tests
+* Review documentation. Document all methods that require documentation.
+* Change access to methods once testing is finished
 * @steventhan to write StockSingle class
 * @steventhan to write test for Basket class
 * @matthiasdenu to write Basket class
 * @matthiasdenu to write test for Stock class
-* Split workload with @steventhan
-* @steventhan to look at JUnit documentation about synchronicity
 * @steventhan to look at java.util.Date class
-* Complete the _Basket_ class
 * <del>Decide how to do the 5 things</del>
 * <del>Implement StockSingle like Expression from assignment 4, i.e. cannot change query once it is made, you would need to make a new query</del>
 * <del>Actually query something!</del>
