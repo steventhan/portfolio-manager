@@ -1,3 +1,4 @@
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,8 +19,12 @@ public class CustomDate implements Comparable<CustomDate> {
   public CustomDate(String strDate) {
     try {
       this.date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
-    } catch (Exception e) {
-      throw new IllegalArgumentException("Unable to parse date: " + strDate);
+    } catch (ParseException e) {
+      try {
+        this.date = new SimpleDateFormat("yyyyMMdd").parse(strDate);
+      } catch (ParseException ex) {
+        throw new IllegalArgumentException("Unable to parse date: " + strDate);
+      }
     }
     this.cal = Calendar.getInstance();
     this.cal.setTime(this.date);
