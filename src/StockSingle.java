@@ -160,7 +160,8 @@ public class StockSingle extends StockAbstract implements IStockSingle {
       i++;
     }
 
-    if (total == 0) {
+    if (total == 0 || priceRecords.get(pastDate.toKeyInt()) == null
+            || priceRecords.get(date.toKeyInt()) == null) {
       throw new StockPriceNotFound("Stock price not found");
     }
     return total / days;
