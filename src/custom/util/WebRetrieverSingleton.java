@@ -1,5 +1,7 @@
-package util;
+package custom.util;
 
+
+import util.WebStockDataRetriever;
 
 /**
  * Singleton web stock data retriever.
