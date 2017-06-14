@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Map;
 
 import custom.util.CustomDate;
@@ -16,7 +17,7 @@ public class StockBasket extends StockAbstract {
    * Constructs an empty {@code StockBasket} with the default WebRetrieverSingleton.
    */
   public StockBasket() {
-    this.retriever = WebRetrieverSingleton.getInstance();
+    this(WebRetrieverSingleton.getInstance());
   }
 
   /**
@@ -37,6 +38,7 @@ public class StockBasket extends StockAbstract {
    */
   public StockBasket(NewStockRetriever retriever) {
     this.retriever = retriever;
+    this.basket = new HashMap<>();
   }
 
   /**
@@ -57,6 +59,7 @@ public class StockBasket extends StockAbstract {
 
   /**
    * Adds stock to the basket.
+   *
    * @param stock stock.
    * @param shares shares.
    * @throws IllegalArgumentException if either argument is null.
@@ -69,6 +72,17 @@ public class StockBasket extends StockAbstract {
     else {
       this.basket.put(stock, shares);
     }
+  }
+
+  /**
+   * Adds stock to the basket.
+   *
+   * @param stockSymbol stock symbol as String.
+   * @param shares shares.
+   * @throws Exception StockSingle object cannot be constructed.
+   */
+  public void add(String stockSymbol, Integer shares) throws Exception {
+    this.add(new StockSingle(stockSymbol), shares);
   }
 
   /**

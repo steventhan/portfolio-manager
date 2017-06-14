@@ -14,11 +14,14 @@ public class CustomDate implements Comparable<CustomDate> {
   private Calendar cal;
 
   public CustomDate(String strDate) {
+    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    df.setLenient(false);
     try {
-      this.date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
+      this.date = df.parse(strDate);
     } catch (ParseException e) {
       try {
-        this.date = new SimpleDateFormat("yyyyMMdd").parse(strDate);
+        df.applyPattern("yyyyMMdd");
+        this.date = df.parse(strDate);
       } catch (ParseException ex) {
         throw new IllegalArgumentException("Unable to parse date: " + strDate);
       }
