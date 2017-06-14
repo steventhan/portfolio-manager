@@ -36,6 +36,11 @@ public class CustomDateTest {
     new CustomDate("12-27-2000");
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void testUnrealDate() throws Exception {
+    new CustomDate("2017-02-29");
+  }
+
   @Test
   public void testGetYear() throws Exception {
     Assert.assertEquals(2000, this.date1.getYear());
