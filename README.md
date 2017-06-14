@@ -27,6 +27,8 @@
 
 ### TODO
 
+* Document CustomDate
+* Change access to methods
 * @steventhan to write StockSingle class
 * @steventhan to write test for Basket class
 * @matthiasdenu to write Basket class

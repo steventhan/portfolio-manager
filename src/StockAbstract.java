@@ -15,7 +15,7 @@ abstract class StockAbstract implements IStock {
    * Find the line that joins the first data point to the last data point, and find its trend.
    *
    * @param fromDate start.
-   * @param toDate   end.
+   * @param toDate end.
    * @return true if up trend and false otherwise.
    * @throws Exception if dates not valid.
    */
