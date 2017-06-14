@@ -52,6 +52,12 @@ public class StockSingleTest {
   }
 
   @Test
+  public void temp() throws Exception {
+    verizon.getPriceOnDay(today.toString()); // no exception thrown
+    verizon.trendsUp("2017-01-02", today.toString()); // exception thrown
+  }
+
+  @Test
   public void testConstructor() throws Exception {
     // legal constructor arguments
     new StockSingle("A");
@@ -182,52 +188,52 @@ public class StockSingleTest {
   @Test
   public void getClosingPrices() throws Exception {
     Map<String, Double> expectedPricesVZ = new HashMap<>();
-    expectedPricesVZ.put("6/12/2017", 47.19);
-    expectedPricesVZ.put("6/9/2017", 46.72);
-    expectedPricesVZ.put("6/8/2017", 46.19);
-    expectedPricesVZ.put("6/7/2017", 46.5);
-    expectedPricesVZ.put("6/6/2017", 46.44);
-    expectedPricesVZ.put("6/5/2017", 46.37);
-    expectedPricesVZ.put("6/2/2017", 46.44);
-    expectedPricesVZ.put("6/1/2017", 46.51);
-    expectedPricesVZ.put("5/31/2017", 46.64);
-    expectedPricesVZ.put("5/30/2017", 46.2);
-    expectedPricesVZ.put("5/26/2017", 45.32);
-    expectedPricesVZ.put("5/25/2017", 45.31);
-    expectedPricesVZ.put("5/24/2017", 45.04);
-    expectedPricesVZ.put("5/23/2017", 45.48);
-    expectedPricesVZ.put("5/22/2017", 45.48);
-    expectedPricesVZ.put("5/19/2017", 45.42);
-    expectedPricesVZ.put("5/18/2017", 45.04);
-    expectedPricesVZ.put("5/17/2017", 44.48);
-    expectedPricesVZ.put("5/16/2017", 45.31);
-    expectedPricesVZ.put("5/15/2017", 45.38);
-    expectedPricesVZ.put("5/12/2017", 45.84);
-    expectedPricesVZ.put("5/11/2017", 46.02);
+    expectedPricesVZ.put("2017-06-12", 47.19);
+    expectedPricesVZ.put("2017-06-09", 46.72);
+    expectedPricesVZ.put("2017-06-08", 46.19);
+    expectedPricesVZ.put("2017-06-07", 46.5);
+    expectedPricesVZ.put("2017-06-06", 46.44);
+    expectedPricesVZ.put("2017-06-05", 46.37);
+    expectedPricesVZ.put("2017-06-02", 46.44);
+    expectedPricesVZ.put("2017-06-01", 46.51);
+    expectedPricesVZ.put("2017-05-31", 46.64);
+    expectedPricesVZ.put("2017-05-30", 46.2);
+    expectedPricesVZ.put("2017-05-26", 45.32);
+    expectedPricesVZ.put("2017-05-25", 45.31);
+    expectedPricesVZ.put("2017-05-24", 45.04);
+    expectedPricesVZ.put("2017-05-23", 45.48);
+    expectedPricesVZ.put("2017-05-22", 45.48);
+    expectedPricesVZ.put("2017-05-19", 45.42);
+    expectedPricesVZ.put("2017-05-18", 45.04);
+    expectedPricesVZ.put("2017-05-17", 44.48);
+    expectedPricesVZ.put("2017-05-16", 45.31);
+    expectedPricesVZ.put("2017-05-15", 45.38);
+    expectedPricesVZ.put("2017-05-12", 45.84);
+    expectedPricesVZ.put("2017-05-11", 46.02);
 
     Map<String, Double> expectedPricesUPS = new HashMap<>();
-    expectedPricesUPS.put("6/12/2017", 108.94);
-    expectedPricesUPS.put("6/9/2017", 107.03);
-    expectedPricesUPS.put("6/8/2017", 106.75);
-    expectedPricesUPS.put("6/7/2017", 106.68);
-    expectedPricesUPS.put("6/6/2017", 107.43);
-    expectedPricesUPS.put("6/5/2017", 107.95);
-    expectedPricesUPS.put("6/2/2017", 107.67);
-    expectedPricesUPS.put("6/1/2017", 107.66);
-    expectedPricesUPS.put("5/31/2017", 105.97);
-    expectedPricesUPS.put("5/30/2017", 106.81);
-    expectedPricesUPS.put("5/26/2017", 105.87);
-    expectedPricesUPS.put("5/25/2017", 105.94);
-    expectedPricesUPS.put("5/24/2017", 104.72);
-    expectedPricesUPS.put("5/23/2017", 104.2);
-    expectedPricesUPS.put("5/22/2017", 103.78);
-    expectedPricesUPS.put("5/19/2017", 103.42);
-    expectedPricesUPS.put("5/18/2017", 103.19);
-    expectedPricesUPS.put("5/17/2017", 102.87);
-    expectedPricesUPS.put("5/16/2017", 104.5);
-    expectedPricesUPS.put("5/15/2017", 105.29);
-    expectedPricesUPS.put("5/12/2017", 104.13);
-    expectedPricesUPS.put("5/11/2017", 104.15);
+    expectedPricesUPS.put("2017-06-12", 108.94);
+    expectedPricesUPS.put("2017-06-09", 107.03);
+    expectedPricesUPS.put("2017-06-08", 106.75);
+    expectedPricesUPS.put("2017-06-07", 106.68);
+    expectedPricesUPS.put("2017-06-06", 107.43);
+    expectedPricesUPS.put("2017-06-05", 107.95);
+    expectedPricesUPS.put("2017-06-02", 107.67);
+    expectedPricesUPS.put("2017-06-01", 107.66);
+    expectedPricesUPS.put("2017-05-31", 105.97);
+    expectedPricesUPS.put("2017-05-30", 106.81);
+    expectedPricesUPS.put("2017-05-26", 105.87);
+    expectedPricesUPS.put("2017-05-25", 105.94);
+    expectedPricesUPS.put("2017-05-24", 104.72);
+    expectedPricesUPS.put("2017-05-23", 104.2);
+    expectedPricesUPS.put("2017-05-22", 103.78);
+    expectedPricesUPS.put("2017-05-19", 103.42);
+    expectedPricesUPS.put("2017-05-18", 103.19);
+    expectedPricesUPS.put("2017-05-17", 102.87);
+    expectedPricesUPS.put("2017-05-16", 104.5);
+    expectedPricesUPS.put("2017-05-15", 105.29);
+    expectedPricesUPS.put("2017-05-12", 104.13);
+    expectedPricesUPS.put("2017-05-11", 104.15);
 
     Map<String, Double> actualPricesVZ = verizon.getClosingPrices("2017-05-11", "2017-06-12");
     Map<String, Double> actualPricesUPS = UPS.getClosingPrices("2017-05-11", "2017-06-12");
@@ -398,6 +404,30 @@ public class StockSingleTest {
       // pass
     }
 
+    try {
+      // holiday
+      assertTrue(verizon.trendsUp(christmas.toString(), "2017-06-12"));
+      Assert.fail();
+    } catch (Exception e) {
+      // pass
+    }
+
+    try {
+      // holiday
+      assertTrue(verizon.trendsUp(dec2316.toString(), christmas.toString()));
+      Assert.fail();
+    } catch (Exception e) {
+      // pass
+    }
+
+    try {
+      // same day
+      verizon.trendsUp(today.toString(), today.toString());
+      Assert.fail();
+    } catch (Exception e) {
+      // pass
+    }
+
   }
 
   @Test
@@ -406,18 +436,15 @@ public class StockSingleTest {
     assertFalse(verizon.trendsUp("2017-04-20", "2017-06-12"));
     assertFalse(verizon.trendsUp("2017-06-12", "2017-06-12"));
 
-
     assertTrue(UPS.trendsUp("2017-04-20", "2017-06-12"));
     assertFalse(UPS.trendsUp("2017-05-30", "2017-05-31"));
     assertTrue(UPS.trendsUp("2017-06-09", "2017-06-12"));
     assertFalse(UPS.trendsUp("2017-06-12", "2017-06-12"));
 
     try {
-      //TODO: I'm getting a StockPriceNotFound exception here.
       verizon.trendsUp("2017-01-02", today.toString());
-      verizon.trendsUp(today.toString(), today.toString());
+      verizon.trendsUp("2017-01-02", today.toString());
       UPS.trendsUp("2017-01-02", today.toString());
-      UPS.trendsUp(today.toString(), today.toString());
     } catch (Exception e) {
       Assert.fail();
     }
