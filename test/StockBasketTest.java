@@ -16,6 +16,9 @@ public class StockBasketTest {
   StockBasket sb3;
   StockBasket sb4;
 
+  /**
+   * Creates stock baskets for testing purposes.
+   */
   @Before
   public void setup() throws Exception {
     this.sb1 = new StockBasket();
@@ -37,6 +40,9 @@ public class StockBasketTest {
     this.sb3.add("GOOGL", 9);
 
     this.sb4 = new StockBasket();
+    this.sb4.add("GE", 9);
+    this.sb4.add("VZ", 20);
+    this.sb4.add("DIS", 14);
   }
 
   @Test
@@ -44,6 +50,7 @@ public class StockBasketTest {
     Assert.assertEquals(0, this.sb1.size());
     Assert.assertEquals(6, this.sb2.size());
     Assert.assertEquals(4, this.sb3.size());
+    Assert.assertEquals(3, this.sb4.size());
 
     Assert.assertTrue(this.sb2.toString().contains("A: 6\n"));
     Assert.assertTrue(this.sb2.toString().contains("VZ: 7\n"));
@@ -75,9 +82,48 @@ public class StockBasketTest {
   }
 
   @Test
+  public void testGetPriceOnIllegalDay() throws Exception {
+    try {
+      this.sb2.getPriceOnDay("1900-03-04");
+      Assert.fail("Exception was not thrown for old date");
+    } catch (StockPriceNotFound e) {
+      // Pass test
+    }
+
+    try {
+      this.sb3.getPriceOnDay("2018-02-03");
+      Assert.fail("Exception was not thrown for future date");
+    } catch (StockPriceNotFound e) {
+      // Pass test
+    }
+
+    try {
+      this.sb4.getPriceOnDay("2017-01-01");
+      Assert.fail("Exception was not thrown for date without exchange activity");
+    } catch (StockPriceNotFound e) {
+      // Pass test
+    }
+
+    try {
+      this.sb4.getPriceOnDay("2017-01-02");
+      Assert.fail("Exception was not thrown for date without exchange activity");
+    } catch (StockPriceNotFound e) {
+      // Pass test
+    }
+
+    try {
+      this.sb4.getPriceOnDay("2017-06-03");
+      Assert.fail("Exception was not thrown for date without exchange activity");
+    } catch (StockPriceNotFound e) {
+      // Pass test
+    }
+  }
+
+  @Test
   public void testTrendsUp() throws Exception {
     Assert.assertTrue(this.sb2.trendsUp("2017-06-12", "2017-06-13"));
     Assert.assertTrue(this.sb2.trendsUp("2017-04-07", "2017-04-28"));
+    Assert.assertFalse(this.sb4.trendsUp("2016-07-18", "2016-10-14"));
   }
 
   @Test
@@ -85,6 +131,13 @@ public class StockBasketTest {
     try {
       this.sb2.trendsUp("2017-06-13", "2017-06-12");
       Assert.fail("Exception was not thrown when from date is after to date");
+    } catch (IllegalArgumentException e) {
+      // Pass test
+    }
+
+    try {
+      this.sb4.trendsUp("2017-06-12", "2017-06-12");
+      Assert.fail("Exception was not thrown when from date same as to date");
     } catch (IllegalArgumentException e) {
       // Pass test
     }
