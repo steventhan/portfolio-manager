@@ -52,6 +52,8 @@ public class StockBasket extends StockAbstract {
     this.retriever = retriever;
   }
 
+  //
+
   /**
    * Adds stock to the basket.
    * @param stock stock.
@@ -77,8 +79,9 @@ public class StockBasket extends StockAbstract {
   @Override
   public double getPriceOnDay(String date) throws Exception {
     double res = 0.0;
+    CustomDate day = new CustomDate(date);
     for(StockSingle s : this.basket.keySet()) {
-      res += s.getPriceOnDay(date) * this.basket.get(s);
+      res += s.getPriceOnDay(day.toString()) * this.basket.get(s);
     }
     return res;
   }
