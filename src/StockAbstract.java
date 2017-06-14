@@ -1,3 +1,5 @@
+import custom.util.CustomDate;
+
 /**
  * This class represents an abstract stock which implements operations shared between any stock
  * classes.

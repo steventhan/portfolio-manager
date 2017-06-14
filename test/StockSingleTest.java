@@ -5,8 +5,9 @@ import org.junit.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import util.NewStockRetriever;
-import util.WebRetrieverSingleton;
+import custom.util.CustomDate;
+import custom.util.NewStockRetriever;
+import custom.util.WebRetrieverSingleton;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -255,8 +256,8 @@ public class StockSingleTest {
   @Test
   public void isBuyingOppExceptions() throws Exception {
 
-    //TODO: wrong format date exception (i.e. start using CustomDate as an intermediary)
-    //TODO: use CustomDate.toString();
+    //TODO: wrong format date exception (i.e. start using custom.util.CustomDate as an intermediary)
+    //TODO: use custom.util.CustomDate.toString();
 
     try {
       assertFalse(UPS.isBuyingOpportunity(null));

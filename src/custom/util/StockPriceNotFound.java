@@ -1,3 +1,5 @@
+package custom.util;
+
 /**
  * This class represents an exception that can be thrown when a Stock's price cannot be found.
  */

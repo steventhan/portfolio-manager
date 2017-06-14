@@ -2,8 +2,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 
+import custom.util.CustomDate;
+
 /**
- * JUnit tests for CustomDate.
+ * JUnit tests for custom.util.CustomDate.
  */
 public class CustomDateTest {
   private CustomDate date1;
@@ -14,7 +16,7 @@ public class CustomDateTest {
   private CustomDate date6;
 
   /**
-   * Creates CustomDate objects for testing
+   * Creates custom.util.CustomDate objects for testing
    */
   @Before
   public void setUp() throws Exception {

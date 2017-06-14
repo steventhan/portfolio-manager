@@ -2,8 +2,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import util.NewStockRetriever;
-import util.WebRetrieverSingleton;
 import java.util.HashMap;
 import java.util.Map;
 
