@@ -1,5 +1,6 @@
 /**
- * Created by matthiasdenu on 6/13/2017.
+ * This class represents an abstract stock which implements operations shared between any stock
+ * classes.
  */
 abstract class StockAbstract implements IStock {
 
@@ -10,7 +11,7 @@ abstract class StockAbstract implements IStock {
    * @param fromDate start.
    * @param toDate end.
    * @return true if up trend and false otherwise.
-   * @throws IllegalArgumentException if dates not valid.
+   * @throws Exception if dates not valid.
    */
   @Override
   public boolean trendsUp(String fromDate, String toDate) throws Exception {

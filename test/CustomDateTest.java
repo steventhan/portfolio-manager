@@ -86,11 +86,10 @@ public class CustomDateTest {
   }
 
   @Test
-  public void testGetXDaysAgo() throws Exception {
+  public void testGetXDaysBeforeOrAfter() throws Exception {
     Assert.assertEquals("1999-11-12", this.date1.getXDaysBeforeOrAfter(-50).toString());
     Assert.assertEquals("2004-06-15", this.date2.getXDaysBeforeOrAfter(-200).toString());
     Assert.assertEquals("2007-02-25", this.date5.getXDaysBeforeOrAfter(-300).toString());
     Assert.assertEquals("2016-02-19", this.date6.getXDaysBeforeOrAfter(-10).toString());
   }
-
 }

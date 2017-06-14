@@ -3,7 +3,6 @@ import java.util.TreeMap;
 
 import util.NewStockRetriever;
 import util.WebRetrieverSingleton;
-
 import util.PriceRecord;
 
 /**
@@ -16,23 +15,18 @@ public class StockSingle extends StockAbstract implements IStockSingle {
   private final NewStockRetriever retriever;
 
   /**
-   * Constructs a new stock.
+   * Constructs a new stock using the default retriever.
    *
    * @param symbol stock.
    * @throws Exception if no symbol.
    */
   public StockSingle(String symbol) throws Exception {
-    this.retriever = WebRetrieverSingleton.getInstance();
-    this.symbol = symbol;
-    this.name = this.retriever.getName(symbol);
-    if (this.name.equals("N/A")) {
-      throw new IllegalArgumentException("invalid stock symbol");
-    }
+    this(symbol, WebRetrieverSingleton.getInstance());
   }
 
   /**
    * Constructs a new stock with the option to provide a retriever.
-   * The retriever is of type StockDateRetriever.
+   * The retriever is of type NewStockRetriever.
    *
    * @param symbol stock.
    * @param retriever retriever to be used to retrieve stock price
@@ -47,24 +41,46 @@ public class StockSingle extends StockAbstract implements IStockSingle {
     }
   }
 
+  /**
+   * Gets this Stock's symbol.
+   *
+   * @return the symbol as String
+   */
   public String getSymbol() {
     return this.symbol;
   }
 
+  /**
+   * Gets company name.
+   *
+   * @return the company name as String
+   */
   public String getName() {
     return this.name;
   }
 
 
+  /**
+   * Determines if this Stock equals to the given object.
+   *
+   * @return true if the other object is a StockSimple object, and has same symbol; false otherwise.
+   */
   @Override
   public boolean equals(Object o) {
     return this == o || (o instanceof StockSingle
             && this.symbol.equals(((StockSingle) o).getSymbol()));
   }
 
+  /**
+   * Looks up the price of a stock on a certain day.
+   *
+   * @param strDate date in YYYY-MM-DD format.
+   * @return price record for that day.
+   * @throws Exception if price not found.
+   */
   @Override
-  public double getPriceOnDay(String dateStr) throws Exception {
-    CustomDate date = new CustomDate(dateStr);
+  public double getPriceOnDay(String strDate) throws Exception {
+    CustomDate date = new CustomDate(strDate);
     Map<Integer, PriceRecord> priceRecords;
 
     // If the date is today date then return current price
@@ -83,17 +99,40 @@ public class StockSingle extends StockAbstract implements IStockSingle {
     throw new StockPriceNotFound("Check input date");
   }
 
+  /**
+   * Gets this symbol's hashcode to help the map lookup operation within a StockBasket.
+   *
+   * @return this StockSingle's symbol's hashcode.
+   */
   @Override
   public int hashCode() {
     return this.symbol.hashCode();
   }
 
+  /**
+   * Get historical (closing) prices for a stock for a certain date range.
+   * Historical prices are available only for business days.
+   *
+   * @param fromDate start date.
+   * @param toDate end date.
+   * @return Map of dates and closing prices. Date format is YYYY-MM-DD
+   * @throws Exception if dates not valid.
+   */
   @Override
-  public Map<String, Double> getClosingPrices
-          (String fromDate, String toDate) throws IllegalArgumentException {
+  public Map<String, Double> getClosingPrices(String fromDate, String toDate) throws Exception {
     CustomDate from = new CustomDate(fromDate);
     CustomDate to = new CustomDate(toDate);
-    return null;
+    Map<Integer, PriceRecord> priceRecords = this.retriever.getHistoricalPrices(this.symbol,
+            from.getDay(), from.getMonth(), from.getYear(),
+            to.getDay(), to.getMonth(), to.getYear());
+
+    Map<String, Double> result = new TreeMap<>();
+
+    for (Integer n : priceRecords.keySet()) {
+      result.put(new CustomDate(String.valueOf(n)).toString(),
+              priceRecords.get(n).getClosePrice());
+    }
+    return result;
   }
 
   private double getXDaysMovingAverage(CustomDate date, int days) throws Exception {
@@ -102,8 +141,9 @@ public class StockSingle extends StockAbstract implements IStockSingle {
     double total = 0;
     int i = 0;
 
-    priceRecords = (TreeMap) retriever.getHistoricalPrices(this.symbol, pastDate.getDay(), pastDate.getMonth(),
-            pastDate.getYear(), date.getDay(), date.getMonth(), date.getYear());
+    priceRecords = (TreeMap) this.retriever.getHistoricalPrices(this.symbol, pastDate.getDay(),
+            pastDate.getMonth(), pastDate.getYear(), date.getDay(),
+            date.getMonth(), date.getYear());
 
     for (Integer n : priceRecords.descendingKeySet()) {
       if (i >= days) {
@@ -119,12 +159,23 @@ public class StockSingle extends StockAbstract implements IStockSingle {
     return total / days;
   }
 
+  /**
+   * Determines if there is a buying opportunity for a certain stock on a certain day.
+   *
+   * @param strDate format YYYY-MM-DD.
+   * @return true if buying opportunity and false otherwise.
+   */
   @Override
-  public boolean isBuyingOpportunity(String date) throws Exception {
-    return this.getXDaysMovingAverage(new CustomDate(date), 50)
-            > this.getXDaysMovingAverage(new CustomDate(date), 200);
+  public boolean isBuyingOpportunity(String strDate) throws Exception {
+    return this.getXDaysMovingAverage(new CustomDate(strDate), 50)
+            > this.getXDaysMovingAverage(new CustomDate(strDate), 200);
   }
 
+  /**
+   * Gets a String representation of StockSingle object.
+   *
+   * @return a String representation.
+   */
   @Override
   public String toString() {
     return this.symbol;
