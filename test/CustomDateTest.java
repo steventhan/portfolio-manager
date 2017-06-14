@@ -2,11 +2,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 
-import java.util.Map;
-
-import util.PriceRecord;
-import util.WebRetrieverSingleton;
-
 /**
  * JUnit tests for CustomDate.
  */

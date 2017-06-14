@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by matthiasdenu on 6/12/2017.
+ * JUnit tests for StockBasket.
  */
 public class StockBasketTest {
 
