@@ -21,12 +21,7 @@ public class StockSingle extends StockAbstract implements IStockSingle {
    * @throws Exception if no symbol.
    */
   public StockSingle(String symbol) throws Exception {
-    this.retriever = WebRetrieverSingleton.getInstance();
-    this.symbol = symbol;
-    this.name = this.retriever.getName(symbol);
-    if (this.name.equals("N/A")) {
-      throw new IllegalArgumentException("invalid stock symbol");
-    }
+    this(symbol, WebRetrieverSingleton.getInstance());
   }
 
   /**
@@ -89,10 +84,20 @@ public class StockSingle extends StockAbstract implements IStockSingle {
 
   @Override
   public Map<String, Double> getClosingPrices
-          (String fromDate, String toDate) throws IllegalArgumentException {
+          (String fromDate, String toDate) throws Exception {
     CustomDate from = new CustomDate(fromDate);
     CustomDate to = new CustomDate(toDate);
-    return null;
+    Map<Integer, PriceRecord> priceRecords = this.retriever.getHistoricalPrices(this.symbol,
+            from.getDay(), from.getMonth(), from.getYear(),
+            to.getDay(), to.getMonth(), to.getYear());
+
+    Map<String, Double> result = new TreeMap<>();
+
+    for (Integer n : priceRecords.keySet()) {
+      result.put(new CustomDate(String.valueOf(n)).toString(),
+              priceRecords.get(n).getClosePrice());
+    }
+    return result;
   }
 
   private double getXDaysMovingAverage(CustomDate date, int days) throws Exception {
@@ -101,8 +106,9 @@ public class StockSingle extends StockAbstract implements IStockSingle {
     double total = 0;
     int i = 0;
 
-    priceRecords = (TreeMap) retriever.getHistoricalPrices(this.symbol, pastDate.getDay(), pastDate.getMonth(),
-            pastDate.getYear(), date.getDay(), date.getMonth(), date.getYear());
+    priceRecords = (TreeMap) retriever.getHistoricalPrices(this.symbol, pastDate.getDay(),
+            pastDate.getMonth(), pastDate.getYear(), date.getDay(),
+            date.getMonth(), date.getYear());
 
     for (Integer n : priceRecords.descendingKeySet()) {
       if (i >= days) {
