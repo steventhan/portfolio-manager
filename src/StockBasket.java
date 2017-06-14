@@ -54,8 +54,6 @@ public class StockBasket extends StockAbstract {
     this.retriever = retriever;
   }
 
-  //
-
   /**
    * Adds stock to the basket.
    *
@@ -86,6 +84,7 @@ public class StockBasket extends StockAbstract {
 
   /**
    * Determine the price of a basket on a certain date.
+   *
    * @param date date in YYYY-MM-DD format.
    * @return price.
    * @throws IllegalArgumentException if
@@ -94,10 +93,33 @@ public class StockBasket extends StockAbstract {
   public double getPriceOnDay(String date) throws Exception {
     double res = 0.0;
     CustomDate day = new CustomDate(date);
-    for(StockSingle s : this.basket.keySet()) {
+    for (StockSingle s : this.basket.keySet()) {
       res += s.getPriceOnDay(day.toString()) * this.basket.get(s);
     }
     return res;
   }
 
+  /**
+   * Gets size of the StockBasket.
+   *
+   * @return size as int.
+   */
+  public int size() {
+    return this.basket.size();
+  }
+
+  /**
+   * Gets a String representation of the StockBasket.
+   *
+   * @return a String representation.
+   */
+  @Override
+  public String toString() {
+    StringBuilder str = new StringBuilder();
+
+    for (StockSingle s : this.basket.keySet()) {
+      str.append(String.format("%s: %s\n", s.getSymbol(), this.basket.get(s)));
+    }
+    return str.toString();
+  }
 }
