@@ -8,6 +8,7 @@ public interface IStockSingle extends IStock {
   /**
    * Get historical (closing) prices for a stock for a certain date range.
    * Historical prices are available only for business days.
+   *
    * @param fromDate start date.
    * @param toDate end date.
    * @return Map of dates and closing prices. Date format is YYYY-MM-DD
@@ -17,6 +18,7 @@ public interface IStockSingle extends IStock {
 
   /**
    * Determines if there is a buying opportunity for a certain stock on a certain day.
+   *
    * @param date format YYYY-MM-DD.
    * @return true if buying opportunity and false otherwise.
    */
