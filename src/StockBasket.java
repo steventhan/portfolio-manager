@@ -11,7 +11,7 @@ import custom.util.WebRetrieverSingleton;
 public class StockBasket extends StockAbstract {
 
   private Map<StockSingle, Integer> basket;
-  NewStockRetriever retriever;
+  private NewStockRetriever retriever;
 
   /**
    * Constructs an empty {@code StockBasket} with the default WebRetrieverSingleton.
@@ -21,24 +21,20 @@ public class StockBasket extends StockAbstract {
   }
 
   /**
+   * Constructs an empty {@code StockBasket} with the specified implementation of NewStockRetriever.
+   */
+  public StockBasket(NewStockRetriever retriever) {
+    this(new HashMap<>(), retriever);
+  }
+
+  /**
    * Constructs a stock basket.
    *
    * @param basket map with shares per symbol in basket.
    * @throws IllegalArgumentException if either argument is null.
    */
-  public StockBasket(Map<StockSingle, Integer> basket)
-          throws IllegalArgumentException {
-    if (basket == null) throw new IllegalArgumentException();
-    this.basket = basket;
-    this.retriever = WebRetrieverSingleton.getInstance();
-  }
-
-  /**
-   * Constructs an empty {@code StockBasket} with the specified implementation of NewStockRetriever.
-   */
-  public StockBasket(NewStockRetriever retriever) {
-    this.retriever = retriever;
-    this.basket = new HashMap<>();
+  public StockBasket(Map<StockSingle, Integer> basket) {
+    this(basket, WebRetrieverSingleton.getInstance());
   }
 
   /**
@@ -55,7 +51,6 @@ public class StockBasket extends StockAbstract {
     this.retriever = retriever;
   }
 
-  //
 
   /**
    * Adds stock to the basket.
@@ -99,6 +94,15 @@ public class StockBasket extends StockAbstract {
       res += s.getPriceOnDay(day.toString()) * this.basket.get(s);
     }
     return res;
+  }
+
+  /**
+   * Returns size of the stock basket.
+   *
+   * @return size of the stock basket.
+   */
+  public int size() {
+    return this.basket.size();
   }
 
 }

@@ -173,11 +173,63 @@ public class StockSingleTest {
 
   @Test
   public void getClosingPricesExceptions() throws Exception {
-    // null, empty, past, future, wrong format
+    // null, empty, same day, past, future, wrong format
 
-    Map<String, Double> actualPricesVZ = verizon.getClosingPrices("2017-05-11", "2017-06-12");
-    Map<String, Double> actualPricesUPS = UPS.getClosingPrices("2017-05-11", "2017-06-12");
+    try {
+      UPS.getClosingPrices(null, today.toString());
+      Assert.fail();
+    } catch (Exception e) {
+      // pass
+    }
 
+    try {
+      UPS.getClosingPrices(today.toString(), null);
+      Assert.fail();
+    } catch (Exception e) {
+      // pass
+    }
+
+    try {
+      UPS.getClosingPrices(today.toString(), "");
+      Assert.fail();
+    } catch (Exception e) {
+      // pass
+    }
+
+    try {
+      UPS.getClosingPrices("", today.toString());
+      Assert.fail();
+    } catch (Exception e) {
+      // pass
+    }
+
+    try {
+      UPS.getClosingPrices(today.toString(), today.toString());
+      Assert.fail();
+    } catch (Exception e) {
+      // pass
+    }
+
+    try {
+      UPS.getClosingPrices(blackThursday.toString(), today.toString());
+      Assert.fail();
+    } catch (Exception e) {
+      // pass
+    }
+
+    try {
+      UPS.getClosingPrices(today.toString(), firstContact.toString());
+      Assert.fail();
+    } catch (Exception e) {
+      // pass
+    }
+
+    try {
+      UPS.getClosingPrices("05-06-2017", "07-05-2017");
+      Assert.fail();
+    } catch (Exception e) {
+      // pass
+    }
   }
 
   @Test
@@ -243,14 +295,6 @@ public class StockSingleTest {
       assertEquals(expectedPricesUPS.get(k),
               actualPricesUPS.get(k), 0.001);
     }
-
-    actualPricesVZ = verizon.getClosingPrices(dec2316.toString(), dec2316.toString());
-    assertEquals(actualPricesVZ.get(dec2316.toString()),
-            verizon.getPriceOnDay(dec2316.toString()), 0.001);
-
-    actualPricesUPS = UPS.getClosingPrices(dec2316.toString(), dec2316.toString());
-    assertEquals(actualPricesUPS.get(dec2316.toString()),
-            UPS.getPriceOnDay(dec2316.toString()), 0.001);
   }
 
   @Test
@@ -322,7 +366,8 @@ public class StockSingleTest {
   public void isBuyingOpportunity() throws Exception {
     assertTrue(UPS.isBuyingOpportunity("2017-03-14"));
     assertFalse(UPS.isBuyingOpportunity("2017-03-15"));
-    assertFalse(UPS.isBuyingOpportunity("03-14-2017"));
+    assertTrue(UPS.isBuyingOpportunity("03-14-2017"));
+
     assertTrue(verizon.isBuyingOpportunity("2016-10-20"));
     assertFalse(verizon.isBuyingOpportunity("2016-10-21"));
     assertFalse(verizon.isBuyingOpportunity("10-20-2016"));
@@ -427,14 +472,12 @@ public class StockSingleTest {
 
   @Test
   public void trendsUp() throws Exception {
+
     assertTrue(verizon.trendsUp("2017-06-09", "2017-06-12"));
     assertFalse(verizon.trendsUp("2017-04-20", "2017-06-12"));
-    assertFalse(verizon.trendsUp("2017-06-12", "2017-06-12"));
 
     assertTrue(UPS.trendsUp("2017-04-20", "2017-06-12"));
     assertFalse(UPS.trendsUp("2017-05-30", "2017-05-31"));
-    assertTrue(UPS.trendsUp("2017-06-09", "2017-06-12"));
-    assertFalse(UPS.trendsUp("2017-06-12", "2017-06-12"));
 
     try {
       verizon.trendsUp("2017-01-03", today.toString());

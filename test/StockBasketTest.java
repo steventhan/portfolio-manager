@@ -2,6 +2,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,14 +91,14 @@ public class StockBasketTest {
     try {
       this.sb3.trendsUp("2017-05-05", "2017-06-11");
       Assert.fail("Exception was not thrown when to date is on weekend");
-    } catch (StockPriceNotFound e) {
+    } catch (Exception e) {
       // Pass test
     }
 
     try {
       this.sb3.trendsUp("2017-05-06", "2017-06-12");
       Assert.fail("Exception was not thrown when from date is on weekend");
-    } catch (StockPriceNotFound e) {
+    } catch (Exception e) {
       // Pass test
     }
   }
