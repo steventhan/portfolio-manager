@@ -9,6 +9,7 @@ import util.PriceRecord;
 /**
  * Implementation of IStock
  */
+//TODO: change access to methods once finished testing.
 public class StockSingle extends StockAbstract implements IStockSingle {
   private final String symbol; // stock symbol
   private final String name; // company name
