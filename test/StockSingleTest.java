@@ -52,12 +52,6 @@ public class StockSingleTest {
   }
 
   @Test
-  public void temp() throws Exception {
-    verizon.getPriceOnDay(today.toString()); // no exception thrown
-    verizon.trendsUp("2017-01-02", today.toString()); // exception thrown
-  }
-
-  @Test
   public void testConstructor() throws Exception {
     // legal constructor arguments
     new StockSingle("A");
@@ -442,9 +436,9 @@ public class StockSingleTest {
     assertFalse(UPS.trendsUp("2017-06-12", "2017-06-12"));
 
     try {
-      verizon.trendsUp("2017-01-02", today.toString());
-      verizon.trendsUp("2017-01-02", today.toString());
-      UPS.trendsUp("2017-01-02", today.toString());
+      verizon.trendsUp("2017-01-03", today.toString());
+      verizon.trendsUp("2017-01-03", today.toString());
+      UPS.trendsUp("2017-01-03", today.toString());
     } catch (Exception e) {
       Assert.fail();
     }
