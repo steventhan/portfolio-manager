@@ -81,12 +81,7 @@ public class WebStockDataRetriever implements StockDataRetriever{
       prices.put(date,record);
     }
     return prices;
-
   }
-
-
-
-
 
   private int toMonth(String month) {
     switch(month) {

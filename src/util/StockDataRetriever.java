@@ -17,6 +17,4 @@ public interface StockDataRetriever {
           int toDate,
           int toMonth,
           int toYear) throws Exception;
-
-
 }
