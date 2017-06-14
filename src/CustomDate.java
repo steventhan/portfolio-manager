@@ -4,17 +4,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * This class is a thin wrapper of java.util.Date, customized to work with StockSingle class.
+ * This class is a thin wrapper of java.util.Date and java.util.Calendar, customized to work with
+ * Stock classes.
  */
 public class CustomDate implements Comparable<CustomDate> {
   private Date date;
   private Calendar cal;
-
-  public CustomDate(Date date) {
-    this.date = date;
-    this.cal = Calendar.getInstance();
-    this.cal.setTime(this.date);
-  }
 
   public CustomDate(String strDate) {
     try {
@@ -32,6 +27,12 @@ public class CustomDate implements Comparable<CustomDate> {
 
   public CustomDate() {
     this(new Date());
+  }
+
+  public CustomDate(Date date) {
+    this.date = date;
+    this.cal = Calendar.getInstance();
+    this.cal.setTime(this.date);
   }
 
   public CustomDate getXDaysBeforeOrAfter(int days) {
@@ -53,9 +54,20 @@ public class CustomDate implements Comparable<CustomDate> {
     return this.cal.get(Calendar.YEAR);
   }
 
+
+  public int toKeyInt() {
+    return Integer.parseInt(String.format("%04d", this.getYear())
+            + String.format("%02d", this.getMonth()) + String.format("%02d", this.getDay()));
+  }
+
   public boolean equals(CustomDate d) {
     return this.getDay() == d.getDay()
             && this.getMonth() == d.getMonth() && this.getYear() == d.getYear();
+  }
+
+  @Override
+  public boolean equals(Object d) {
+    return d == this || (d instanceof CustomDate && this.equals((CustomDate) d));
   }
 
   @Override
@@ -69,18 +81,6 @@ public class CustomDate implements Comparable<CustomDate> {
     }
     return 0;
   }
-
-  public int toKeyInt() {
-    return Integer.parseInt(String.format("%04d", this.getYear())
-            + String.format("%02d", this.getMonth()) + String.format("%02d", this.getDay()));
-  }
-
-  @Override
-  public boolean equals(Object d) {
-    return d == this || (d instanceof CustomDate && this.equals((CustomDate) d));
-  }
-
-
 
   @Override
   public String toString() {

@@ -33,6 +33,7 @@ public class StockSingle extends StockAbstract implements IStockSingle {
    * @throws Exception if no symbol.
    */
   public StockSingle(String symbol, NewStockRetriever retriever) throws Exception {
+    super();
     this.symbol = symbol;
     this.retriever = retriever;
     this.name = this.retriever.getName(symbol);
@@ -71,6 +72,25 @@ public class StockSingle extends StockAbstract implements IStockSingle {
             && this.symbol.equals(((StockSingle) o).getSymbol()));
   }
 
+  public double getPriceOnDay(CustomDate date) throws Exception {
+    Map<Integer, PriceRecord> priceRecords;
+
+    // If the date is today date then return current price
+    if (date.equals(new CustomDate())) {
+      return this.retriever.getCurrentPrice(this.symbol);
+    }
+
+    priceRecords = this.retriever.getHistoricalPrices(this.symbol, date.getDay(), date.getMonth(),
+            date.getYear(), date.getDay(), date.getMonth(), date.getYear());
+
+    PriceRecord result = priceRecords.get(date.toKeyInt());
+
+    if (result != null) {
+      return result.getClosePrice();
+    }
+    throw new StockPriceNotFound("Check input date");
+  }
+
   /**
    * Looks up the price of a stock on a certain day.
    *
@@ -81,22 +101,7 @@ public class StockSingle extends StockAbstract implements IStockSingle {
   @Override
   public double getPriceOnDay(String strDate) throws Exception {
     CustomDate date = new CustomDate(strDate);
-    Map<Integer, PriceRecord> priceRecords;
-
-    // If the date is today date then return current price
-    if (date.equals(new CustomDate())) {
-      return retriever.getCurrentPrice(this.symbol);
-    }
-
-    priceRecords = retriever.getHistoricalPrices(this.symbol, date.getDay(), date.getMonth(),
-            date.getYear(), date.getDay(), date.getMonth(), date.getYear());
-
-    PriceRecord result = priceRecords.get(date.toKeyInt());
-
-    if (result != null) {
-      return result.getClosePrice();
-    }
-    throw new StockPriceNotFound("Check input date");
+    return this.getPriceOnDay(date);
   }
 
   /**
@@ -120,8 +125,10 @@ public class StockSingle extends StockAbstract implements IStockSingle {
    */
   @Override
   public Map<String, Double> getClosingPrices(String fromDate, String toDate) throws Exception {
+    super.verifyDateInOrder(fromDate, toDate);
     CustomDate from = new CustomDate(fromDate);
     CustomDate to = new CustomDate(toDate);
+
     Map<Integer, PriceRecord> priceRecords = this.retriever.getHistoricalPrices(this.symbol,
             from.getDay(), from.getMonth(), from.getYear(),
             to.getDay(), to.getMonth(), to.getYear());
