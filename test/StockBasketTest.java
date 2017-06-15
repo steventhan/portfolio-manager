@@ -2,7 +2,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,9 +65,9 @@ public class StockBasketTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testConstructorIllegal() {
-      Map<IStockSingle, Integer> temp = null;
+    Map<IStockSingle, Integer> temp = null;
     //noinspection ConstantConditions
-      new StockBasket(temp);
+    new StockBasket(temp);
   }
 
   @Test

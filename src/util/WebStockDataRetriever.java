@@ -75,8 +75,8 @@ public class WebStockDataRetriever implements StockDataRetriever {
           Exception {
 
 
-    URL url = new URL("https://www.google" +
-            ".com/finance/historical?output=csv&q=" + stockSymbol + "&startdate="
+    URL url = new URL("https://www.google"
+            + ".com/finance/historical?output=csv&q=" + stockSymbol + "&startdate="
             + fromMonth + "+" + fromDate + "+" + fromYear + "&enddate=" + toMonth + "+"
             + toDate + "+" + toYear);
 
