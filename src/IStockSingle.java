@@ -24,4 +24,11 @@ public interface IStockSingle extends IStock {
    */
   boolean isBuyingOpportunity(String date) throws Exception;
 
+  /**
+   * Gets this Stock's symbol.
+   *
+   * @return the symbol as String
+   */
+  public String getSymbol();
+
 }

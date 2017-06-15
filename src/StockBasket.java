@@ -10,13 +10,13 @@ import custom.util.WebRetrieverSingleton;
  */
 public class StockBasket extends StockAbstract {
 
-  private Map<StockSingle, Integer> basket;
+  private Map<IStockSingle, Integer> basket;
 
   /**
    * Constructs an empty {@code StockBasket} with the default WebRetrieverSingleton.
    */
   public StockBasket() {
-    this(new HashMap<StockSingle, Integer>());
+    this(new HashMap<IStockSingle, Integer>());
   }
 
   /**
@@ -25,7 +25,8 @@ public class StockBasket extends StockAbstract {
    * @param basket map with shares per symbol in basket.
    * @throws IllegalArgumentException if either argument is null.
    */
-  public StockBasket(Map<StockSingle, Integer> basket) {
+  public StockBasket(Map<IStockSingle, Integer> basket) {
+    if (basket == null) throw new IllegalArgumentException();
     this.basket = basket;
   }
 
@@ -37,7 +38,7 @@ public class StockBasket extends StockAbstract {
    * @param shares shares.
    * @throws IllegalArgumentException if either argument is null.
    */
-  public void add(StockSingle stock, Integer shares)
+  public void add(IStockSingle stock, Integer shares)
           throws IllegalArgumentException {
     if ((stock == null) || (shares == null)) throw new IllegalArgumentException();
     if (this.basket.containsKey(stock)) {
@@ -52,7 +53,7 @@ public class StockBasket extends StockAbstract {
    *
    * @param stockSymbol stock symbol as String.
    * @param shares      shares.
-   * @throws Exception StockSingle object cannot be constructed.
+   * @throws Exception IStockSingle object cannot be constructed.
    */
   public void add(String stockSymbol, Integer shares) throws Exception {
     this.add(new StockSingle(stockSymbol), shares);
@@ -69,7 +70,7 @@ public class StockBasket extends StockAbstract {
   public double getPriceOnDay(String date) throws Exception {
     double res = 0.0;
     CustomDate day = new CustomDate(date);
-    for (StockSingle s : this.basket.keySet()) {
+    for (IStockSingle s : this.basket.keySet()) {
       res += s.getPriceOnDay(day.toString()) * this.basket.get(s);
     }
     return res;
@@ -93,7 +94,7 @@ public class StockBasket extends StockAbstract {
   public String toString() {
     StringBuilder str = new StringBuilder();
 
-    for (StockSingle s : this.basket.keySet()) {
+    for (IStockSingle s : this.basket.keySet()) {
       str.append(String.format("%s: %s\n", s.getSymbol(), this.basket.get(s)));
     }
     return str.toString();

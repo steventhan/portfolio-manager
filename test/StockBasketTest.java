@@ -25,7 +25,7 @@ public class StockBasketTest {
     this.sb1 = new StockBasket();
 
     // using HashMap because, order doesn't matter
-    Map<StockSingle, Integer> temp = new HashMap<>();
+    Map<IStockSingle, Integer> temp = new HashMap<>();
     temp.put(new StockSingle("MMM"), 3);
     temp.put(new StockSingle("ATVI"), 4);
     temp.put(new StockSingle("ADBE"), 5);
@@ -67,7 +67,7 @@ public class StockBasketTest {
   @Test
   public void testConstructorIllegal() {
     try {
-      Map<StockSingle, Integer> temp = null;
+      Map<IStockSingle, Integer> temp = null;
       new StockBasket(temp);
       Assert.fail("Exception was not thrown when the Map is null");
     } catch (IllegalArgumentException e) {
