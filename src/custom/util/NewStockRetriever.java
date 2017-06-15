@@ -3,7 +3,7 @@ package custom.util;
 import util.StockDataRetriever;
 
 /**
- * Created by matthiasdenu on 6/13/2017.
+ * Creates new StockRetriever that extends the old StockDataRetriever.
  */
 public interface NewStockRetriever extends StockDataRetriever {
 }

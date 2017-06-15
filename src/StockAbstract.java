@@ -29,7 +29,7 @@ public abstract class StockAbstract implements IStock {
    * @param fromDate start.
    * @param toDate   end.
    * @return true if up trend and false otherwise.
-   * @throws Exception if dates not valid.
+   * @throws Exception if dates not valid or http request is interrupted.
    */
   @Override
   public boolean trendsUp(String fromDate, String toDate) throws Exception {
