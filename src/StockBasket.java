@@ -54,7 +54,7 @@ public class StockBasket extends StockAbstract {
   /**
    * Adds stock to the basket.
    *
-   * @param stock stock.
+   * @param stock  stock.
    * @param shares shares.
    * @throws IllegalArgumentException if either argument is null.
    */
@@ -62,8 +62,8 @@ public class StockBasket extends StockAbstract {
           throws IllegalArgumentException {
     if ((stock == null) || (shares == null)) throw new IllegalArgumentException();
     if (this.basket.containsKey(stock)) {
-      this.basket.put(stock, shares + this.basket.get(stock)); }
-    else {
+      this.basket.put(stock, shares + this.basket.get(stock));
+    } else {
       this.basket.put(stock, shares);
     }
   }
@@ -72,7 +72,7 @@ public class StockBasket extends StockAbstract {
    * Adds stock to the basket.
    *
    * @param stockSymbol stock symbol as String.
-   * @param shares shares.
+   * @param shares      shares.
    * @throws Exception StockSingle object cannot be constructed.
    */
   public void add(String stockSymbol, Integer shares) throws Exception {
