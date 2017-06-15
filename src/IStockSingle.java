@@ -1,7 +1,7 @@
 import java.util.Map;
 
 /**
- * Created by matthiasdenu on 6/12/2017.
+ * Interface for methods common to a single stock.
  */
 public interface IStockSingle extends IStock {
 
@@ -29,6 +29,6 @@ public interface IStockSingle extends IStock {
    *
    * @return the symbol as String
    */
-  public String getSymbol();
+  String getSymbol();
 
 }

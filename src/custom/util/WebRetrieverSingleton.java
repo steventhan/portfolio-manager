@@ -8,6 +8,9 @@ import util.WebStockDataRetriever;
 public class WebRetrieverSingleton extends WebStockDataRetriever implements NewStockRetriever {
   private static WebRetrieverSingleton ourInstance = new WebRetrieverSingleton();
 
+  private WebRetrieverSingleton() {
+  }
+
   /**
    * Gets the current running (and only) instance of WebRetrieverSingleton.
    *
@@ -15,7 +18,5 @@ public class WebRetrieverSingleton extends WebStockDataRetriever implements NewS
    */
   public static WebRetrieverSingleton getInstance() {
     return ourInstance;
-  }
-  private WebRetrieverSingleton() {
   }
 }

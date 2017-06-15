@@ -54,31 +54,31 @@ public class CustomDateTest {
 
   @Test
   public void testGetMonth() throws Exception {
-    Assert.assertEquals(01, this.date1.getMonth());
-    Assert.assertEquals(01, this.date2.getMonth());
-    Assert.assertEquals(02, this.date3.getMonth());
-    Assert.assertEquals(01, this.date4.getMonth());
+    Assert.assertEquals(1, this.date1.getMonth());
+    Assert.assertEquals(1, this.date2.getMonth());
+    Assert.assertEquals(2, this.date3.getMonth());
+    Assert.assertEquals(1, this.date4.getMonth());
     Assert.assertEquals(12, this.date5.getMonth());
   }
 
   @Test
   public void testGetDay() throws Exception {
-    Assert.assertEquals(01, this.date1.getDay());
-    Assert.assertEquals(01, this.date2.getDay());
-    Assert.assertEquals(01, this.date3.getDay());
+    Assert.assertEquals(1, this.date1.getDay());
+    Assert.assertEquals(1, this.date2.getDay());
+    Assert.assertEquals(1, this.date3.getDay());
     Assert.assertEquals(17, this.date4.getDay());
     Assert.assertEquals(22, this.date5.getDay());
   }
 
   @Test
   public void testEquals() throws Exception {
-    Assert.assertTrue(this.date1.equals(new CustomDate("2000-01-01")));
-    Assert.assertTrue(this.date3.equals(new CustomDate("2000-02-01")));
-    Assert.assertTrue(this.date5.equals(new CustomDate("2007-12-22")));
+    Assert.assertTrue(this.date1.sameDate(new CustomDate("2000-01-01")));
+    Assert.assertTrue(this.date3.sameDate(new CustomDate("2000-02-01")));
+    Assert.assertTrue(this.date5.sameDate(new CustomDate("2007-12-22")));
 
-    Assert.assertFalse(this.date2.equals(new CustomDate("1999-01-01")));
-    Assert.assertFalse(this.date3.equals(new CustomDate("2000-07-01")));
-    Assert.assertFalse(this.date4.equals(new CustomDate("2000-01-22")));
+    Assert.assertFalse(this.date2.sameDate(new CustomDate("1999-01-01")));
+    Assert.assertFalse(this.date3.sameDate(new CustomDate("2000-07-01")));
+    Assert.assertFalse(this.date4.sameDate(new CustomDate("2000-01-22")));
   }
 
   @Test

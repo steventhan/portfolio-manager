@@ -64,15 +64,11 @@ public class StockBasketTest {
     Assert.assertTrue(this.sb3.toString().contains("GOOGL: 9\n"));
   }
 
-  @Test
+  @Test(expected = IllegalArgumentException.class)
   public void testConstructorIllegal() {
-    try {
       Map<IStockSingle, Integer> temp = null;
+    //noinspection ConstantConditions
       new StockBasket(temp);
-      Assert.fail("Exception was not thrown when the Map is null");
-    } catch (IllegalArgumentException e) {
-      // Pass test
-    }
   }
 
   @Test

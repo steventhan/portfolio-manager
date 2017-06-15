@@ -105,17 +105,6 @@ public class CustomDate implements Comparable<CustomDate> {
   }
 
   /**
-   * Determines if this CustomDate is equal to another CustomDate object.
-   *
-   * @param d the CustomDate object to be compared to.
-   * @return true if they are equal, false otherwise.
-   */
-  public boolean equals(CustomDate d) {
-    return this.getDay() == d.getDay()
-            && this.getMonth() == d.getMonth() && this.getYear() == d.getYear();
-  }
-
-  /**
    * Determines if this CustomDate is equal to another Object object.
    *
    * @param d the CustomDate object to be compared to.
@@ -123,7 +112,18 @@ public class CustomDate implements Comparable<CustomDate> {
    */
   @Override
   public boolean equals(Object d) {
-    return d == this || (d instanceof CustomDate && this.equals((CustomDate) d));
+    return d == this || (d instanceof CustomDate && this.sameDate((CustomDate) d));
+  }
+
+  /**
+   * Determines if this CustomDate is equal to another CustomDate object.
+   *
+   * @param d the CustomDate object to be compared to.
+   * @return true if they are equal, false otherwise.
+   */
+  public boolean sameDate(CustomDate d) {
+    return this.getDay() == d.getDay()
+            && this.getMonth() == d.getMonth() && this.getYear() == d.getYear();
   }
 
   /**
@@ -131,7 +131,7 @@ public class CustomDate implements Comparable<CustomDate> {
    *
    * @param d the other CustomDate object to be compared against
    * @return 0 if they are same date, negative int if the other Date is after this date, positive
-   * int if the other Date is before this date.
+   *         int if the other Date is before this date.
    */
   @Override
   public int compareTo(CustomDate d) {

@@ -63,7 +63,7 @@ public class StockSingle extends StockAbstract implements IStockSingle {
 
 
   /**
-   * Determines if this Stock equals to the given object.
+   * Determines if this Stock sameDate to the given object.
    *
    * @return true if the other object is a StockSimple object, and has same symbol; false otherwise.
    */
@@ -73,11 +73,18 @@ public class StockSingle extends StockAbstract implements IStockSingle {
             && this.symbol.equals(((StockSingle) o).getSymbol()));
   }
 
+  /**
+   * Gets price on a day.
+   *
+   * @param date day.
+   * @return price.
+   * @throws Exception if price not found.
+   */
   public double getPriceOnDay(CustomDate date) throws Exception {
     Map<Integer, PriceRecord> priceRecords;
 
     // If the date is today date then return current price
-    if (date.equals(new CustomDate())) {
+    if (date.sameDate(new CustomDate())) {
       return this.retriever.getCurrentPrice(this.symbol);
     }
 

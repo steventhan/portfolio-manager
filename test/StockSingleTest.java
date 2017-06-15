@@ -18,18 +18,24 @@ import static org.junit.Assert.assertTrue;
  */
 public class StockSingleTest {
 
+  /**
+   * Necessary empty constructor to throw exception.
+   *
+   * @throws Exception if there is one.
+   */
   public StockSingleTest() throws Exception {
+    // empty constructor to document that this class throws an exception.
   }
 
   private NewStockRetriever retriever;
 
   // intialize constants for testing
   private final IStockSingle verizon = new StockSingle("VZ");
-  // 6/13/2017	5/5/2017	2/14/2017	12/25/2016	12/23/2016
-  // 46.450001	  46.69	      48.27	      #N/A	     53.68
+  // 6/13/2017  5/5/2017  2/14/2017  12/25/2016  12/23/2016
+  // 46.450001    46.69        48.27        #N/A       53.68
   private final IStockSingle UPS = new StockSingle("UPS");
-  //  6/13/2017	5/5/2017	2/14/2017	12/25/2016	12/23/2016
-  // 109.809998	  107.43	   108.99	      #N/A	    115.97
+  //  6/13/2017  5/5/2017  2/14/2017  12/25/2016  12/23/2016
+  // 109.809998    107.43     108.99        #N/A      115.97
   private final CustomDate today = new CustomDate();
   private final CustomDate cincoDeMayo = new CustomDate("2017-05-05");
   // VZ $46.69, $48.7546, $50.5683
