@@ -288,7 +288,6 @@ public class StockSingleTest {
     Map<String, Double> actualPricesVZ = verizon.getClosingPrices("2017-05-11", "2017-06-12");
     Map<String, Double> actualPricesUPS = UPS.getClosingPrices("2017-05-11", "2017-06-12");
 
-    //TODO: fix whatever issue is going on here with HashCode (docs say it returns Map<K, V>)
     for (String k : expectedPricesVZ.keySet()) {
       assertEquals(expectedPricesVZ.get(k),
               actualPricesVZ.get(k), 0.001);
@@ -302,10 +301,6 @@ public class StockSingleTest {
 
   @Test
   public void testIsBuyingOppExceptions() throws Exception {
-
-    //TODO: wrong format date exception (i.e. start using custom.util.CustomDate as an intermediary)
-    //TODO: use custom.util.CustomDate.toString();
-
     try {
       assertFalse(UPS.isBuyingOpportunity(null));
       Assert.fail();
@@ -335,8 +330,6 @@ public class StockSingleTest {
     }
 
     try {
-      //TODO: need to document what this returns. This should be an exception if getPriceOnDay()
-      //TODO: throws an exception
       UPS.isBuyingOpportunity(blackThursday.toString());
       Assert.fail();
     } catch (Exception e) {
@@ -425,7 +418,6 @@ public class StockSingleTest {
 
     try {
       // wrong order
-      //TODO: document how this works or throw exception
       assertTrue(verizon.trendsUp("2017-06-12", "2017-06-09"));
       Assert.fail();
     } catch (Exception e) {
@@ -434,13 +426,11 @@ public class StockSingleTest {
 
     try {
       // wrong format
-      //TODO: we should be able to throw an exception here
       assertTrue(verizon.trendsUp("09-06-2017", "08-10-2016"));
       Assert.fail();
     } catch (Exception e) {
       // pass
     }
-
 
     try {
       // really old date
