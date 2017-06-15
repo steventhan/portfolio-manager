@@ -115,5 +115,4 @@ public class WebStockDataRetriever implements StockDataRetriever{
     return (actualYear*100+actualMonth)*100+actualDate;
   }
 
-
 }

@@ -11,20 +11,12 @@ import custom.util.WebRetrieverSingleton;
 public class StockBasket extends StockAbstract {
 
   private Map<StockSingle, Integer> basket;
-  private NewStockRetriever retriever;
 
   /**
    * Constructs an empty {@code StockBasket} with the default WebRetrieverSingleton.
    */
   public StockBasket() {
-    this(WebRetrieverSingleton.getInstance());
-  }
-
-  /**
-   * Constructs an empty {@code StockBasket} with the specified implementation of NewStockRetriever.
-   */
-  public StockBasket(NewStockRetriever retriever) {
-    this(new HashMap<>(), retriever);
+    this(new HashMap<StockSingle, Integer>());
   }
 
   /**
@@ -34,22 +26,9 @@ public class StockBasket extends StockAbstract {
    * @throws IllegalArgumentException if either argument is null.
    */
   public StockBasket(Map<StockSingle, Integer> basket) {
-    this(basket, WebRetrieverSingleton.getInstance());
+    this.basket = basket;
   }
 
-  /**
-   * Constructs an empty {@code StockBasket} with the specified implementation of NewStockRetriever.
-   *
-   * @param basket    stock basket.
-   * @param retriever stock retriever.
-   * @throws IllegalArgumentException if either argument is null.
-   */
-  public StockBasket(Map<StockSingle, Integer> basket, NewStockRetriever retriever)
-          throws IllegalArgumentException {
-    if ((basket == null) || (retriever == null)) throw new IllegalArgumentException();
-    this.basket = basket;
-    this.retriever = retriever;
-  }
 
   /**
    * Adds stock to the basket.
