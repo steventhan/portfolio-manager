@@ -4,7 +4,7 @@ import custom.util.CustomDate;
  * This class represents an abstract stock which implements operations shared between any stock
  * classes.
  */
-abstract class StockAbstract implements IStock {
+public abstract class StockAbstract implements IStock {
 
   /**
    * Verifies the start date is before the end date, and the end date is not in the future.
