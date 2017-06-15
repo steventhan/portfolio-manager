@@ -17,8 +17,8 @@ public abstract class StockAbstract implements IStock {
   protected void verifyDateInOrder(String fromDate, String toDate) throws IllegalArgumentException {
     if (new CustomDate(fromDate).compareTo(new CustomDate(toDate)) >= 0
             || new CustomDate(toDate).compareTo(new CustomDate()) > 0) {
-      throw new IllegalArgumentException("Start date has to be before end date, " +
-              "and end date cannot be in the future");
+      throw new IllegalArgumentException("Start date has to be before end date, "
+              + "and end date cannot be in the future");
     }
   }
 
