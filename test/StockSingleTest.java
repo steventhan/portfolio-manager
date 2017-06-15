@@ -14,7 +14,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * Created by matthiasdenu on 6/13/2017.
+ * JUnit tests for StockSingle.
  */
 public class StockSingleTest {
 
@@ -46,6 +46,9 @@ public class StockSingleTest {
   private final CustomDate blackThursday = new CustomDate("1929-10-04");
   private final CustomDate firstContact = new CustomDate("2063-04-05");
 
+  /**
+   * Sets up a StockDataRetriever for this test.
+   */
   @Before
   public void setUp() throws Exception {
     // reinitialize retriever
@@ -94,6 +97,13 @@ public class StockSingleTest {
     } catch (Exception e) {
       // pass
     }
+  }
+
+  @Test
+  public void testGetName() throws Exception {
+    assertEquals("\"Verizon", new StockSingle("VZ").getName());
+    assertEquals("\"United", new StockSingle("UPS").getName());
+    assertEquals("\"Apple", new StockSingle("AAPL").getName());
   }
 
   @Test
@@ -172,7 +182,7 @@ public class StockSingleTest {
   }
 
   @Test
-  public void getClosingPricesExceptions() throws Exception {
+  public void testGetClosingPricesExceptions() throws Exception {
     // null, empty, same day, past, future, wrong format
 
     try {
@@ -211,13 +221,6 @@ public class StockSingleTest {
     }
 
     try {
-      UPS.getClosingPrices(blackThursday.toString(), today.toString());
-      Assert.fail();
-    } catch (Exception e) {
-      // pass
-    }
-
-    try {
       UPS.getClosingPrices(today.toString(), firstContact.toString());
       Assert.fail();
     } catch (Exception e) {
@@ -233,7 +236,7 @@ public class StockSingleTest {
   }
 
   @Test
-  public void getClosingPrices() throws Exception {
+  public void testGetClosingPrices() throws Exception {
     Map<String, Double> expectedPricesVZ = new HashMap<>();
     expectedPricesVZ.put("2017-06-12", 47.19);
     expectedPricesVZ.put("2017-06-09", 46.72);
@@ -298,7 +301,7 @@ public class StockSingleTest {
   }
 
   @Test
-  public void isBuyingOppExceptions() throws Exception {
+  public void testIsBuyingOppExceptions() throws Exception {
 
     //TODO: wrong format date exception (i.e. start using custom.util.CustomDate as an intermediary)
     //TODO: use custom.util.CustomDate.toString();
@@ -334,7 +337,7 @@ public class StockSingleTest {
     try {
       //TODO: need to document what this returns. This should be an exception if getPriceOnDay()
       //TODO: throws an exception
-      assertFalse(UPS.isBuyingOpportunity(blackThursday.toString()));
+      UPS.isBuyingOpportunity(blackThursday.toString());
       Assert.fail();
     } catch (Exception e) {
       // pass
@@ -360,21 +363,33 @@ public class StockSingleTest {
     } catch (Exception e) {
       // pass
     }
+
+    try {
+      UPS.isBuyingOpportunity("03-14-2017");
+      Assert.fail();
+    } catch (Exception e) {
+      // pass
+    }
+
+    try {
+      verizon.isBuyingOpportunity("10-20-2016");
+    } catch (IllegalArgumentException e) {
+      // pass
+
+    }
   }
 
   @Test
-  public void isBuyingOpportunity() throws Exception {
+  public void testIsBuyingOpportunity() throws Exception {
     assertTrue(UPS.isBuyingOpportunity("2017-03-14"));
     assertFalse(UPS.isBuyingOpportunity("2017-03-15"));
-    assertTrue(UPS.isBuyingOpportunity("03-14-2017"));
 
     assertTrue(verizon.isBuyingOpportunity("2016-10-20"));
     assertFalse(verizon.isBuyingOpportunity("2016-10-21"));
-    assertFalse(verizon.isBuyingOpportunity("10-20-2016"));
   }
 
   @Test
-  public void trendsUpExceptions() throws Exception {
+  public void testTrendsUpExceptions() throws Exception {
 
     try {
       // nulls
@@ -391,7 +406,6 @@ public class StockSingleTest {
     } catch (Exception e) {
       // pass
     }
-
 
     try {
       // empty string
@@ -471,8 +485,7 @@ public class StockSingleTest {
   }
 
   @Test
-  public void trendsUp() throws Exception {
-
+  public void testTrendsUp() throws Exception {
     assertTrue(verizon.trendsUp("2017-06-09", "2017-06-12"));
     assertFalse(verizon.trendsUp("2017-04-20", "2017-06-12"));
 
@@ -487,5 +500,4 @@ public class StockSingleTest {
       Assert.fail();
     }
   }
-
 }
