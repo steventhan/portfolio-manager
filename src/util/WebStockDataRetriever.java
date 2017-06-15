@@ -17,8 +17,8 @@ public class WebStockDataRetriever implements StockDataRetriever{
   }
 
   public double getCurrentPrice(String stockSymbol) throws Exception {
-    URL url = new URL("https://download.finance.yahoo.com/d/quotes.csv?" +
-            "s=" + stockSymbol + "&f=l1&e=.csv");
+    URL url = new URL("https://download.finance.yahoo.com/d/quotes.csv?"
+            + "s=" + stockSymbol + "&f=l1&e=.csv");
 
     String output = new Scanner(url.openStream()).next();
 
@@ -27,8 +27,8 @@ public class WebStockDataRetriever implements StockDataRetriever{
   }
 
   public String getName(String stockSymbol) throws Exception {
-    URL url = new URL("https://download.finance.yahoo.com/d/quotes.csv?" +
-            "s=" + stockSymbol + "&f=n&e=.csv");
+    URL url = new URL("https://download.finance.yahoo.com/d/quotes.csv?"
+            + "s=" + stockSymbol + "&f=n&e=.csv");
 
     String output = new Scanner(url.openStream()).next();
 
@@ -50,15 +50,15 @@ public class WebStockDataRetriever implements StockDataRetriever{
           Exception {
 
 
-    URL url = new URL("https://www.google" +
-            ".com/finance/historical?output=csv&q=" + stockSymbol + "&startdate=" +
-            fromMonth + "+" +
-            fromDate + "+" +
-            fromYear +
-            "&enddate=" +
-            toMonth + "+" +
-            toDate + "+" +
-            toYear);
+    URL url = new URL("https://www.google"
+            + ".com/finance/historical?output=csv&q=" + stockSymbol + "&startdate="
+            + fromMonth + "+"
+            + fromDate + "+"
+            + fromYear
+            + "&enddate="
+            + toMonth + "+"
+            + toDate + "+"
+            + toYear);
 
     String output = "";
     Map<Integer,PriceRecord> prices = new TreeMap<Integer,PriceRecord>();
