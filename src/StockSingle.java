@@ -30,7 +30,7 @@ public class StockSingle extends StockAbstract implements IStockSingle {
    * Constructs a new stock with the option to provide a retriever.
    * The retriever is of type NewStockRetriever.
    *
-   * @param symbol stock.
+   * @param symbol    stock.
    * @param retriever retriever to be used to retrieve stock price
    * @throws Exception if no symbol.
    */
@@ -119,9 +119,11 @@ public class StockSingle extends StockAbstract implements IStockSingle {
   /**
    * Get historical (closing) prices for a stock for a certain date range.
    * Historical prices are available only for business days.
+   * If the start date is even before the Stock's earliest day,
+   * it would return all entries it has.
    *
    * @param fromDate start date.
-   * @param toDate end date.
+   * @param toDate   end date.
    * @return Map of dates and closing prices. Date format is YYYY-MM-DD
    * @throws Exception if dates not valid.
    */
@@ -144,28 +146,37 @@ public class StockSingle extends StockAbstract implements IStockSingle {
     return result;
   }
 
-  private double getXDaysMovingAverage(CustomDate date, int days) throws Exception {
-    CustomDate pastDate = date.getXDaysBeforeOrAfter(days * (-2));
+  private boolean isBuyingOpportunityUsingMovingAverage(CustomDate date) throws Exception {
+    CustomDate pastDate = date.getXDaysBeforeOrAfter(-400);
     TreeMap<Integer, PriceRecord> priceRecords;
     double total = 0;
-    int i = 0;
+    double fiftyDaysMovingAverage = 0;
+    double twoHundredsDaysMovingAverage = 0;
+    int i = 1;
 
     priceRecords = (TreeMap) this.retriever.getHistoricalPrices(this.symbol, pastDate.getDay(),
             pastDate.getMonth(), pastDate.getYear(), date.getDay(),
             date.getMonth(), date.getYear());
 
     for (Integer n : priceRecords.descendingKeySet()) {
-      if (i >= days) {
+      total += priceRecords.get(n).getClosePrice();
+      if (i == 200) {
+        twoHundredsDaysMovingAverage = total / i;
         break;
       }
-      total += priceRecords.get(n).getClosePrice();
+      if (i == 50) {
+        fiftyDaysMovingAverage = total / i;
+      }
       i++;
     }
 
     if (total == 0 || priceRecords.get(date.toKeyInt()) == null) {
       throw new StockPriceNotFound("Stock price not found");
     }
-    return total / days;
+    if (fiftyDaysMovingAverage == 0 || twoHundredsDaysMovingAverage == 0) {
+      throw new IllegalArgumentException("Not enough data to calculate moving day average");
+    }
+    return fiftyDaysMovingAverage > twoHundredsDaysMovingAverage;
   }
 
   /**
@@ -176,8 +187,7 @@ public class StockSingle extends StockAbstract implements IStockSingle {
    */
   @Override
   public boolean isBuyingOpportunity(String strDate) throws Exception {
-    return this.getXDaysMovingAverage(new CustomDate(strDate), 50)
-            > this.getXDaysMovingAverage(new CustomDate(strDate), 200);
+    return this.isBuyingOpportunityUsingMovingAverage(new CustomDate(strDate));
   }
 
   /**
