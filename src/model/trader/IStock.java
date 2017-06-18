@@ -1,3 +1,5 @@
+package model.trader;
+
 /**
  * Interface for all methods that a stock must implement.
  */
