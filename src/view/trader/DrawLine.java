@@ -2,7 +2,6 @@ package view.trader;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -52,26 +51,36 @@ class DrawPanel extends JPanel {
 
   private final static Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN,
           Color.BLUE, Color.MAGENTA, Color.PINK, Color.CYAN, Color.GRAY};
-
   private int colorIndex = 0;
-
   private int count;
-  private List<Point> points;
+  private List<ColorPoint> cpoints;
+
+  public class ColorPoint extends Point {
+    private Color color;
+
+    ColorPoint(int x, int y, Color color) {
+      super(x, y);
+      this.color = color;
+    }
+
+    public Color getColor() {
+      return new Color(this.color.getRGB());
+    }
+
+  }
 
   public DrawPanel() {
     super();
     //set background to white
     this.setBackground(Color.WHITE);
     count = 0;
-    points = new ArrayList<Point>();
+    cpoints = new LinkedList<>();
   }
 
   public void increment() {
     count++;
-//    points.add(new Point((int) (Math.random() * this.getWidth()), (int) (Math.random() * this
-//            .getHeight())));
-
-    points.add(new Point((count * 50) % this.getWidth(), (count + 100) % this.getHeight()));
+    colorIndex = (1 + colorIndex) % colors.length;
+    cpoints.add(new ColorPoint(this.getWidth() / 2, count * 10, colors[colorIndex]));
   }
 
   @Override
@@ -87,7 +96,6 @@ class DrawPanel extends JPanel {
 
     //the Graphics g object has already been set up. You can use this to draw
     //various shapes
-
 
     Graphics2D g2d = (Graphics2D) g;
 
@@ -112,11 +120,10 @@ class DrawPanel extends JPanel {
     g2d.setColor(Color.GREEN);
     g2d.drawLine(60, 445, 75, 445);
 
-    Color myColor = new Color(0);
-    for (Point p : points) {
-      colorIndex = (1 + colorIndex) % colors.length;
-      g2d.setColor(colors[colorIndex]);
-      g2d.fillOval(p.x, p.y, 10, 10);
+    for (ColorPoint p : cpoints) {
+      g2d.setColor(p.getColor());
+      g2d.fillOval((int) p.getX(), (int) p.getY(), 10, 10);
+
     }
   }
 }
