@@ -2,6 +2,7 @@ package view.trader;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.geom.AffineTransform;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -83,12 +84,16 @@ class DrawPanel extends JPanel {
     cpoints.add(new ColorPoint(this.getWidth() / 2, count * 10, colors[colorIndex]));
   }
 
+
   @Override
   public Dimension getPreferredSize() {
     return new Dimension(600, 600);
   }
 
   protected void paintComponent(Graphics g) {
+
+    //TODO: make helpers
+
     //call its default implementation, let it do its thing
     //one of the things its default implementation does it to clear the screen
     //thus everything in this method is drawn starting from a blank screen
@@ -112,6 +117,7 @@ class DrawPanel extends JPanel {
     g2d.drawString("String 2", 100, 430);
     g2d.drawString("String 3", 100, 445);
 
+
     //TODO: pick unused colors for newly added symbols
     g2d.setColor(Color.RED);
     g2d.drawLine(60, 415, 75, 415);
@@ -120,10 +126,22 @@ class DrawPanel extends JPanel {
     g2d.setColor(Color.GREEN);
     g2d.drawLine(60, 445, 75, 445);
 
-    for (ColorPoint p : cpoints) {
+
+    Graphics2D g2 = (Graphics2D) g;
+    Font font = new Font(null, Font.PLAIN, 10);
+    AffineTransform affineTransform = new AffineTransform();
+    affineTransform.rotate(Math.toRadians(270), 0, 0);
+    Font rotatedFont = font.deriveFont(affineTransform);
+    g2.setFont(rotatedFont);
+
+//    g2.dispose();
+
+    //TODO this will probably be a list of records for stock prices
+    for (int i = 0; i < cpoints.size(); i++) {
+      ColorPoint p = cpoints.get(i);
       g2d.setColor(p.getColor());
       g2d.fillOval((int) p.getX(), (int) p.getY(), 10, 10);
-
+      g2.drawString("A String", i * 10, 550);
     }
   }
 }
