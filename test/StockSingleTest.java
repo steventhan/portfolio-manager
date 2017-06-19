@@ -8,6 +8,8 @@ import java.util.Map;
 import custom.util.CustomDate;
 import custom.util.NewStockRetriever;
 import custom.util.WebRetrieverSingleton;
+import model.trader.IStockSingle;
+import model.trader.StockSingle;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

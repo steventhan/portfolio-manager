@@ -1,3 +1,5 @@
+package model.trader;
+
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,3 +1,4 @@
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -6,6 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import custom.util.StockPriceNotFound;
+import model.trader.IStockSingle;
+import model.trader.StockBasket;
+import model.trader.StockSingle;
 
 /**
  * JUnit tests for StockBasket.
