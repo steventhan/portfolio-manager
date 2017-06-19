@@ -50,6 +50,11 @@ public class DrawLine extends JFrame {
 
 class DrawPanel extends JPanel {
 
+  private final static Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN,
+          Color.BLUE, Color.MAGENTA, Color.PINK, Color.CYAN, Color.GRAY};
+
+  private int colorIndex = 0;
+
   private int count;
   private List<Point> points;
 
@@ -63,8 +68,10 @@ class DrawPanel extends JPanel {
 
   public void increment() {
     count++;
-    points.add(new Point((int) (Math.random() * this.getWidth()), (int) (Math.random() * this
-            .getHeight())));
+//    points.add(new Point((int) (Math.random() * this.getWidth()), (int) (Math.random() * this
+//            .getHeight())));
+
+    points.add(new Point((count * 50) % this.getWidth(), (count + 100) % this.getHeight()));
   }
 
   @Override
@@ -81,6 +88,7 @@ class DrawPanel extends JPanel {
     //the Graphics g object has already been set up. You can use this to draw
     //various shapes
 
+
     Graphics2D g2d = (Graphics2D) g;
 
     //set color to black
@@ -88,10 +96,6 @@ class DrawPanel extends JPanel {
     //TODO: Grow legend taller with added symbols
     //TODO: Legend is 100px wide right now
     //TODO: String padding is 15px
-//    g2d.drawLine(50, 400, 50, 450);
-//    g2d.drawLine(50, 450, 150, 450);
-//    g2d.drawLine(50, 400, 150, 400);
-//    g2d.drawLine(150, 400, 150, 450);
     g2d.drawRect(50, 400, 100, 50);
 
     //write some text
@@ -108,8 +112,10 @@ class DrawPanel extends JPanel {
     g2d.setColor(Color.GREEN);
     g2d.drawLine(60, 445, 75, 445);
 
-    g2d.setColor(Color.BLACK);
+    Color myColor = new Color(0);
     for (Point p : points) {
+      colorIndex = (1 + colorIndex) % colors.length;
+      g2d.setColor(colors[colorIndex]);
       g2d.fillOval(p.x, p.y, 10, 10);
     }
   }
