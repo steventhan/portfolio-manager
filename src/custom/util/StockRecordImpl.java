@@ -1,5 +1,7 @@
 package custom.util;
 
+import sun.reflect.generics.tree.Tree;
+
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -11,18 +13,18 @@ import java.util.TreeMap;
  */
 public class StockRecordImpl implements StockRecord {
   private String symbol;
-  private Map<String, Integer> stockShares; //TODO: make null for single stock and check later
-  private Map<String, Double> closingPrices;
-  private Map<String, Double> fiftyDayAverages;
-  private Map<String, Double> twoHundredDayAverages;
+  private TreeMap<String, Integer> stockShares; //TODO: make null for single stock and check later
+  private TreeMap<String, Double> closingPrices;
+  private TreeMap<String, Double> fiftyDayAverages;
+  private TreeMap<String, Double> twoHundredDayAverages;
 
   //TODO: scale view according to longest field among closingPrices, fiftyDayAverages, and twoHundredDayAverages
 
   public StockRecordImpl(String symbol,
-                         Map<String, Integer> stockShares,
-                         Map<String, Double> closingPrices,
-                         Map<String, Double> fiftyDayAverages,
-                         Map<String, Double> twoHundredDayAverages) {
+                         TreeMap<String, Integer> stockShares,
+                         TreeMap<String, Double> closingPrices,
+                         TreeMap<String, Double> fiftyDayAverages,
+                         TreeMap<String, Double> twoHundredDayAverages) {
     this.symbol = symbol;
     this.stockShares = stockShares;
     this.closingPrices = closingPrices;
