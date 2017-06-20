@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -80,10 +79,8 @@ public class TraderModelImpl implements TraderModel {
 
   @Override
   public Map<String, Map<String, Integer>> getAllBaskets() {
-
     Map<String, Map<String, Integer>> result = new LinkedHashMap<>();
     return this.records.keySet().stream()
             .collect(Collectors.toMap(k -> k, k -> this.records.get(k).getStockShares()));
   }
-
 }
