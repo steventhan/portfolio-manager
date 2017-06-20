@@ -31,7 +31,7 @@ public class TraderControllerImpl implements TraderController {
     Map<String, Integer> basket;
 
     while (true) {
-      this.view.printMenu(this.model.getMenuOptions());
+      this.view.printMenu();
       switch (sc.nextLine()) {
         case "c":
           this.view.append("Enter stock basket name: ");

@@ -1,7 +1,6 @@
 package view.trader;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,8 +33,8 @@ public class TraderViewImpl implements TraderView {
   }
 
   @Override
-  public void printMenu(List<String> options) throws Exception {
-    this.textView.printMenu(options);
+  public void printMenu() throws Exception {
+    this.textView.printMenu();
   }
 
   /**

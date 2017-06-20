@@ -1,8 +1,6 @@
 package view.trader;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,14 +19,12 @@ public class TraderTextViewImpl implements TraderTextView {
   }
 
   @Override
-  public void printMenu(List<String> options) throws Exception {
-    options.stream().forEach(o -> {
-      try {
-        this.out.append(o + "\n");
-      } catch (IOException e) {
-        throw new UncheckedIOException(e);
-      }
-    });
+  public void printMenu() throws Exception {
+    this.out.append("c - Create new stock basket\n");
+    this.out.append("a - Add new share to a basket\n");
+    this.out.append("p - Print the stock basket\n");
+    this.out.append("g - Graphical view\n");
+    this.out.append("q - Quit\n");
     this.out.append("Select: ");
   }
 

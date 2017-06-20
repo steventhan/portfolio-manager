@@ -7,7 +7,6 @@ import java.util.Map;
  * Created by steven on 18/06/2017.
  */
 public interface TraderModel {
-  List<String> getMenuOptions() throws Exception;
   void createStockBasket(String name) throws Exception;
   void addStockToBasket(String name, String symbol, int numShare) throws Exception;
   void remove(String name);

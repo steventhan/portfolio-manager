@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -21,12 +20,6 @@ public class TraderModelImpl implements TraderModel {
 
   public TraderModelImpl() {
     records = new HashMap<>();
-  }
-
-  @Override
-  public List<String> getMenuOptions() {
-    return Arrays.asList("c - Create new stock basket", "a - Add new share to a basket",
-            "p - Print the stock basket", "g - Graphical view", "q - Quit");
   }
 
   @Override
