@@ -13,9 +13,9 @@ public class TraderViewImpl implements TraderView {
   private TraderGraphicalView graphicalView;
   private TraderTextView textView;
 
-  public TraderViewImpl() {
-    graphicalView = new TraderGraphicalViewImpl();
-    textView = new TraderTextViewImpl(System.out);
+  public TraderViewImpl(TraderGraphicalView tgv, TraderTextView ttv) {
+    this.graphicalView = tgv;
+    this.textView = ttv;
   }
 
   @Override
