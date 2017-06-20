@@ -1,5 +1,7 @@
 import controller.trader.TraderControllerImpl;
 import model.trader.TraderModelImpl;
+import view.trader.TraderGraphicalViewImpl;
+import view.trader.TraderTextViewImpl;
 import view.trader.TraderViewImpl;
 
 /**
@@ -7,6 +9,7 @@ import view.trader.TraderViewImpl;
  */
 public class TraderApp {
   public static void main(String[] args) throws Exception {
-    new TraderControllerImpl(new TraderModelImpl(), new TraderViewImpl()).start();
+    new TraderControllerImpl(new TraderModelImpl(),
+            new TraderViewImpl(new TraderGraphicalViewImpl(), new TraderTextViewImpl(System.out)));
   }
 }
