@@ -52,6 +52,7 @@ class DrawPanel extends JPanel {
 
   private final static Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN,
           Color.BLUE, Color.MAGENTA, Color.PINK, Color.CYAN, Color.GRAY};
+
   private int colorIndex = 0;
   private int count;
   private List<ColorPoint> cpoints;

@@ -1,7 +1,6 @@
 package view.trader;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.util.List;
 import java.util.Map;
 
@@ -11,12 +10,12 @@ import java.util.Map;
 public class TraderViewImpl implements TraderView {
 
   //TODO: use composition and delegation to implement all methods in TraderView interface
-  private ITraderGraphicalView graphicalView;
-  private ITraderTextView textView;
+  private TraderGraphicalView graphicalView;
+  private TraderTextView textView;
 
   public TraderViewImpl() {
-    graphicalView = new TraderGraphicalView();
-    textView = new TraderTextView(System.out);
+    graphicalView = new TraderGraphicalViewImpl();
+    textView = new TraderTextViewImpl(System.out);
   }
 
   //TODO: document that append is used to send warnings to user
@@ -33,8 +32,8 @@ public class TraderViewImpl implements TraderView {
   }
 
   @Override
-  public void printRecord(Map<String, Integer> basket) throws Exception {
-    this.textView.printRecord(basket);
+  public void printBasket(Map<String, Integer> basket) throws Exception {
+    this.textView.printBasket(basket);
   }
 
   @Override

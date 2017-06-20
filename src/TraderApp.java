@@ -1,6 +1,5 @@
 import controller.trader.TraderControllerImpl;
 import model.trader.TraderModelImpl;
-import view.trader.TraderTextView;
 import view.trader.TraderViewImpl;
 
 /**

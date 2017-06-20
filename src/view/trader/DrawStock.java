@@ -1,8 +1,8 @@
 package view.trader;
-
 import java.awt.event.ActionEvent;
 
-import javax.swing.*;
+import javax.swing.Timer;
+import javax.swing.JFrame;
 
 //TODO: Matthias fix this!
 
@@ -34,7 +34,6 @@ public class DrawStock extends JFrame {
     DrawStock mainWindow = new DrawStock();
     Timer timer = new Timer(1000, (ActionEvent e) -> mainWindow.step());
     timer.start();
-
   }
 
 }

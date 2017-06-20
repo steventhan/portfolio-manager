@@ -3,20 +3,10 @@ package view.trader;
 import java.util.Map;
 
 /**
- * Graphical view for the stock trader application.
+ * Created by matthiasdenu on 6/20/2017.
  */
-public class TraderGraphicalView implements ITraderGraphicalView {
+public interface TraderGraphicalView {
+  void plotRecord(String name, Map<String, Double> data);
 
-  private DrawStock stockDrawer;
-
-  @Override
-  public void plotRecord(String name, Map<String, Double> data) {
-    //TODO: put logic for calculating scale in the view
-  }
-
-  public void exit() {
-    System.exit(0);
-  }
-
-
+  void exit();
 }
