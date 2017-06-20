@@ -2,6 +2,7 @@ package model.trader;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import custom.util.CustomDate;
 
@@ -102,5 +103,13 @@ public class StockBasket extends StockAbstract {
       str.append(String.format("%s: %s\n", s.getSymbol(), this.basket.get(s)));
     }
     return str.toString();
+  }
+
+  public Set<IStockSingle> keySet() {
+    return this.basket.keySet();
+  }
+
+  public int get(IStockSingle stock) {
+    return this.basket.get(stock);
   }
 }
