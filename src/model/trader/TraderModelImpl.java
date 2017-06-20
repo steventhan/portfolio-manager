@@ -5,6 +5,7 @@ import sun.security.pkcs11.wrapper.Functions;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -76,20 +77,8 @@ public class TraderModelImpl implements TraderModel {
   @Override
   public Map<String, Map<String, Integer>> getAllBaskets() {
     Map<String, Map<String, Integer>> result = new LinkedHashMap<>();
-    this.records.keySet().stream().map(k -> {
-
-      StockBasket basket = this.records.get(k);
-
-      Map<String, Integer> basketContent = new HashMap<>();
-      basket.keySet().stream().map(key -> basketContent.put(key.getSymbol(), basket.get(key)));
-      return result.put(k, basketContent);
-    });
-
-    return result;
+    return this.records.keySet().stream()
+            .collect(Collectors.toMap(k -> k, k -> this.records.get(k).getStockShares()));
   }
 
-  @Override
-  public double getPriceOnDay(String stockSymbol, String strDate) throws Exception {
-    return new StockSingleImpl(stockSymbol).getPriceOnDay(strDate);
-  }
 }
