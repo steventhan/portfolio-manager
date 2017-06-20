@@ -69,12 +69,20 @@ public class TraderModelImpl implements TraderModel {
   @Override
   public boolean trendsUp(String name, String fromDate, String toDate) throws Exception {
     //TODO: test this
-    Map<String, Integer> contents = this.records.get(name).getStockShares();
-    Map<StockSingle, Integer> unboxedBasket = new HashMap<>();
-    for (String key : contents.keySet()) {
-      unboxedBasket.put(new StockSingleImpl(key), contents.get(key));
+
+    try {
+      StockSingle tempSingle = new StockSingleImpl(name);
+      return tempSingle.trendsUp(fromDate, toDate);
+
+    } catch (IllegalArgumentException e) {
+      Map<String, Integer> contents = this.records.get(name).getStockShares();
+      Map<StockSingle, Integer> unboxedBasket = new HashMap<>();
+      for (String key : contents.keySet()) {
+        unboxedBasket.put(new StockSingleImpl(key), contents.get(key));
+      }
+      return new StockBasketImpl(unboxedBasket).trendsUp(fromDate, toDate);
+
     }
-    return new StockBasketImpl(unboxedBasket).trendsUp(fromDate, toDate);
   }
 
   @Override
@@ -82,5 +90,12 @@ public class TraderModelImpl implements TraderModel {
     Map<String, Map<String, Integer>> result = new LinkedHashMap<>();
     return this.records.keySet().stream()
             .collect(Collectors.toMap(k -> k, k -> this.records.get(k).getStockShares()));
+  }
+
+  @Override
+  public String toString() {
+
+    String.format()
+    return null;
   }
 }

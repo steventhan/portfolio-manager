@@ -33,4 +33,11 @@ public interface StockSingle extends Stock {
    */
   String getSymbol();
 
+  /**
+   * Gets company name.
+   *
+   * @return the company name as String
+   */
+  String getName();
+
 }
