@@ -23,8 +23,13 @@ public class TraderModelImpl implements TraderModel {
 
   @Override
   public List<String> getMenuOptions() {
-    return Arrays.asList("c - Create new stock basket", "a - Add new share to a basket",
-            "p - Print the stock basket", "g - Graphical view",  "q - Quit");
+    return Arrays.asList("c - Create new stock basket",
+            "a - Add new share to a basket",
+            "p - Print the stock basket",
+            "t - Trend of stock",
+            "g - Graphical view",
+            "p - Plot",
+            "q - Quit");
   }
 
   @Override
