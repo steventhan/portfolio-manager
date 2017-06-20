@@ -2,6 +2,7 @@ package model.trader;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,12 +75,20 @@ public class TraderModelImpl implements TraderModel {
   @Override
   public boolean trendsUp(String name, String fromDate, String toDate) throws Exception {
     //TODO: test this
-    Map<String, Integer> contents = this.records.get(name).getStockShares();
-    Map<StockSingle, Integer> unboxedBasket = new HashMap<>();
-    for (String key : contents.keySet()) {
-      unboxedBasket.put(new StockSingleImpl(key), contents.get(key));
+
+    try {
+      StockSingle tempSingle = new StockSingleImpl(name);
+      return tempSingle.trendsUp(fromDate, toDate);
+
+    } catch (IllegalArgumentException e) {
+      Map<String, Integer> contents = this.records.get(name).getStockShares();
+      Map<StockSingle, Integer> unboxedBasket = new HashMap<>();
+      for (String key : contents.keySet()) {
+        unboxedBasket.put(new StockSingleImpl(key), contents.get(key));
+      }
+      return new StockBasketImpl(unboxedBasket).trendsUp(fromDate, toDate);
+
     }
-    return new StockBasketImpl(unboxedBasket).trendsUp(fromDate, toDate);
   }
 
   @Override
@@ -87,5 +96,49 @@ public class TraderModelImpl implements TraderModel {
     Map<String, Map<String, Integer>> result = new LinkedHashMap<>();
     return this.records.keySet().stream()
             .collect(Collectors.toMap(k -> k, k -> this.records.get(k).getStockShares()));
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder result = new StringBuilder();
+    Iterator<String> cps;
+    Iterator<String> fiftyDay;
+    Iterator<String> two100Day;
+    Iterator<String> shrs;
+    String shareKey;
+
+    for (String name : this.records.keySet()) {
+      Map<String, Double> closingPrices = this.records.get(name).getClosingPrices();
+      Map<String, Double> fiftyDayAvgs = this.records.get(name).getFiftyDayAverages();
+      Map<String, Double> two100DayAvgs = this.records.get(name).getTwoHundredDayAverages();
+      Map<String, Integer> shares = this.records.get(name).getStockShares();
+
+      cps = closingPrices.keySet().iterator();
+      fiftyDay = fiftyDayAvgs.keySet().iterator();
+      two100Day = two100DayAvgs.keySet().iterator();
+
+      for (int i = 0; i < 30 - (name.length() / 2); i++) {
+        result.append(" ");
+      } // center record name
+      result.append(name).append("\n");
+      while (cps.hasNext() || fiftyDay.hasNext() || two100Day.hasNext()) {
+        result.append(String.format("%19s %19s %19s\n",
+                (cps.hasNext() ? closingPrices.get(cps.next()) : ""),
+                (fiftyDay.hasNext() ? fiftyDayAvgs.get(fiftyDay.next()) : ""),
+                (two100Day.hasNext() ? two100DayAvgs.get(two100Day.next()) : "")));
+      }
+
+      result.append("\n");
+      result.append("stock shares\n\n");
+      shrs = shares.keySet().iterator();
+
+      while (shrs.hasNext()) {
+        shareKey = shrs.next();
+        result.append(String.format("%s, %d\n", shareKey, shares.get(shareKey)));
+      }
+      result.append("\n").append("\n");
+    }
+
+    return result.toString();
   }
 }
