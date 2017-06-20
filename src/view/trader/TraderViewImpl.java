@@ -18,9 +18,6 @@ public class TraderViewImpl implements TraderView {
     textView = new TraderTextViewImpl(System.out);
   }
 
-  //TODO: document that append is used to send warnings to user
-  //TODO: add overrides
-
   @Override
   public void plotRecord(String name, Map<String, Double> data) {
     this.graphicalView.plotRecord(name, data);
@@ -41,6 +38,14 @@ public class TraderViewImpl implements TraderView {
     this.textView.printMenu(options);
   }
 
+  /**
+   * Appends text to the output.
+   * This method is used for displaying very simple messages in the output, like true/false or
+   * warnings for the user.
+   *
+   * @param text to display.
+   * @throws IOException if there is one.
+   */
   @Override
   public void append(String text) throws IOException {
     this.textView.append(text);

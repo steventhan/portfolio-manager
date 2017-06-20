@@ -7,6 +7,5 @@ import java.util.Map;
  */
 public interface TraderGraphicalView {
   void plotRecord(String name, Map<String, Double> data);
-
   void exit();
 }
