@@ -1,5 +1,6 @@
 package model.trader;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -21,9 +22,20 @@ public class TraderModelImpl implements TraderModel {
   }
 
   @Override
-  public void createStockBasket(String name) {
+  public List<String> getMenuOptions() {
+    return Arrays.asList("c - Create new stock basket", "a - Add new share to a basket",
+            "p - Print the stock basket", "g - Graphical view",  "q - Quit");
+  }
+
+  @Override
+  public void createStockBasket(String name) throws Exception {
     //TODO: basket names cannot be stock symbols
-    this.baskets.put(name, new StockBasketImpl());
+    try {
+      new StockSingleImpl(name);
+    } catch (IllegalArgumentException e) {
+      this.baskets.put(name, new StockBasketImpl());
+    }
+    throw new IllegalArgumentException("Basket name cannot be same with a stock symbol");
   }
 
   @Override
@@ -91,4 +103,5 @@ public class TraderModelImpl implements TraderModel {
   public double getPriceOnDay(String stockSymbol, String strDate) throws Exception {
     return new StockSingleImpl(stockSymbol).getPriceOnDay(strDate);
   }
+
 }
