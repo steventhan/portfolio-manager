@@ -23,6 +23,8 @@ public class TraderTextViewImpl implements TraderTextView {
     this.out.append("c - Create new stock basket\n");
     this.out.append("a - Add new share to a basket\n");
     this.out.append("p - Print the stock basket\n");
+    this.out.append("t - Trend of stock\n");
+    this.out.append("l - Plot\n");
     this.out.append("g - Graphical view\n");
     this.out.append("q - Quit\n");
     this.out.append("Select: ");
