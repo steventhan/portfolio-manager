@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,6 @@ public class TraderModelImpl implements TraderModel {
   @Override
   public void createStockBasket(String name) throws Exception {
     //TODO: basket names cannot be stock symbols
-    StockBasket tempBasket = new StockBasketImpl();
     TreeMap<String, Integer> tempShares = new TreeMap<>();
     TreeMap<String, Double> tempPrices = new TreeMap<>();
     TreeMap<String, Double> temp50Avgs = new TreeMap<>();
@@ -44,8 +44,11 @@ public class TraderModelImpl implements TraderModel {
   public void addStockToBasket(String name, String symbol, int shares) throws Exception {
     //TODO: test this
     StockRecord temp = this.records.get(name);
+    //TODO: stock not found in the controller
+    Objects.requireNonNull(temp);
     Map<String, Integer> tempShares = temp.getStockShares();
     Integer tempInteger = (tempShares.get(symbol) == null) ? 0 : tempShares.get(symbol);
+    //TODO: extra feature decrement number of shares.
     tempShares.put(symbol, shares + tempInteger);
   }
 
