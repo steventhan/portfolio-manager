@@ -5,12 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Interface for View.
+ * This interface is used to unify separate interfaces for the stock trader application into one
+ * interface.
  */
-public interface TraderView {
-  String getViewType();
-  void append(String text) throws IOException;
-  void showMainMenu(List<String> options) throws Exception;
-  void showBasket(Map<String, Integer> basket) throws Exception;
-  void exit();
+public interface TraderView extends ITraderTextView, ITraderGraphicalView {
+
+
 }

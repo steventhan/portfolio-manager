@@ -17,6 +17,11 @@ public class TraderModelImpl implements TraderModel {
   }
 
   @Override
+  public void removeRecord() {
+
+  }
+
+  @Override
   public void createStockBasket(String sbName) {
     this.baskets.put(sbName, new StockBasket());
   }

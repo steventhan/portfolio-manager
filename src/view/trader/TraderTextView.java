@@ -8,24 +8,20 @@ import java.util.Map;
 /**
  * Created by steven on 17/06/2017.
  */
-public class TraderTextView implements TraderView {
+public class TraderTextView implements ITraderTextView {
   private Appendable out;
 
   public TraderTextView(Appendable out) {
     this.out = out;
   }
 
+  @Override
   public void append(String text) throws IOException {
     this.out.append(text);
   }
 
   @Override
-  public String getViewType() {
-    return "text";
-  }
-
-  @Override
-  public void showMainMenu(List<String> options) throws Exception {
+  public void printMenu(List<String> options) throws Exception {
     options.stream().forEach(o -> {
       try {
         this.out.append(o + "\n");
@@ -37,7 +33,7 @@ public class TraderTextView implements TraderView {
   }
 
   @Override
-  public void showBasket(Map<String, Integer> basket) throws Exception {
+  public void printRecord(Map<String, Integer> basket) throws Exception {
     this.out.append(basket
             .entrySet()
             .stream()
@@ -45,10 +41,5 @@ public class TraderTextView implements TraderView {
                     e.getKey(), e.getValue(), e.getValue() > 1 ? "s" : ""))
             .reduce("", (a, b) -> a + b)
     );
-  }
-
-  @Override
-  public void exit() {
-    System.exit(0);
   }
 }

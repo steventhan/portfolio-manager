@@ -35,7 +35,7 @@ public class DrawLine extends JFrame {
 
   public void incrementCount() {
     drawPanel.increment();
-    repaint(); //refresh the scFeen
+    repaint(); //refresh the screen
   }
 
   public static void main(String[] args) {
@@ -83,7 +83,6 @@ class DrawPanel extends JPanel {
     colorIndex = (1 + colorIndex) % colors.length;
     cpoints.add(new ColorPoint(this.getWidth() / 2, count * 10, colors[colorIndex]));
   }
-
 
   @Override
   public Dimension getPreferredSize() {

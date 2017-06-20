@@ -6,6 +6,7 @@ import java.util.Map;
  * Created by steven on 18/06/2017.
  */
 public interface TraderModel {
+  void removeRecord(); // TODO: put in model
   void createStockBasket(String sbName);
   void addStockToBasket(String sbName, String symbol, int numShare) throws Exception;
   Map<String, Integer> getBasketContentByName(String sbName);
