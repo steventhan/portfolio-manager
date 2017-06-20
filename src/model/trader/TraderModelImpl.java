@@ -29,7 +29,7 @@ public class TraderModelImpl implements TraderModel {
   }
 
   @Override
-  public Map<String, Integer> getBasketByName(String sbName) {
+  public Map<String, Integer> getBasketContentByName(String sbName) {
     StockBasket basket = this.baskets.get(sbName);
     return basket
             .keySet()
