@@ -16,10 +16,10 @@ import model.trader.StockSingleImpl;
  * JUnit tests for StockBasketImpl.
  */
 public class StockBasketImplTest {
-  StockBasket sb1;
-  StockBasket sb2;
-  StockBasket sb3;
-  StockBasket sb4;
+  private StockBasket sb1;
+  private StockBasket sb2;
+  private StockBasket sb3;
+  private StockBasket sb4;
 
   /**
    * Creates stock baskets for testing purposes.

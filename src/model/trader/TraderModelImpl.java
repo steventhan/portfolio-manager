@@ -76,12 +76,14 @@ public class TraderModelImpl implements TraderModel {
 
     } catch (IllegalArgumentException e) {
       Map<String, Integer> contents = this.records.get(name).getStockShares();
+      if (contents.size() == 0) {
+        throw new IllegalArgumentException("There's nothing in the basket.");
+      }
       Map<StockSingle, Integer> unboxedBasket = new HashMap<>();
       for (String key : contents.keySet()) {
         unboxedBasket.put(new StockSingleImpl(key), contents.get(key));
       }
       return new StockBasketImpl(unboxedBasket).trendsUp(fromDate, toDate);
-
     }
   }
 

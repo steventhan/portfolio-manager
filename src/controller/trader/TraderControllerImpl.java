@@ -73,9 +73,9 @@ public class TraderControllerImpl implements TraderController {
       this.view.append(String.format("This basket or stock is trending %s.", trendingUp
               ? "up" : "down"));
     } catch (StockPriceNotFound e) {
-      this.view.append("Trend cannot be determined. Try again");
+      this.view.append(e.getMessage());
     } catch (IllegalArgumentException e) {
-      this.view.append("Invalid input. Try again");
+      this.view.append(e.getMessage());
     }
     this.view.append("\n");
   }
