@@ -38,6 +38,10 @@ public class TraderModelImplTest {
     md.addStockToBasket("test sb", "AMZN", 3);
     temp = md.getBasketContentByName("test sb");
     assertEquals(1, temp.size());
+
+    System.out.println(md.toString());
+
+
   }
 
   @Test

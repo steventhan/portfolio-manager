@@ -39,15 +39,19 @@ public class TraderModelImpl implements TraderModel {
   }
 
   @Override
+  //TODO: extra feature decrement number of shares.
   public void addStockToBasket(String name, String symbol, int shares) throws Exception {
-    //TODO: test this
-    StockRecord temp = this.records.get(name);
-    //TODO: stock not found in the controller
-    Objects.requireNonNull(temp);
-    Map<String, Integer> tempShares = temp.getStockShares();
-    Integer tempInteger = (tempShares.get(symbol) == null) ? 0 : tempShares.get(symbol);
-    //TODO: extra feature decrement number of shares.
-    tempShares.put(symbol, shares + tempInteger);
+    StockRecord record = this.records.get(name);
+    Objects.requireNonNull(record); //TODO: stock not found in the controller
+    TreeMap<String, Integer> newShares = record.getStockShares();
+    Integer tempInteger = (newShares.get(symbol) == null) ? 0 : newShares.get(symbol);
+    newShares.put(symbol, shares + tempInteger);
+
+    this.records.put(name, new StockRecordImpl(record.getSymbol(),
+            newShares,
+            record.getClosingPrices(),
+            record.getFiftyDayAverages(),
+            record.getTwoHundredDayAverages()));
   }
 
   @Override

@@ -12,6 +12,7 @@ import view.trader.TraderView;
 /**
  * An implementation of TraderController interface.
  */
+//TODO: automate test by reading from and writing to file(s)
 public class TraderControllerImpl implements TraderController {
   private final TraderModel model;
   private final TraderView view;

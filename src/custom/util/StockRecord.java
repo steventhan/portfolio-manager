@@ -1,6 +1,7 @@
 package custom.util;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by matthiasdenu on 6/20/2017.
@@ -8,12 +9,12 @@ import java.util.Map;
 public interface StockRecord {
   String getSymbol();
 
-  Map<String, Double> getClosingPrices();
+  TreeMap<String, Double> getClosingPrices();
 
-  Map<String, Integer> getStockShares();
+  TreeMap<String, Integer> getStockShares();
 
-  Map<String, Double> getFiftyDayAverages();
+  TreeMap<String, Double> getFiftyDayAverages();
 
-  Map<String, Double> getTwoHundredDayAverages();
+  TreeMap<String, Double> getTwoHundredDayAverages();
 
 }

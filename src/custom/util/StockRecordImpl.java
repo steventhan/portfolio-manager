@@ -1,7 +1,5 @@
 package custom.util;
 
-import sun.reflect.generics.tree.Tree;
-
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -38,22 +36,22 @@ public class StockRecordImpl implements StockRecord {
   }
 
   @Override
-  public Map<String, Double> getClosingPrices() {
+  public TreeMap<String, Double> getClosingPrices() {
     return copyMapStringDouble(this.closingPrices);
   }
 
   @Override
-  public Map<String, Integer> getStockShares() {
+  public TreeMap<String, Integer> getStockShares() {
     return copyMapStringInteger(this.stockShares);
   }
 
   @Override
-  public Map<String, Double> getFiftyDayAverages() {
+  public TreeMap<String, Double> getFiftyDayAverages() {
     return copyMapStringDouble(this.fiftyDayAverages);
   }
 
   @Override
-  public Map<String, Double> getTwoHundredDayAverages() {
+  public TreeMap<String, Double> getTwoHundredDayAverages() {
     return copyMapStringDouble(this.twoHundredDayAverages);
   }
 
