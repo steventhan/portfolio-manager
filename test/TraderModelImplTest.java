@@ -169,15 +169,18 @@ public class TraderModelImplTest {
 
   @Test
   public void trendsUp() throws Exception {
+    //TODO: test this. just do math and check for correct resutl
   }
 
   @Test
-  public void getAllBaskets() throws Exception {
+  public void getRecords() throws Exception {
+    //TODO: possibly return records sorted by name
+    //TODO: make a big Map<String, Map<String, Integer>> to compare with and check
+    System.out.println(TraderModel.sPrintStockRecords(model.getRecords()));
   }
 
   @Test
   public void testToString() throws Exception {
-
-
+    System.out.println(model.toString());
   }
 }
