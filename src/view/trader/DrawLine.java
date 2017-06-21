@@ -90,35 +90,24 @@ class DrawPanel extends JPanel {
     return new Dimension(600, 600);
   }
 
+  //TODO: make helpers
+  //TODO: Grow legend taller with added symbols
+  //TODO: Legend is 100px wide right now
+  //TODO: String padding is 15px
+  //TODO: pick unused colors for newly added symbols
   protected void paintComponent(Graphics g) {
 
-    //TODO: make helpers
+    super.paintComponent(g); // Call the UI delegate's paint method
 
-    //call its default implementation, let it do its thing
-    //one of the things its default implementation does it to clear the screen
-    //thus everything in this method is drawn starting from a blank screen
-    super.paintComponent(g);
+    Graphics2D g2d = (Graphics2D) g; // for convenience cast Graphics object as Graphics2D object
 
-    //the Graphics g object has already been set up. You can use this to draw
-    //various shapes
-
-    Graphics2D g2d = (Graphics2D) g;
-
-    //set color to black
+    // draw legend
     g2d.setColor(Color.BLACK);
-    //TODO: Grow legend taller with added symbols
-    //TODO: Legend is 100px wide right now
-    //TODO: String padding is 15px
     g2d.drawRect(50, 400, 100, 50);
-
-    //write some text
     g2d.setColor(Color.BLACK);
     g2d.drawString("String 1", 100, 415);
     g2d.drawString("String 2", 100, 430);
     g2d.drawString("String 3", 100, 445);
-
-
-    //TODO: pick unused colors for newly added symbols
     g2d.setColor(Color.RED);
     g2d.drawLine(60, 415, 75, 415);
     g2d.setColor(Color.ORANGE);
@@ -126,22 +115,21 @@ class DrawPanel extends JPanel {
     g2d.setColor(Color.GREEN);
     g2d.drawLine(60, 445, 75, 445);
 
-
-    Graphics2D g2 = (Graphics2D) g;
+    // create a rotated transform and draw x-axis values
+    Graphics2D gTransform = (Graphics2D) g;
     Font font = new Font(null, Font.PLAIN, 10);
     AffineTransform affineTransform = new AffineTransform();
     affineTransform.rotate(Math.toRadians(270), 0, 0);
     Font rotatedFont = font.deriveFont(affineTransform);
-    g2.setFont(rotatedFont);
+    gTransform.setFont(rotatedFont);
 
-//    g2.dispose();
 
     //TODO this will probably be a list of records for stock prices
     for (int i = 0; i < cpoints.size(); i++) {
       ColorPoint p = cpoints.get(i);
       g2d.setColor(p.getColor());
       g2d.fillOval((int) p.getX(), (int) p.getY(), 10, 10);
-      g2.drawString("A String", i * 10, 550);
+      gTransform.drawString("A String", i * 10, 550);
     }
   }
 }
