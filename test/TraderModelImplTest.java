@@ -59,7 +59,7 @@ public class TraderModelImplTest {
     newModel.createStockBasket("test basket");
     assertEquals(1, newModel.getRecords().size());
 
-    // TODO: decide how to handle duplicate basket creation
+    // TODO: decide how to handle duplicate basket creation (document it)
     // adding new basket with same name (Exception
     // newModel.createStockBasket("test basket");
 
@@ -74,15 +74,47 @@ public class TraderModelImplTest {
 
     // TODO: test duplicates for pre-existing TraderModelImpl as well
 
-    System.out.println("createStockBasket()\n");
-    System.out.println(newModel.toString());
-    System.out.println(model.toString());
-
+    // System.out.println("createStockBasket()\n");
+    // System.out.println(newModel.toString());
+    // System.out.println(model.toString());
   }
 
   @Test
   public void addStockToBasket() throws Exception {
+    // add stock to empty basket
+    int origSz = model.getBasketContentByName("basket five").size();
+    model.addStockToBasket("basket five", "HULU", 5);
+    assertEquals(origSz + 1, model.getBasketContentByName("basket five").size());
 
+    // add zero stock to empty basket
+    //TODO: update so that stock needs nonzero value to be added to basket
+    model.addStockToBasket("basket five", "PG", 0);
+    assertEquals(origSz + 2, model.getBasketContentByName("basket five").size());
+
+    // add stock to pre-existing stock
+    //TODO: decide whether adding stock to pre-existing stock overwrites or adds to
+    model.addStockToBasket("basket five", "HULU", 5);
+    assertEquals(origSz + 2, model.getBasketContentByName("basket five").size());
+    assertEquals((Integer) 10, model.getBasketContentByName("basket five").get("HULU"));
+
+    // add zero stock to pre-existing stock
+    model.addStockToBasket("basket five", "HULU", 0);
+    assertEquals(origSz + 2, model.getBasketContentByName("basket five").size());
+    assertEquals((Integer) 10, model.getBasketContentByName("basket five").get("HULU"));
+
+    // add stock for invalid symbol
+    //TODO: update so that invalid symbols can't be added
+    model.addStockToBasket("basket five", "DICKS", 11);
+    assertEquals(origSz + 3, model.getBasketContentByName("basket five").size());
+    assertEquals((Integer) 10, model.getBasketContentByName("basket five").get("HULU"));
+
+    // add stock to nonexistent basket
+    //TODO: decide how to handle this null pointer exception
+    // model.addStockToBasket("frmbl", "DKS", 11);
+    // assertEquals(origSz + 4, model.getBasketContentByName("basket five").size());
+    // assertEquals((Integer) 11, model.getBasketContentByName("basket five").get("DKS"));
+
+    System.out.println(model.toString());
   }
 
   @Test
@@ -113,6 +145,7 @@ public class TraderModelImplTest {
 
   @Test
   public void getBasketContentByName() throws Exception {
+
 
   }
 

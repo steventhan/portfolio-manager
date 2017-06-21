@@ -100,6 +100,7 @@ public class TraderModelImpl implements TraderModel {
 
   @Override
   public String toString() {
+    //TODO: pass sorted version of this.records
     return TraderModel.sPrintStockRecords(this.records);
   }
 }
