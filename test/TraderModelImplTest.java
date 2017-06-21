@@ -1,10 +1,16 @@
 import org.junit.Test;
 import org.junit.Before;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
+
 import model.trader.TraderModel;
 import model.trader.TraderModelImpl;
 import view.trader.TraderView;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
@@ -145,8 +151,20 @@ public class TraderModelImplTest {
 
   @Test
   public void getBasketContentByName() throws Exception {
+    Map<String, Integer> testMapOne = new TreeMap<>();
+    testMapOne.put("BAC", 6);
+    testMapOne.put("CHK", 15);
+    testMapOne.put("TWTR", 90);
+    testMapOne.put("INTC", 10);
+    Map<String, Integer> emptySet = new LinkedHashMap<>();
 
-
+    // get contents of non-empty basket
+    assertEquals(testMapOne, model.getBasketContentByName("basket two"));
+    // get contents of empty basket
+    assertEquals(emptySet, model.getBasketContentByName("basket five"));
+    //TODO: decide how to handle this null pointer exception
+    // get contents of nonexistent basket
+    // assertEquals(null, model.getBasketContentByName("frmbl"));
   }
 
   @Test
