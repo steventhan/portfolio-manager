@@ -20,7 +20,7 @@ public class TraderTextViewImpl implements TraderTextView {
 
   @Override
   public void printMenu() throws Exception {
-    this.out.append("c - Create new stock basket\n");
+    this.out.append("c - Create new stock or basket\n");
     this.out.append("a - Add new share to a basket\n");
     this.out.append("p - Print the stock basket\n");
     this.out.append("t - Trend of stock\n");
@@ -35,7 +35,7 @@ public class TraderTextViewImpl implements TraderTextView {
     this.out.append(basket
             .entrySet()
             .stream()
-            .map(e -> String.format("%s: %d share%s",
+            .map(e -> String.format("%s: %d share%s\n",
                     e.getKey(), e.getValue(), e.getValue() > 1 ? "s" : ""))
             .reduce("", (a, b) -> a + b)
     );

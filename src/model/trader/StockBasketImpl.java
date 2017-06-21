@@ -3,6 +3,8 @@ package model.trader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import custom.util.CustomDate;
 
@@ -61,6 +63,23 @@ public class StockBasketImpl extends StockAbstract implements StockBasket {
    */
   public void add(String stockSymbol, Integer shares) throws Exception {
     this.add(new StockSingleImpl(stockSymbol), shares);
+  }
+
+  @Override
+  public Map<String, Double> getClosingPrices(String fromDate, String toDate) throws Exception {
+    Map<String, Double> basketPrices = new TreeMap<>();
+    for (StockSingle s : this.basket.keySet()) {
+      Map<String, Double> stockPrices = s.getClosingPrices(fromDate, toDate);
+      int numShares = this.basket.get(s);
+      for (String date : stockPrices.keySet()) {
+        if (basketPrices.containsKey(date)) {
+          basketPrices.put(date, basketPrices.get(date) + (stockPrices.get(date) * numShares));
+        } else {
+          basketPrices.put(date, stockPrices.get(date) * numShares);
+        }
+      }
+    }
+    return basketPrices;
   }
 
   /**

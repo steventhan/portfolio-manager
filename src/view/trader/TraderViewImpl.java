@@ -50,4 +50,11 @@ public class TraderViewImpl implements TraderView {
     this.textView.append(text);
   }
 
+  public void setupPanel() {
+    this.graphicalView.setupPanel();
+  }
+
+  @Override
+  public void showBlankCanvas() {
+  }
 }

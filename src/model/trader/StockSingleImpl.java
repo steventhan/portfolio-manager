@@ -162,9 +162,9 @@ public class StockSingleImpl extends StockAbstract implements StockSingle {
     double twoHundredsDaysMovingAverage = 0;
     int i = 1;
 
-    priceRecords = (TreeMap) this.retriever.getHistoricalPrices(this.symbol, pastDate.getDay(),
-            pastDate.getMonth(), pastDate.getYear(), date.getDay(),
-            date.getMonth(), date.getYear());
+    priceRecords = (TreeMap<Integer, PriceRecord>) this.retriever.getHistoricalPrices(this.symbol,
+            pastDate.getDay(), pastDate.getMonth(), pastDate.getYear(),
+            date.getDay(), date.getMonth(), date.getYear());
 
     for (Integer n : priceRecords.descendingKeySet()) {
       total += priceRecords.get(n).getClosePrice();

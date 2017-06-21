@@ -9,7 +9,9 @@ import java.util.Map;
 public interface TraderModel {
   void createStockBasket(String name) throws Exception;
   void addStockToBasket(String name, String symbol, int numShare) throws Exception;
-  void remove(String name);
   Map<String, Integer> getBasketContentByName(String sbName); //TODO: use for printBasket
+  Map<String, Map<String, Double>> getPlotData(String fromDate, String toDate) throws Exception; //TODO: use for printBasket
+  Map<String, Double> getPlotDataForOne(String stockOrBasketName,
+                                        String fromDate, String toDate) throws Exception; //TODO: use for printBasket
   boolean trendsUp(String name, String fromDate, String toDate) throws Exception;
 }
