@@ -1,33 +1,92 @@
 import org.junit.Test;
-
+import org.junit.Before;
 import java.util.Map;
-
-import model.trader.StockBasket;
-import model.trader.StockBasketImpl;
-import model.trader.StockSingleImpl;
 import model.trader.TraderModel;
 import model.trader.TraderModelImpl;
+import view.trader.TraderView;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 
 /**
- * Created by matthiasdenu on 6/20/2017.
+ * Class to test model.
  */
+//TODO: test getRecords();
 public class TraderModelImplTest {
+  TraderModel model;
+
+  @Before
+  public void setup() throws Exception {
+    model = new TraderModelImpl();
+    model.createStockBasket("basket one");
+    model.createStockBasket("basket two");
+    model.createStockBasket("basket three");
+    model.createStockBasket("basket four");
+    model.createStockBasket("basket five");
+    model.createStockBasket("basket six");
+
+    model.addStockToBasket("basket one", "AAPL", 3);
+    model.addStockToBasket("basket one", "WFC", 9);
+    model.addStockToBasket("basket one", "UPS", 5);
+    model.addStockToBasket("basket one", "AMZN", 3);
+
+    model.addStockToBasket("basket two", "BAC", 6);
+    model.addStockToBasket("basket two", "CHK", 15);
+    model.addStockToBasket("basket two", "TWTR", 90);
+    model.addStockToBasket("basket two", "INTC", 10);
+
+    model.addStockToBasket("basket three", "INTC", 13);
+    model.addStockToBasket("basket three", "MU", 15);
+    model.addStockToBasket("basket three", "NVDA", 22);
+    model.addStockToBasket("basket three", "SIRI", 8);
+
+    model.addStockToBasket("basket four", "MSFT", 5);
+    model.addStockToBasket("basket four", "CSCO", 5);
+    model.addStockToBasket("basket four", "FB", 5);
+    model.addStockToBasket("basket four", "ADBE", 5);
+
+    model.addStockToBasket("basket six", "WFM", 10);
+
+  }
+
+
   @Test
   public void createStockBasket() throws Exception {
+    // new stock basket to new TraderModelImpl
+    TraderModel newModel = new TraderModelImpl();
+    assertEquals(0, newModel.getRecords().size());
+    newModel.createStockBasket("test basket");
+    assertEquals(1, newModel.getRecords().size());
+
+    // TODO: decide how to handle duplicate basket creation
+    // adding new basket with same name (Exception
+    // newModel.createStockBasket("test basket");
+
+    // adding new basket with different name
+    newModel.createStockBasket("second test basket");
+    assertEquals(2, newModel.getRecords().size());
+
+    // new stock basket to pre-existing TraderModelImpl
+    int originalSize = model.getRecords().size();
+    model.createStockBasket("third test basket");
+    assertEquals(originalSize + 1, model.getRecords().size());
+
+    // TODO: test duplicates for pre-existing TraderModelImpl as well
+
+    System.out.println("createStockBasket()\n");
+    System.out.println(newModel.toString());
+    System.out.println(model.toString());
+
   }
 
   @Test
   public void addStockToBasket() throws Exception {
+
   }
 
   @Test
   public void remove() throws Exception {
-  }
-
-  @Test
-  public void getBasketContentByName() throws Exception {
     TraderModel md = new TraderModelImpl();
     Map<String, Integer> temp;
 
@@ -39,8 +98,21 @@ public class TraderModelImplTest {
     temp = md.getBasketContentByName("test sb");
     assertEquals(1, temp.size());
 
-    System.out.println(md.toString());
+    md.addStockToBasket("test sb", "AAPL", 3);
+    temp = md.getBasketContentByName("test sb");
+    assertEquals(2, temp.size());
 
+    md.addStockToBasket("test sb", "UPS", 3);
+    temp = md.getBasketContentByName("test sb");
+    assertEquals(3, temp.size());
+
+    md.remove("test sb");
+    temp = md.getBasketContentByName("test sb");
+    assertEquals(0, temp.size());
+  }
+
+  @Test
+  public void getBasketContentByName() throws Exception {
 
   }
 

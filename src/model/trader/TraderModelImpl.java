@@ -17,8 +17,19 @@ import custom.util.StockRecordImpl;
 public class TraderModelImpl implements TraderModel {
   private Map<String, StockRecord> records;
 
+  //TraderModel.printStockRecords(myRecords);
+
+  static final void printStockRecords(Map<String, StockRecord> records) {
+
+  }
+
   public TraderModelImpl() {
     records = new HashMap<>();
+  }
+
+  @Override
+  public Map<String, StockRecord> getRecords() {
+    return this.records.keySet().stream().collect(Collectors.toMap(k -> k, records::get));
   }
 
   @Override
@@ -89,45 +100,6 @@ public class TraderModelImpl implements TraderModel {
 
   @Override
   public String toString() {
-    StringBuilder result = new StringBuilder();
-    Iterator<String> cps;
-    Iterator<String> fiftyDay;
-    Iterator<String> two100Day;
-    Iterator<String> shrs;
-    String shareKey;
-
-    for (String name : this.records.keySet()) {
-      Map<String, Double> closingPrices = this.records.get(name).getClosingPrices();
-      Map<String, Double> fiftyDayAvgs = this.records.get(name).getFiftyDayAverages();
-      Map<String, Double> two100DayAvgs = this.records.get(name).getTwoHundredDayAverages();
-      Map<String, Integer> shares = this.records.get(name).getStockShares();
-
-      cps = closingPrices.keySet().iterator();
-      fiftyDay = fiftyDayAvgs.keySet().iterator();
-      two100Day = two100DayAvgs.keySet().iterator();
-
-      for (int i = 0; i < 30 - (name.length() / 2); i++) {
-        result.append(" ");
-      } // center record name
-      result.append(name).append("\n");
-      while (cps.hasNext() || fiftyDay.hasNext() || two100Day.hasNext()) {
-        result.append(String.format("%19s %19s %19s\n",
-                (cps.hasNext() ? closingPrices.get(cps.next()) : ""),
-                (fiftyDay.hasNext() ? fiftyDayAvgs.get(fiftyDay.next()) : ""),
-                (two100Day.hasNext() ? two100DayAvgs.get(two100Day.next()) : "")));
-      }
-
-      result.append("\n");
-      result.append("stock shares\n\n");
-      shrs = shares.keySet().iterator();
-
-      while (shrs.hasNext()) {
-        shareKey = shrs.next();
-        result.append(String.format("%s, %d\n", shareKey, shares.get(shareKey)));
-      }
-      result.append("\n").append("\n");
-    }
-
-    return result.toString();
+    return TraderModel.sPrintStockRecords(this.records);
   }
 }
