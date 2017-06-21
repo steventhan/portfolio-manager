@@ -12,5 +12,4 @@ public interface TraderModel {
   void remove(String name);
   Map<String, Integer> getBasketContentByName(String sbName); //TODO: use for printBasket
   boolean trendsUp(String name, String fromDate, String toDate) throws Exception;
-  Map<String, Map<String, Integer>> getAllBaskets();
 }
