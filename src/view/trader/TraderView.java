@@ -5,5 +5,4 @@ package view.trader;
  * interface.
  */
 public interface TraderView extends TraderTextView, TraderGraphicalView {
-  void showBlankCanvas();
 }

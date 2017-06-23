@@ -1,8 +1,6 @@
 package controller.trader;
 
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -18,6 +16,7 @@ public class TraderControllerImpl implements TraderController {
   private final TraderModel model;
   private final TraderView view;
   private final Readable in;
+  private double currentGraphHighestPrice;
   private String fromDate;
   private String toDate;
 
@@ -29,6 +28,7 @@ public class TraderControllerImpl implements TraderController {
     this.model = model;
     this.view = view;
     this.in = in;
+    this.currentGraphHighestPrice = 0;
     this.fromDate = null;
     this.toDate = null;
   }
@@ -53,8 +53,7 @@ public class TraderControllerImpl implements TraderController {
     }
 
     if (this.fromDate != null && this.toDate != null && stockCreated) {
-      this.view.plotRecord(basketOrStockName, this.model.getPlotDataForOne(basketOrStockName,
-              this.fromDate, this.toDate));
+      plotOneRecord(basketOrStockName);
     }
   }
 
@@ -75,8 +74,7 @@ public class TraderControllerImpl implements TraderController {
 
     this.model.addStockToBasket(basketName, symbol, amount);
     if (this.fromDate != null && this.toDate != null) {
-      this.view.plotRecord(basketName, this.model.getPlotDataForOne(basketName,
-              this.fromDate, this.toDate));
+      plotOneRecord(basketName);
     }
   }
 
@@ -110,19 +108,34 @@ public class TraderControllerImpl implements TraderController {
     this.view.append("\n");
   }
 
-  private void plot(Scanner sc) throws Exception {
-    Map<String,Map<String, Double>> dataPoints;
+  private void plotOneRecord(String basketOrStockName) throws Exception {
+    Map<String, Double> plotData;
+    plotData = this.model.getPlotDataForOne(basketOrStockName, this.fromDate, this.toDate);
 
+    if (Double.compare(this.model.getHighestPrice(), this.currentGraphHighestPrice) == 0) {
+      this.view.plotRecord(basketOrStockName, plotData);
+    } else {
+      this.plotEverything();
+    }
+  }
+
+  private void plotEverything() throws Exception {
+    Map<String,Map<String, Double>> plotData;
+    plotData = this.model.getPlotData(this.fromDate, this.toDate);
+    this.currentGraphHighestPrice = this.model.getHighestPrice();
+    this.view.setupPanel(this.currentGraphHighestPrice);
+
+    for (String k : plotData.keySet()) {
+      this.view.plotRecord(k, plotData.get(k));
+    }
+  }
+
+  private void plot(Scanner sc) throws Exception {
     this.view.append("From (yyyy-mm-dd): ");
     this.fromDate = sc.nextLine();
     this.view.append("To (yyyy-mm-dd): ");
     this.toDate = sc.nextLine();
-    dataPoints = this.model.getPlotData(this.fromDate, this.toDate);
-    this.view.setupPanel();
-
-    for (String k : dataPoints.keySet()) {
-      this.view.plotRecord(k, dataPoints.get(k));
-    }
+    this.plotEverything();
   }
 
   @Override

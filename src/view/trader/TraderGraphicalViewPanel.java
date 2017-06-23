@@ -11,6 +11,7 @@ import javax.swing.*;
 public class TraderGraphicalViewPanel extends JPanel {
   private TraderGraph graph;
   private TraderGraphLegend legend;
+
   private static final int width = 1100;
   private static final int height = 700;
   private static final int xOffset = 50;
@@ -19,10 +20,10 @@ public class TraderGraphicalViewPanel extends JPanel {
           Color.BLUE, Color.MAGENTA, Color.PINK, Color.CYAN, Color.GRAY};
   private int colorIndx;
 
-  public TraderGraphicalViewPanel() {
+  public TraderGraphicalViewPanel(double highestPrice) {
     super();
     this.graph = new TraderGraph(this.getPreferredSize().width - 200,
-            this.getPreferredSize().height - 100, 2000);
+            this.getPreferredSize().height - 100, highestPrice);
     this.legend = new TraderGraphLegend(this.getPreferredSize().width
             - this.graph.getWidth() - this.xOffset - 10,
             this.graph.getHeight() - this.yOffset);

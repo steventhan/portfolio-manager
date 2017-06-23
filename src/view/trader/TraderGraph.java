@@ -20,13 +20,25 @@ public class TraderGraph extends BufferedImage {
     Graphics2D g2d = this.createGraphics();
     float dateIncrement = ((float) this.getWidth()) / data.keySet().size();
     float i = 0;
+    int prevX = 0;
+    int prevY = 0;
+    int currentX = 0;
+    int currentY = 0;
 
     g2d.setColor(color);
 
     for (String date : data.keySet()) {
-      int y = this.getHeight() - 10
-              - (int) Math.round((data.get(date) / this.highestPrice) * (this.getHeight() - 10));
-      g2d.fillOval(Math.round(i), y, 5, 5);
+      currentX = Math.round(i);
+      currentY = this.getHeight() - 10
+              - (int) Math.round((data.get(date) / (this.highestPrice + 10))
+              * (this.getHeight() - 10));
+      g2d.fillOval(currentX, currentY, 5, 5);
+
+      if (currentX != 0 && currentY != 0) {
+        g2d.drawLine(prevX, prevY, currentX, currentY);
+      }
+      prevX = currentX;
+      prevY = currentY;
       i += dateIncrement;
     }
   }
