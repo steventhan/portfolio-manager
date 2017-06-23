@@ -1,6 +1,7 @@
 #Assignment 6
 
 ##What to Submit
+
 _Submit all your source files, including the ones given to you that your code ends up using. You should also submit a screenshot of your graphical view that plots the closing price and 50-day average of the Wells Fargo Inc. (WFC) from January 1 2015 to January 1 2017._
 
 ##Assignment Requirements
