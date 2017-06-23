@@ -72,6 +72,16 @@ public class TraderModelImpl implements TraderModel {
   }
 
   @Override
+  public Map<String, Map<String, Double>> getMovingAveragesForAll(String fromDate, String toDate, int days) throws Exception {
+    return null;
+  }
+
+  @Override
+  public Map<String, Double> getMovingAveragesForOne(String stockOrBasketName, String fromDate, String toDate, int days) throws Exception {
+    return null;
+  }
+
+  @Override
   public boolean trendsUp(String name, String fromDate, String toDate) throws Exception {
     //TODO: test this
 

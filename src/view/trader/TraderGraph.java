@@ -32,7 +32,7 @@ public class TraderGraph extends BufferedImage {
       currentY = this.getHeight() - 10
               - (int) Math.round((data.get(date) / (this.highestPrice + 10))
               * (this.getHeight() - 10));
-      g2d.fillOval(currentX, currentY, 5, 5);
+      g2d.fillOval(currentX, currentY, 2, 2);
 
       if (currentX != 0 && currentY != 0) {
         g2d.drawLine(prevX, prevY, currentX, currentY);

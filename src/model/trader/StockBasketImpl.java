@@ -82,6 +82,24 @@ public class StockBasketImpl extends StockAbstract implements StockBasket {
     return basketPrices;
   }
 
+  @Override
+  public Map<String, Double> getMovingAverages(String fromDate, String toDate, int days) throws Exception {
+    Map<String, Double> movingAverages = new TreeMap<>();
+
+    for (StockSingle s : this.basket.keySet()) {
+      Map<String, Double> stockAverages = s.getMovingAverages(fromDate, toDate, days);
+      int numShares = this.basket.get(s);
+      for (String date : stockAverages.keySet()) {
+        if (movingAverages.containsKey(date)) {
+          movingAverages.put(date, movingAverages.get(date) + (stockAverages.get(date) * numShares));
+        } else {
+          movingAverages.put(date, stockAverages.get(date) * numShares);
+        }
+      }
+    }
+    return movingAverages;
+  }
+
   /**
    * Determine the price of a basket on a certain date.
    *
