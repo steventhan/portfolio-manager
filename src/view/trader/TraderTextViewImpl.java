@@ -1,13 +1,14 @@
 package view.trader;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.Map;
 
 /**
  * Created by steven on 17/06/2017.
  */
 public class TraderTextViewImpl implements TraderTextView {
-  private Appendable out;
+  private final Appendable out;
 
   public TraderTextViewImpl(Appendable out) {
     this.out = out;
@@ -31,13 +32,23 @@ public class TraderTextViewImpl implements TraderTextView {
   }
 
   @Override
-  public void printBasket(Map<String, Integer> basket) {
-    basket.forEach((key, value) -> System.out.printf("%s: %d share%s\n",
-            key, value, value > 1 ? "s" : ""));
+  public void printBasket(Map<String, Integer> basket) throws IOException {
+    basket.forEach((key, value) -> {
+      try {
+        this.out.append(String.format("%s: %d share%s\n", key, value, value > 1 ? "s" : ""));
+      } catch (IOException e) {
+        throw new UncheckedIOException(e);
+      }
+    });
   }
 
-  public void printAllBaskets(Map<String, Map<String, Integer>> baskets) {
-    baskets.keySet().forEach(k -> this.printBasket(baskets.get(k)));
+  public void printAllBaskets(Map<String, Map<String, Integer>> baskets) throws Exception {
+    baskets.keySet().forEach(k -> {
+      try {
+        this.printBasket(baskets.get(k));
+      } catch (IOException e) {
+        throw new UncheckedIOException(e);
+      }
+    });
   }
-
 }
