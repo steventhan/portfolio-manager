@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import custom.util.CustomDate;
@@ -108,9 +109,14 @@ public class StockBasketImpl extends StockAbstract implements StockBasket {
     return this.basket.size();
   }
 
-  //TODO: where are these two methods used? Should they be declared in the interface?
   public Set<StockSingle> keySet() {
     return this.basket.keySet();
+  }
+
+  @Override
+  public Map<String, Integer> getStocks() {
+    return this.basket.keySet().stream()
+            .collect(Collectors.toMap(StockSingle::getSymbol, this.basket::get));
   }
 
   public int get(StockSingle stock) {

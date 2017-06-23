@@ -1,14 +1,16 @@
 import org.junit.Test;
 import org.junit.Before;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 import model.trader.TraderModel;
 import model.trader.TraderModelImpl;
+import view.trader.TraderGraphicalViewImpl;
+import view.trader.TraderTextViewImpl;
 import view.trader.TraderView;
+import view.trader.TraderViewImpl;
 
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
@@ -18,52 +20,55 @@ import static org.junit.Assert.assertEquals;
 /**
  * Class to test model.
  */
-//TODO: test getRecords();
+//TODO: make sure there is a test for every method in the interface
 public class TraderModelImplTest {
-  TraderModel model;
+  private TraderModel model;
+  private TraderView traderView;
 
   @Before
   public void setup() throws Exception {
+    traderView =
+            new TraderViewImpl(new TraderGraphicalViewImpl(), new TraderTextViewImpl(System.out));
+
     model = new TraderModelImpl();
-    model.createStockBasket("basket one");
-    model.createStockBasket("basket two");
-    model.createStockBasket("basket three");
-    model.createStockBasket("basket four");
-    model.createStockBasket("basket five");
-    model.createStockBasket("basket six");
+    model.createStockBasket("basket-one");
+    model.createStockBasket("basket-two");
+    model.createStockBasket("basket-three");
+    model.createStockBasket("basket-four");
+    model.createStockBasket("basket-five");
+    model.createStockBasket("basket-six");
 
-    model.addStockToBasket("basket one", "AAPL", 3);
-    model.addStockToBasket("basket one", "WFC", 9);
-    model.addStockToBasket("basket one", "UPS", 5);
-    model.addStockToBasket("basket one", "AMZN", 3);
+    model.addStockToBasket("basket-one", "AAPL", 3);
+    model.addStockToBasket("basket-one", "WFC", 9);
+    model.addStockToBasket("basket-one", "UPS", 5);
+    model.addStockToBasket("basket-one", "AMZN", 3);
 
-    model.addStockToBasket("basket two", "BAC", 6);
-    model.addStockToBasket("basket two", "CHK", 15);
-    model.addStockToBasket("basket two", "TWTR", 90);
-    model.addStockToBasket("basket two", "INTC", 10);
+    model.addStockToBasket("basket-two", "BAC", 6);
+    model.addStockToBasket("basket-two", "CHK", 15);
+    model.addStockToBasket("basket-two", "TWTR", 90);
+    model.addStockToBasket("basket-two", "INTC", 10);
 
-    model.addStockToBasket("basket three", "INTC", 13);
-    model.addStockToBasket("basket three", "MU", 15);
-    model.addStockToBasket("basket three", "NVDA", 22);
-    model.addStockToBasket("basket three", "SIRI", 8);
+    model.addStockToBasket("basket-three", "INTC", 13);
+    model.addStockToBasket("basket-three", "MU", 15);
+    model.addStockToBasket("basket-three", "NVDA", 22);
+    model.addStockToBasket("basket-three", "SIRI", 8);
 
-    model.addStockToBasket("basket four", "MSFT", 5);
-    model.addStockToBasket("basket four", "CSCO", 5);
-    model.addStockToBasket("basket four", "FB", 5);
-    model.addStockToBasket("basket four", "ADBE", 5);
+    model.addStockToBasket("basket-four", "MSFT", 5);
+    model.addStockToBasket("basket-four", "CSCO", 5);
+    model.addStockToBasket("basket-four", "FB", 5);
+    model.addStockToBasket("basket-four", "ADBE", 5);
 
-    model.addStockToBasket("basket six", "WFM", 10);
+    model.addStockToBasket("basket-six", "WFM", 10);
 
   }
-
 
   @Test
   public void createStockBasket() throws Exception {
     // new stock basket to new TraderModelImpl
     TraderModel newModel = new TraderModelImpl();
-    assertEquals(0, newModel.getRecords().size());
+    assertEquals(0, newModel.getBaskets().size());
     newModel.createStockBasket("test basket");
-    assertEquals(1, newModel.getRecords().size());
+    assertEquals(1, newModel.getBaskets().size());
 
     // TODO: decide how to handle duplicate basket creation (document it)
     // adding new basket with same name (Exception
@@ -71,12 +76,12 @@ public class TraderModelImplTest {
 
     // adding new basket with different name
     newModel.createStockBasket("second test basket");
-    assertEquals(2, newModel.getRecords().size());
+    assertEquals(2, newModel.getBaskets().size());
 
     // new stock basket to pre-existing TraderModelImpl
-    int originalSize = model.getRecords().size();
+    int originalSize = model.getBaskets().size();
     model.createStockBasket("third test basket");
-    assertEquals(originalSize + 1, model.getRecords().size());
+    assertEquals(originalSize + 1, model.getBaskets().size());
 
     // TODO: test duplicates for pre-existing TraderModelImpl as well
 
@@ -144,9 +149,14 @@ public class TraderModelImplTest {
     temp = md.getBasketContentByName("test sb");
     assertEquals(3, temp.size());
 
-    md.remove("test sb");
+    // md.remove("test sb"); //TODO: how are we removing stocks from view?
     temp = md.getBasketContentByName("test sb");
     assertEquals(0, temp.size());
+  }
+
+  @Test
+  public void getBaskets() throws Exception {
+    traderView.printAllBaskets(model.getBaskets());
   }
 
   @Test
@@ -169,14 +179,7 @@ public class TraderModelImplTest {
 
   @Test
   public void trendsUp() throws Exception {
-    //TODO: test this. just do math and check for correct resutl
-  }
-
-  @Test
-  public void getRecords() throws Exception {
-    //TODO: possibly return records sorted by name
-    //TODO: make a big Map<String, Map<String, Integer>> to compare with and check
-    System.out.println(TraderModel.sPrintStockRecords(model.getRecords()));
+    //TODO: test this -- just do math and check for correct resutl
   }
 
   @Test

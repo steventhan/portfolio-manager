@@ -79,6 +79,11 @@ public class TraderViewImpl implements TraderView {
   }
 
   @Override
+  public void printAllBaskets(Map<String, Map<String, Integer>> baskets) throws Exception {
+    this.textView.printAllBaskets(baskets);
+  }
+
+  @Override
   public void setupPanel(double highestPrice) {
     this.graphicalView.setupPanel(highestPrice);
   }
