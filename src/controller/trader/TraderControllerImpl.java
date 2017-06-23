@@ -69,8 +69,15 @@ public class TraderControllerImpl implements TraderController {
 
     this.view.append("Enter stock symbol: ");
     String symbol = sc.nextLine();
+    int amount;
     this.view.append("Amount: ");
-    int amount = Integer.valueOf(sc.nextLine());
+
+    try {
+      amount = Integer.valueOf(sc.nextLine());
+    } catch (NumberFormatException e) {
+      this.view.append("Invalid amount.");
+      return;
+    }
 
     this.model.addStockToBasket(basketName, symbol, amount);
     if (this.fromDate != null && this.toDate != null) {
@@ -179,6 +186,7 @@ public class TraderControllerImpl implements TraderController {
 
         case "q":
           this.view.exit();
+          return;
       }
       this.view.append("\n");
     }
