@@ -3,6 +3,7 @@ package controller.trader;
 import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import custom.util.StockPriceNotFound;
 import model.trader.TraderModel;
@@ -129,9 +130,18 @@ public class TraderControllerImpl implements TraderController {
     Map<String,Map<String, Double>> priceData;
     Map<String,Map<String, Double>> avg50;
     Map<String,Map<String, Double>> avg200;
-    priceData = this.model.getPlotData(this.fromDate, this.toDate);
-    avg50 = this.model.getMovingAveragesForAll(this.fromDate, this.toDate, 50);
-    avg200 = this.model.getMovingAveragesForAll(this.fromDate, this.toDate, 200);
+    priceData = new TreeMap<>();
+    avg50 = new TreeMap<>();
+    avg200 = new TreeMap<>();
+
+    try {
+      priceData = this.model.getPlotData(this.fromDate, this.toDate);
+      avg50 = this.model.getMovingAveragesForAll(this.fromDate, this.toDate, 50);
+      avg200 = this.model.getMovingAveragesForAll(this.fromDate, this.toDate, 200);
+    } catch (Exception e) {
+      this.view.append(e.getMessage());
+    }
+
     this.currentGraphHighestPrice = this.model.getHighestPrice();
     this.view.setupPanel(this.currentGraphHighestPrice);
 
