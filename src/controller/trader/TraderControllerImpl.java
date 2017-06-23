@@ -160,6 +160,12 @@ public class TraderControllerImpl implements TraderController {
     this.plotEverything();
   }
 
+  private void remove(Scanner sc) throws Exception {
+    this.view.append("Enter stock entity name to remove: ");
+    this.model.remove(sc.next());
+    this.plotEverything();
+  }
+
   @Override
   public void start() throws Exception {
     Scanner sc = new Scanner(this.in);
@@ -185,6 +191,10 @@ public class TraderControllerImpl implements TraderController {
 
         case "l":
           this.plot(sc);
+          break;
+
+        case "r":
+          this.remove(sc);
           break;
 
         case "q":

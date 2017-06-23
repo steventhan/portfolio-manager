@@ -9,9 +9,10 @@ public interface TraderModel {
 
   /**
    * Adds stock to a basket.
-   *
-   * @param name     of basket.
-   * @param symbol   of stock.
+   * It is possible to remove stocks by sending a negative number. It is also possible to store a
+   * negative number of stocks in a basket.
+   * @param name of basket.
+   * @param symbol of stock.
    * @param numShare number of shares of stock to add to the basket.
    * @throws Exception described by its message.
    */
@@ -19,6 +20,8 @@ public interface TraderModel {
 
   /**
    * Creates a stock basket.
+   * A previously created stock basket can be overwritten by creating a new stock basket of the
+   * same name.
    * @param name of basket.
    * @throws Exception described by its message.
    */
@@ -89,6 +92,11 @@ public interface TraderModel {
    */
   Map<String, Double> getPlotDataForOne(String stockOrBasketName,
                                         String fromDate, String toDate) throws Exception;
+
+  /**
+   * Removes a stock entity from the current model, if it exists.
+   */
+  void remove(String name);
 
   /**
    * Returns true if the stock entity trends up, given the specified dates. This is a naive

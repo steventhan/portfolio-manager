@@ -25,6 +25,7 @@ public class TraderTextViewImpl implements TraderTextView {
     this.out.append("p - Print the stock basket\n");
     this.out.append("t - Trend of stock\n");
     this.out.append("l - Plot\n");
+    this.out.append("r - Remove stock entity by name\n");
     this.out.append("q - Quit\n");
     this.out.append("Select: ");
   }
