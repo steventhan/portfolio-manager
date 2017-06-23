@@ -88,12 +88,12 @@ public class TraderModelImpl2 implements TraderModel {
   public boolean trendsUp(String name, String fromDate, String toDate) throws Exception {
     StockBasket basket = this.records.get(name);
 
-    if (basket.keySet().size() == 0) {
-      throw new IllegalArgumentException("Basket is empty.");
-    }
-
     if (basket == null) {
       throw new IllegalArgumentException("Basket or stock not found.");
+    }
+
+    if (basket.keySet().size() == 0) {
+      throw new IllegalArgumentException("Basket is empty.");
     }
 
     try {

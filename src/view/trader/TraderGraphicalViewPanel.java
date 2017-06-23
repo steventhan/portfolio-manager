@@ -11,6 +11,7 @@ import javax.swing.*;
 public class TraderGraphicalViewPanel extends JPanel {
   private TraderGraph graph;
   private TraderGraphLegend legend;
+
   private static final int width = 1100;
   private static final int height = 700;
   private static final int xOffset = 50;

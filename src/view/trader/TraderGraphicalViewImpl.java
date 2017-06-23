@@ -1,9 +1,6 @@
 package view.trader;
 
-
-import java.awt.*;
 import java.util.Map;
-
 import javax.swing.*;
 
 /**
