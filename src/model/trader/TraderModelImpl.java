@@ -97,6 +97,39 @@ public class TraderModelImpl implements TraderModel {
   }
 
   @Override
+  public Map<String, Map<String, Double>> getMovingAveragesForAll(String fromDate,
+                                                                  String toDate, int days)
+          throws Exception {
+
+    Map<String, Map<String, Double>> data = new TreeMap<>();
+    Map<String, Double> averages;
+
+    for (String name : this.stockBasketMap.keySet()) {
+      averages = this.stockBasketMap.get(name).getMovingAverages(fromDate, toDate, days);
+      data.put(name, averages);
+    }
+    return data;
+  }
+
+  @Override
+  public Map<String, Double> getMovingAveragesForOne(String symbolOrBasketName, String fromDate,
+                                                     String toDate, int days)
+          throws Exception {
+    Map<String, Double> data;
+    data = this.basketExist(symbolOrBasketName) ?
+            this.stockBasketMap.get(symbolOrBasketName).getMovingAverages(fromDate, toDate, days)
+            : new StockSingleImpl(symbolOrBasketName).getMovingAverages(fromDate, toDate, days);
+
+    data.entrySet()
+            .stream()
+            .forEach(e -> this.highestPrice = e.getValue() > this.highestPrice ?
+                    e.getValue() : this.highestPrice);
+
+    return data;
+
+  }
+
+  @Override
   public double getHighestPrice() {
     return this.highestPrice;
   }

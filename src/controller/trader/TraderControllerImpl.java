@@ -11,6 +11,7 @@ import view.trader.TraderView;
 /**
  * An implementation of TraderController interface.
  */
+//TODO: automate test by reading from and writing to file(s)
 public class TraderControllerImpl implements TraderController {
   private final TraderModel model;
   private final TraderView view;
@@ -148,6 +149,7 @@ public class TraderControllerImpl implements TraderController {
     this.toDate = sc.nextLine();
     this.plotEverything();
   }
+
   @Override
   public void start() throws Exception {
     Scanner sc = new Scanner(this.in);

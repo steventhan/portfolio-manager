@@ -17,6 +17,12 @@ public interface TraderModel {
 
   double getHighestPrice();
 
+  Map<String, Map<String, Double>> getMovingAveragesForAll(String fromDate, String toDate, int days)
+          throws Exception;
+
+  Map<String, Double> getMovingAveragesForOne(String stockOrBasketName, String fromDate,
+                                              String toDate, int days) throws Exception;
+
   Map<String, Map<String, Double>> getPlotData(String fromDate, String toDate) throws Exception;
 
   Map<String, Double> getPlotDataForOne(String stockOrBasketName,
