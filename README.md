@@ -13,4 +13,3 @@
     affineTransform.rotate(Math.toRadians(270), 0, 0);
     Font rotatedFont = font.deriveFont(affineTransform);
     gTransform.setFont(rotatedFont);
-
