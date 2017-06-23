@@ -43,13 +43,10 @@ _Submit all your source files, including the ones given to you that your code en
 * *changes to what the graphical view shows should cause it to automatically refresh the plots*
 
 ##TODO List
-//TODO update this readme per the instructions
-//TODO update TraderModelImpl to only keep track of necessary data
-
-//todo document and review all public methods
-//todo make sure exceptions are handled correctly
-//todo if time permits draw an x-axis
-//todo if time permits update tests for model classes
+* todo document and review all public methods
+* todo make sure exceptions are handled correctly
+* todo if time permits draw an x-axis
+* todo if time permits update tests for model classes
 
     // create a rotated transform and draw x-axis values
     Graphics2D gTransform = (Graphics2D) g;
