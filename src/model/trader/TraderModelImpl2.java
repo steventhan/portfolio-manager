@@ -10,9 +10,11 @@ import java.util.stream.Collectors;
  */
 public class TraderModelImpl2 implements TraderModel {
   private Map<String, StockBasket> records;
+  private double highestPrice; // This field is to determine graph vertical scaling.
 
   public TraderModelImpl2() {
     this.records = new HashMap<>();
+    this.highestPrice = 0;
   }
 
   private boolean basketExist(String sbName) {
@@ -66,22 +68,42 @@ public class TraderModelImpl2 implements TraderModel {
           throws Exception {
 
     Map<String, Map<String, Double>> data = new TreeMap<>();
+    Map<String, Double> closingPrices;
+    this.highestPrice = 0;
 
     for (String name : this.records.keySet()) {
-      data.put(name, this.records.get(name).getClosingPrices(fromDate, toDate));
+      closingPrices = this.records.get(name).getClosingPrices(fromDate, toDate);
+      closingPrices
+              .entrySet()
+              .stream()
+              .forEach(e -> this.highestPrice = e.getValue() > this.highestPrice ?
+                      e.getValue() : this.highestPrice);
+
+      data.put(name, closingPrices);
     }
     return data;
   }
 
   @Override
+  public double getHighestPrice() {
+    return this.highestPrice;
+  }
+
+  @Override
   public Map<String, Double> getPlotDataForOne(String symbolOrBasketName,
                                                String fromDate, String toDate) throws Exception {
+    Map<String, Double> data;
 
-    if (this.basketExist(symbolOrBasketName)) {
-      return this.records.get(symbolOrBasketName).getClosingPrices(fromDate, toDate);
-    }
-    return new StockSingleImpl(symbolOrBasketName).getClosingPrices(fromDate, toDate);
+    data = this.basketExist(symbolOrBasketName) ?
+            this.records.get(symbolOrBasketName).getClosingPrices(fromDate, toDate)
+            : new StockSingleImpl(symbolOrBasketName).getClosingPrices(fromDate, toDate);
 
+    data.entrySet()
+            .stream()
+            .forEach(e -> this.highestPrice = e.getValue() > this.highestPrice ?
+                    e.getValue() : this.highestPrice);
+
+    return data;
   }
 
   @Override

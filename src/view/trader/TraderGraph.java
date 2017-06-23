@@ -22,16 +22,19 @@ public class TraderGraph extends BufferedImage {
     float i = 0;
     int prevX = 0;
     int prevY = 0;
+    int currentX = 0;
+    int currentY = 0;
 
     g2d.setColor(color);
 
     for (String date : data.keySet()) {
-      int currentX = Math.round(i);
-      int currentY = this.getHeight() - 10
-              - (int) Math.round((data.get(date) / this.highestPrice) * (this.getHeight() - 10));
+      currentX = Math.round(i);
+      currentY = this.getHeight() - 10
+              - (int) Math.round((data.get(date) / (this.highestPrice + 10))
+              * (this.getHeight() - 10));
       g2d.fillOval(currentX, currentY, 5, 5);
 
-      if (prevX != 0 && prevY != 0) {
+      if (currentX != 0 && currentY != 0) {
         g2d.drawLine(prevX, prevY, currentX, currentY);
       }
       prevX = currentX;

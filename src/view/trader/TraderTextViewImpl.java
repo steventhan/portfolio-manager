@@ -25,19 +25,15 @@ public class TraderTextViewImpl implements TraderTextView {
     this.out.append("p - Print the stock basket\n");
     this.out.append("t - Trend of stock\n");
     this.out.append("l - Plot\n");
-    this.out.append("g - Graphical view\n");
     this.out.append("q - Quit\n");
     this.out.append("Select: ");
   }
 
   @Override
   public void printBasket(Map<String, Integer> basket) throws Exception {
-    this.out.append(basket
-            .entrySet()
+    basket.entrySet()
             .stream()
-            .map(e -> String.format("%s: %d share%s\n",
-                    e.getKey(), e.getValue(), e.getValue() > 1 ? "s" : ""))
-            .reduce("", (a, b) -> a + b)
-    );
+            .forEach(e -> String.format("%s: %d share%s\n",
+                    e.getKey(), e.getValue(), e.getValue() > 1 ? "s" : ""));
   }
 }

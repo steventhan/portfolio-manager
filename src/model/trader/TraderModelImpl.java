@@ -93,6 +93,11 @@ public class TraderModelImpl implements TraderModel {
   }
 
   @Override
+  public double getHighestPrice() {
+    return 0;
+  }
+
+  @Override
   public String toString() {
     StringBuilder result = new StringBuilder();
     Iterator<String> cps;

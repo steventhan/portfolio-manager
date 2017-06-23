@@ -15,15 +15,17 @@ public class TraderGraphicalViewImpl extends JFrame implements TraderGraphicalVi
     this.setVisible(true);
   }
 
-  public void setupPanel() {
+  @Override
+  public void setupPanel(double highestPrice) {
     if (this.graphPanel != null) {
       this.remove(this.graphPanel);
     }
-    this.graphPanel = new TraderGraphicalViewPanel();
+    this.graphPanel = new TraderGraphicalViewPanel(highestPrice);
     this.add(graphPanel);
     this.pack();
     this.revalidate();
     this.repaint();
+
   }
 
   @Override
