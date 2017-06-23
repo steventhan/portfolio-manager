@@ -152,6 +152,15 @@ public class TraderModelImpl implements TraderModel {
   }
 
   @Override
+  public void remove(String name) {
+    try {
+      this.stockBasketMap.remove(name);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  @Override
   public boolean trendsUp(String name, String fromDate, String toDate) throws Exception {
     StockBasket basket = this.stockBasketMap.get(name);
 

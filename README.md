@@ -44,7 +44,7 @@ _Submit all your source files, including the ones given to you that your code en
 * changes to what the graphical view shows should cause it to automatically refresh the plots
 
 ##TODO List
-* todo document and review all public methods
+* TODO document and review all public methods
 * todo make sure exceptions are handled correctly
 * todo if time permits draw an x-axis
 * todo if time permits update tests for model classes
