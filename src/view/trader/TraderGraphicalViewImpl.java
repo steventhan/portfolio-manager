@@ -6,25 +6,25 @@ import javax.swing.*;
 /**
  * Graphical view for the stock trader application.
  */
-public class TraderGraphicalViewImpl extends JFrame implements TraderGraphicalView {
+public class TraderGraphicalViewImpl implements TraderGraphicalView {
   private TraderGraphicalViewPanel graphPanel;
-
-  public TraderGraphicalViewImpl() {
-    super();
-    this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    this.setVisible(true);
-  }
+  private JFrame frame;
 
   @Override
   public void setupPanel(double highestPrice) {
+    if (this.frame == null) {
+      this.frame = new JFrame();
+      this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+      this.frame.setVisible(true);
+    }
     if (this.graphPanel != null) {
-      this.remove(this.graphPanel);
+      this.frame.remove(this.graphPanel);
     }
     this.graphPanel = new TraderGraphicalViewPanel(highestPrice);
-    this.add(graphPanel);
-    this.pack();
-    this.revalidate();
-    this.repaint();
+    this.frame.add(this.graphPanel);
+    this.frame.pack();
+    this.frame.revalidate();
+    this.frame.repaint();
 
   }
 
@@ -32,12 +32,14 @@ public class TraderGraphicalViewImpl extends JFrame implements TraderGraphicalVi
   public void plotRecord(String name, Map<String, Double> data) {
     //TODO: put logic for calculating scale in the view
     this.graphPanel.plotRecord(name, data);
-    this.pack();
-    this.revalidate();
-    this.repaint();
+    this.frame.pack();
+    this.frame.revalidate();
+    this.frame.repaint();
   }
 
   public void exit() {
-    System.exit(0);
+    if (this.frame != null) {
+      this.frame.dispose();
+    }
   }
 }
