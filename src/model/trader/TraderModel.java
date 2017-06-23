@@ -2,6 +2,7 @@ package model.trader;
 
 import java.util.List;
 import java.util.Map;
+//TODO: add creation dates for basket
 
 /**
  * Created by steven on 18/06/2017.
