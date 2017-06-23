@@ -169,4 +169,5 @@ public class TraderModelImpl implements TraderModel {
       return basket.trendsUp(fromDate, toDate);
     }
   }
+
 }
