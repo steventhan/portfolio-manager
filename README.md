@@ -56,3 +56,15 @@ _Submit all your source files, including the ones given to you that your code en
     affineTransform.rotate(Math.toRadians(270), 0, 0);
     Font rotatedFont = font.deriveFont(affineTransform);
     gTransform.setFont(rotatedFont);</pre>
+
+Highest price on 2017-06-22 should be 85.6751
+"BAC" 22.93
+"CHK"  4.50
+"TWTR" 18.15
+"INTC" 34.36
+"WFC" 52.49
+"HAL" 41.90
+"A" 60.61
+"PWC" 85.6751
+
+Highest price between 2016-01-01 and 2017-01-01 is

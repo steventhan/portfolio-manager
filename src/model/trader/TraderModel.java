@@ -42,7 +42,7 @@ public interface TraderModel {
   Map<String, Map<String, Integer>> getBaskets();
 
   /**
-   * Returns highest price.
+   * Returns highest price of all the stock entities of all the days in the range.
    * @return highest price.
    */
   double getHighestPrice();
