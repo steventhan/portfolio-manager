@@ -11,12 +11,11 @@ import java.util.TreeMap;
  */
 public class StockRecordImpl implements StockRecord {
   private String symbol;
-  private TreeMap<String, Integer> stockShares; //TODO: make null for single stock and check later
+  private TreeMap<String, Integer> stockShares; // null for single stocks
   private TreeMap<String, Double> closingPrices;
   private TreeMap<String, Double> fiftyDayAverages;
   private TreeMap<String, Double> twoHundredDayAverages;
 
-  //TODO: scale view according to longest field among closingPrices, fiftyDayAverages, and twoHundredDayAverages
 
   public StockRecordImpl(String symbol,
                          TreeMap<String, Integer> stockShares,

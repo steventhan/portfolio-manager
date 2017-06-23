@@ -6,7 +6,7 @@ import java.util.Set;
 /**
  * Created by matthiasdenu on 6/20/2017.
  */
-//TODO: document for this class how we handle creation dates.
+//TODO add stock basket date
 public interface StockBasket extends Stock {
   void add(StockSingle stock, Integer shares)
           throws IllegalArgumentException;
@@ -31,4 +31,6 @@ public interface StockBasket extends Stock {
   int get(StockSingle stock);
 
   Set<StockSingle> keySet();
+
+  Map<String, Integer> getStocks();
 }

@@ -30,10 +30,13 @@ public class TraderTextViewImpl implements TraderTextView {
   }
 
   @Override
-  public void printBasket(Map<String, Integer> basket) throws Exception {
-    basket.entrySet()
-            .stream()
-            .forEach(e -> String.format("%s: %d share%s\n",
-                    e.getKey(), e.getValue(), e.getValue() > 1 ? "s" : ""));
+  public void printBasket(Map<String, Integer> basket) {
+    basket.forEach((key, value) -> System.out.printf("%s: %d share%s\n",
+            key, value, value > 1 ? "s" : ""));
   }
+
+  public void printAllBaskets(Map<String, Map<String, Integer>> baskets) {
+    baskets.keySet().forEach(k -> this.printBasket(baskets.get(k)));
+  }
+
 }
