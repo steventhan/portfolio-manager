@@ -72,16 +72,43 @@ public class TraderModelImpl2 implements TraderModel {
     this.highestPrice = 0;
 
     for (String name : this.records.keySet()) {
-      closingPrices = this.records.get(name).getClosingPrices(fromDate, toDate);
-      closingPrices
-              .entrySet()
-              .stream()
-              .forEach(e -> this.highestPrice = e.getValue() > this.highestPrice ?
-                      e.getValue() : this.highestPrice);
-
+      closingPrices = this.getPlotDataForOne(name, fromDate, toDate);
       data.put(name, closingPrices);
     }
     return data;
+  }
+
+  @Override
+  public Map<String, Map<String, Double>> getMovingAveragesForAll(String fromDate,
+                                                                  String toDate, int days)
+          throws Exception {
+
+    Map<String, Map<String, Double>> data = new TreeMap<>();
+    Map<String, Double> averages;
+
+    for (String name : this.records.keySet()) {
+      averages = this.records.get(name).getMovingAverages(fromDate, toDate, days);
+      data.put(name, averages);
+    }
+    return data;
+  }
+
+  @Override
+  public Map<String, Double> getMovingAveragesForOne(String symbolOrBasketName, String fromDate,
+                                                                  String toDate, int days)
+          throws Exception {
+    Map<String, Double> data;
+    data = this.basketExist(symbolOrBasketName) ?
+            this.records.get(symbolOrBasketName).getMovingAverages(fromDate, toDate, days)
+            : new StockSingleImpl(symbolOrBasketName).getMovingAverages(fromDate, toDate, days);
+
+    data.entrySet()
+            .stream()
+            .forEach(e -> this.highestPrice = e.getValue() > this.highestPrice ?
+                    e.getValue() : this.highestPrice);
+
+    return data;
+
   }
 
   @Override
@@ -92,8 +119,8 @@ public class TraderModelImpl2 implements TraderModel {
   @Override
   public Map<String, Double> getPlotDataForOne(String symbolOrBasketName,
                                                String fromDate, String toDate) throws Exception {
-    Map<String, Double> data;
 
+    Map<String, Double> data;
     data = this.basketExist(symbolOrBasketName) ?
             this.records.get(symbolOrBasketName).getClosingPrices(fromDate, toDate)
             : new StockSingleImpl(symbolOrBasketName).getClosingPrices(fromDate, toDate);

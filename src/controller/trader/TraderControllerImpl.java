@@ -53,7 +53,7 @@ public class TraderControllerImpl implements TraderController {
     }
 
     if (this.fromDate != null && this.toDate != null && stockCreated) {
-      plotOneRecord(basketOrStockName);
+      this.plotOneAddionalRecord(basketOrStockName);
     }
   }
 
@@ -74,7 +74,7 @@ public class TraderControllerImpl implements TraderController {
 
     this.model.addStockToBasket(basketName, symbol, amount);
     if (this.fromDate != null && this.toDate != null) {
-      plotOneRecord(basketName);
+      this.plotOneAddionalRecord(basketName);
     }
   }
 
@@ -108,25 +108,37 @@ public class TraderControllerImpl implements TraderController {
     this.view.append("\n");
   }
 
-  private void plotOneRecord(String basketOrStockName) throws Exception {
-    Map<String, Double> plotData;
-    plotData = this.model.getPlotDataForOne(basketOrStockName, this.fromDate, this.toDate);
+  private void plotOneAddionalRecord(String basketOrStockName) throws Exception {
+    Map<String, Double> priceData;
+    Map<String, Double> avg50;
+    Map<String, Double> avg200;
+    priceData = this.model.getPlotDataForOne(basketOrStockName, this.fromDate, this.toDate);
+    avg50 = this.model.getMovingAveragesForOne(basketOrStockName, this.fromDate, this.toDate, 50);
+    avg200 = this.model.getMovingAveragesForOne(basketOrStockName, this.fromDate, this.toDate, 200);
 
     if (Double.compare(this.model.getHighestPrice(), this.currentGraphHighestPrice) == 0) {
-      this.view.plotRecord(basketOrStockName, plotData);
+      this.view.plotRecord(basketOrStockName, priceData);
+      this.view.plotRecord(basketOrStockName + "50", avg50);
+      this.view.plotRecord(basketOrStockName + "200", avg200);
     } else {
       this.plotEverything();
     }
   }
 
   private void plotEverything() throws Exception {
-    Map<String,Map<String, Double>> plotData;
-    plotData = this.model.getPlotData(this.fromDate, this.toDate);
+    Map<String,Map<String, Double>> priceData;
+    Map<String,Map<String, Double>> avg50;
+    Map<String,Map<String, Double>> avg200;
+    priceData = this.model.getPlotData(this.fromDate, this.toDate);
+    avg50 = this.model.getMovingAveragesForAll(this.fromDate, this.toDate, 50);
+    avg200 = this.model.getMovingAveragesForAll(this.fromDate, this.toDate, 200);
     this.currentGraphHighestPrice = this.model.getHighestPrice();
     this.view.setupPanel(this.currentGraphHighestPrice);
 
-    for (String k : plotData.keySet()) {
-      this.view.plotRecord(k, plotData.get(k));
+    for (String k : priceData.keySet()) {
+      this.view.plotRecord(k, priceData.get(k));
+      this.view.plotRecord(k + "50", avg50.get(k));
+      this.view.plotRecord(k + "200", avg200.get(k));
     }
   }
 

@@ -1,5 +1,8 @@
 package model.trader;
 
+import java.net.Inet4Address;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -154,6 +157,41 @@ public class StockSingleImpl extends StockAbstract implements StockSingle {
     return result;
   }
 
+  @Override
+  public Map<String, Double> getMovingAverages(String fromDate, String toDate, int days) throws Exception {
+    return this.getMovingAverages(new CustomDate(fromDate), new CustomDate(toDate), days);
+  }
+
+  public Map<String, Double> getMovingAverages(CustomDate fromDate, CustomDate toDate, int days)
+          throws Exception {
+
+    CustomDate pastDate = fromDate.getXDaysBeforeOrAfter(-(days * 2));
+    Map<String, Double> result = new TreeMap<>();
+    TreeMap<Integer, PriceRecord> priceRecords;
+
+    priceRecords = (TreeMap<Integer, PriceRecord>) this.retriever.getHistoricalPrices(this.symbol,
+            pastDate.getDay(), pastDate.getMonth(), pastDate.getYear(),
+            toDate.getDay(), toDate.getMonth(), toDate.getYear());
+
+    List<Integer> keySet = new ArrayList<>(priceRecords.descendingKeySet());
+    int i = 0;
+
+    while (toDate.compareTo(fromDate) >= 0) {
+      if (priceRecords.get(toDate.toKeyInt()) != null) {
+        double total = 0;
+        int currentDay = keySet.get(i);
+        for (int j = i; j < (days + i); j++) {
+          total += priceRecords.get(keySet.get(j)).getClosePrice();
+        }
+        result.put(new CustomDate(String.valueOf(currentDay)).toString(), total / days);
+        i++;
+      }
+      toDate = toDate.getXDaysBeforeOrAfter(-1);
+    }
+
+    return result;
+  }
+
   private boolean isBuyingOpportunityUsingMovingAverage(CustomDate date) throws Exception {
     CustomDate pastDate = date.getXDaysBeforeOrAfter(-400);
     TreeMap<Integer, PriceRecord> priceRecords;
@@ -195,7 +233,9 @@ public class StockSingleImpl extends StockAbstract implements StockSingle {
    */
   @Override
   public boolean isBuyingOpportunity(String strDate) throws Exception {
-    return this.isBuyingOpportunityUsingMovingAverage(new CustomDate(strDate));
+//    return this.isBuyingOpportunityUsingMovingAverage(new CustomDate(strDate));
+    return this.getMovingAverages(strDate, strDate, 50).get(strDate)
+            > this.getMovingAverages(strDate, strDate, 200).get(strDate);
   }
 
   /**

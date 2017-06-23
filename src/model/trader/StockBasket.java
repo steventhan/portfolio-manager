@@ -24,6 +24,8 @@ public interface StockBasket extends Stock {
    */
   Map<String, Double> getClosingPrices(String fromDate, String toDate) throws Exception;
 
+  Map<String, Double> getMovingAverages(String fromDate, String toDate, int days) throws Exception;
+
   int size();
 
   int get(StockSingle stock);

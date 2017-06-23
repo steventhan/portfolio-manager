@@ -18,6 +18,8 @@ public interface StockSingle extends Stock {
    */
   Map<String, Double> getClosingPrices(String fromDate, String toDate) throws Exception;
 
+  Map<String, Double> getMovingAverages(String fromDate, String toDate, int days) throws Exception;
+
   /**
    * Determines if there is a buying opportunity for a certain stock on a certain day.
    *
