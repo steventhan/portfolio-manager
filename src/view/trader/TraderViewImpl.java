@@ -78,4 +78,8 @@ public class TraderViewImpl implements TraderView {
     this.textView.append(text);
   }
 
+  @Override
+  public void setupPanel(double highestPrice) {
+    this.graphicalView.setupPanel(highestPrice);
+  }
 }

@@ -66,15 +66,20 @@ public class TraderModelImpl implements TraderModel {
   }
 
   @Override
-  public void remove(String name) {
-    this.records.remove(name);
-  }
-
-  @Override
   public Map<String, Integer> getBasketContentByName(String sbName) {
     //TODO: test this
     Map<String, Integer> contents = this.records.get(sbName).getStockShares();
     return contents.keySet().stream().collect(Collectors.toMap(k -> k, contents::get));
+  }
+
+  @Override
+  public Map<String, Map<String, Double>> getPlotData(String fromDate, String toDate) {
+    return null;
+  }
+
+  @Override
+  public Map<String, Double> getPlotDataForOne(String stockOrBasketName, String fromDate, String toDate) throws Exception {
+    return null;
   }
 
   @Override
@@ -96,6 +101,11 @@ public class TraderModelImpl implements TraderModel {
       }
       return new StockBasketImpl(unboxedBasket).trendsUp(fromDate, toDate);
     }
+  }
+
+  @Override
+  public double getHighestPrice() {
+    return 0;
   }
 
   @Override

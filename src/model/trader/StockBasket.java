@@ -1,5 +1,6 @@
 package model.trader;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -11,6 +12,17 @@ public interface StockBasket extends Stock {
           throws IllegalArgumentException;
 
   void add(String stockSymbol, Integer shares) throws Exception;
+
+  /**
+   * Get historical (closing) prices for a stock for a certain date range.
+   * Historical prices are available only for business days.
+   *
+   * @param fromDate start date.
+   * @param toDate end date.
+   * @return Map of dates and closing prices. Date format is YYYY-MM-DD
+   * @throws IllegalArgumentException if dates not valid.
+   */
+  Map<String, Double> getClosingPrices(String fromDate, String toDate) throws Exception;
 
   int size();
 
