@@ -18,6 +18,16 @@ public interface StockSingle extends Stock {
    */
   Map<String, Double> getClosingPrices(String fromDate, String toDate) throws Exception;
 
+  /**
+   * Get moving averages for a stock for a certain date range.
+   *
+   * @param fromDate from date
+   * @param toDate end date
+   * @param days number of days moving averages
+   * @return a Map&ltString, Double&gt with its keys as date, and values as moving averages
+   *         on the date.
+   * @throws Exception there's a problem communicating with server
+   */
   Map<String, Double> getMovingAverages(String fromDate, String toDate, int days) throws Exception;
 
   /**

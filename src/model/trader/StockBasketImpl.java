@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import custom.util.CustomDate;
@@ -66,6 +65,17 @@ public class StockBasketImpl extends StockAbstract implements StockBasket {
     this.add(new StockSingleImpl(stockSymbol), shares);
   }
 
+  /**
+   * Get historical (closing) prices for a basket for a certain date range.
+   * Historical prices are available only for business days.
+   * If the start date is even before the Stock's earliest day,
+   * it would return all entries it has.
+   *
+   * @param fromDate start date.
+   * @param toDate   end date.
+   * @return Map of dates and closing prices. Date format is YYYY-MM-DD
+   * @throws Exception if dates not valid.
+   */
   @Override
   public Map<String, Double> getClosingPrices(String fromDate, String toDate) throws Exception {
     Map<String, Double> basketPrices = new TreeMap<>();
@@ -83,6 +93,16 @@ public class StockBasketImpl extends StockAbstract implements StockBasket {
     return basketPrices;
   }
 
+  /**
+   * Get moving averages for a stock for a certain date range.
+   *
+   * @param fromDate from date
+   * @param toDate end date
+   * @param days number of days moving averages
+   * @return a Map&ltString, Double&gt with its keys as date, and values as moving averages
+   *         on the date.
+   * @throws Exception there's a problem communicating with server
+   */
   @Override
   public Map<String, Double> getMovingAverages(String fromDate, String toDate, int days) throws Exception {
     Map<String, Double> movingAverages = new TreeMap<>();
@@ -123,20 +143,38 @@ public class StockBasketImpl extends StockAbstract implements StockBasket {
    *
    * @return size as int.
    */
+  @Override
   public int size() {
     return this.basket.size();
   }
 
+  /**
+   * Gets the Set of all StockSingle objects stored in the basket
+   *
+   * @return the them as Set&ltStockSingle&gt.
+   */
+  @Override
   public Set<StockSingle> keySet() {
     return this.basket.keySet();
   }
 
+  /**
+   * Gets basket content of a StockBasket object.
+   *
+   * @return the them as Map&ltStockSingle, Integer&gt.
+   */
   @Override
   public Map<String, Integer> getStocks() {
     return this.basket.keySet().stream()
             .collect(Collectors.toMap(StockSingle::getSymbol, this.basket::get));
   }
 
+  /**
+   * Gets the quantity associated with the StockSingle object in a StockBasket.
+   *
+   * @param stock the StockSingle object for lookup
+   * @return quanity as int
+   */
   public int get(StockSingle stock) {
     return this.basket.get(stock);
   }
