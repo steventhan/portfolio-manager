@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * JUnit4 test for the controller and view portion of this application.
+ * JUnit tests for the program runner.
  */
 public class TraderAppTest {
   private String mainMenu;
@@ -25,7 +25,7 @@ public class TraderAppTest {
   private Reader in;
 
   /**
-   * Initialize values that are repeatedly used in this test.
+   * Creates menu string for tests.
    */
   @Before
   public void setUp() throws Exception {
@@ -210,6 +210,86 @@ public class TraderAppTest {
 
     assertTrue(out.toString().contains("Start date has to be before end date, and end date "
             + "cannot be in the future"));
+  }
+
+  @Test
+  public void testPlotOnlyStocks() throws Exception {
+    in = new StringReader("c\n"
+            + "aapl\n"
+            + "l\n"
+            + "2015-02-04\n"
+            + "2016-04-05\n"
+            + "c\n"
+            + "amd\n"
+            + "c\n"
+            + "aaa\n"
+            + "c\n"
+            + "fb\n"
+            + "c\n"
+            + "amzn\n"
+            + "q\n");
+    out = new StringBuffer();
+
+    new TraderControllerImpl(new TraderModelImpl(),
+            new TraderViewImpl(new TraderGraphicalViewImpl(),
+                    new TraderTextViewImpl(out)), in).start();
+
+  }
+
+  @Test
+  public void testPlotOnlyBaskets() throws Exception {
+    in = new StringReader("c\n"
+            + "random1\n"
+            + "a\n"
+            + "random1\n"
+            + "amd\n"
+            + "10\n"
+            + "l\n"
+            + "2015-02-04\n"
+            + "2016-04-05\n"
+            + "a\n"
+            + "random1\n"
+            + "aapl\n"
+            + "3\n"
+            + "a\n"
+            + "random1\n"
+            + "amzn\n"
+            + "3\n"
+            + "q\n");
+    out = new StringBuffer();
+
+    new TraderControllerImpl(new TraderModelImpl(),
+            new TraderViewImpl(new TraderGraphicalViewImpl(),
+                    new TraderTextViewImpl(out)), in).start();
+
+  }
+
+  @Test
+  public void testPlotStockAndBaskets() throws Exception {
+    in = new StringReader("c\n"
+            + "random1\n"
+            + "a\n"
+            + "random1\n"
+            + "amd\n"
+            + "10\n"
+            + "l\n"
+            + "2015-02-04\n"
+            + "2016-04-05\n"
+            + "a\n"
+            + "random1\n"
+            + "aapl\n"
+            + "3\n"
+            + "a\n"
+            + "random1\n"
+            + "amzn\n"
+            + "a\n"
+            + "aapl\n"
+            + "q\n");
+    out = new StringBuffer();
+
+    new TraderControllerImpl(new TraderModelImpl(),
+            new TraderViewImpl(new TraderGraphicalViewImpl(),
+                    new TraderTextViewImpl(out)), in).start();
   }
 }
 
