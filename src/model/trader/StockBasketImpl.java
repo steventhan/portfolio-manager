@@ -104,7 +104,8 @@ public class StockBasketImpl extends StockAbstract implements StockBasket {
    * @throws Exception there's a problem communicating with server
    */
   @Override
-  public Map<String, Double> getMovingAverages(String fromDate, String toDate, int days) throws Exception {
+  public Map<String, Double> getMovingAverages(String fromDate, String toDate, int days)
+          throws Exception {
     Map<String, Double> movingAverages = new TreeMap<>();
 
     for (StockSingle s : this.basket.keySet()) {
@@ -112,7 +113,8 @@ public class StockBasketImpl extends StockAbstract implements StockBasket {
       int numShares = this.basket.get(s);
       for (String date : stockAverages.keySet()) {
         if (movingAverages.containsKey(date)) {
-          movingAverages.put(date, movingAverages.get(date) + (stockAverages.get(date) * numShares));
+          movingAverages.put(date, movingAverages.get(date) + (stockAverages.get(date)
+                  * numShares));
         } else {
           movingAverages.put(date, stockAverages.get(date) * numShares);
         }
