@@ -191,11 +191,6 @@ public class TraderModelImplTest {
   }
 
   @Test
-  public void getMovingAveragesForAll()
-          throws Exception {
-  }
-
-  @Test
   public void getMovingAveragesForOne() throws Exception {
     this.model.createStockBasket("AAPL");
     assertEquals(148.85, this.model.getMovingAveragesForOne("AAPL",
@@ -260,11 +255,6 @@ public class TraderModelImplTest {
                 tempModel.getPlotData("2017-06-19", "2017-06-23").get(stockNames).get(date), 0.01);
       }
     }
-  }
-
-  @Test
-  public void getPlotDataForOne() throws Exception {
-    assertTrue(this.hashCode() != 0);
   }
 
   @Test
