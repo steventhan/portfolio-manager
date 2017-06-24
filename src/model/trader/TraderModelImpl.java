@@ -34,8 +34,9 @@ public class TraderModelImpl implements TraderModel {
   public void createStockBasket(String sbName) throws Exception {
     // throws exception if sbName has spaces because the URL gets messed up
     for (char c : sbName.toCharArray()) {
-      if (Character.isSpaceChar(c))
+      if (Character.isSpaceChar(c)) {
         throw new IllegalArgumentException("Name must not contain spaces");
+      }
     }
 
     try {
