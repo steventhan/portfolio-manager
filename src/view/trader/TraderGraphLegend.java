@@ -5,11 +5,17 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 /**
- * Created by steven on 21/06/2017.
+ * The legend to be displayed with the graph.
  */
 public class TraderGraphLegend extends BufferedImage {
   private int yInitial;
 
+  /**
+   * Constructs a TraderGraphLegend object.
+   *
+   * @param width the width of the legend
+   * @param height the height of the legend
+   */
   public TraderGraphLegend(int width, int height) {
     super(width, height, BufferedImage.TYPE_3BYTE_BGR);
     this.yInitial = this.getHeight();
