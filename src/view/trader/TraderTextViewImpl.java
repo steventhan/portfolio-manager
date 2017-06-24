@@ -21,6 +21,7 @@ public class TraderTextViewImpl implements TraderTextView {
 
   /**
    * Appends text to the output.
+   *
    * @param text to be appended.
    * @throws IOException described by its message.
    */
@@ -31,6 +32,7 @@ public class TraderTextViewImpl implements TraderTextView {
 
   /**
    * Prints the menu for the user.
+   *
    * @throws Exception described by its message.
    */
   @Override
@@ -47,6 +49,7 @@ public class TraderTextViewImpl implements TraderTextView {
 
   /**
    * Prints a representation of a stock basket.
+   *
    * @param basket to be printed.
    * @throws IOException described by its message.
    */
@@ -63,6 +66,7 @@ public class TraderTextViewImpl implements TraderTextView {
 
   /**
    * Prints all baskets passed to it.
+   *
    * @param baskets to be printed.
    * @throws Exception described by its message.
    */
