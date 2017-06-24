@@ -3,6 +3,7 @@ package view.trader;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by steven on 21/06/2017.
@@ -14,6 +15,15 @@ public class TraderGraph extends BufferedImage {
   public TraderGraph(int width, int height, double highestPrice) {
     super(width, height, BufferedImage.TYPE_3BYTE_BGR);
     this.highestPrice = highestPrice;
+  }
+
+  private void addDatesToX(Set dates) {
+    Graphics2D g2d = this.createGraphics();
+
+  }
+
+  private void addPricesToY() {
+
   }
 
   public void plotRecord(Map<String, Double> data, Color color) {

@@ -11,7 +11,7 @@ public class TraderGraphicalViewImpl implements TraderGraphicalView {
   private JFrame frame;
 
   @Override
-  public void setupPanel(double highestPrice) {
+  public void setupPanel(double highestPrice, String fromDate, String toDate) {
     if (this.frame == null) {
       this.frame = new JFrame();
       this.frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -20,7 +20,7 @@ public class TraderGraphicalViewImpl implements TraderGraphicalView {
     if (this.graphPanel != null) {
       this.frame.remove(this.graphPanel);
     }
-    this.graphPanel = new TraderGraphicalViewPanel(highestPrice);
+    this.graphPanel = new TraderGraphicalViewPanel(highestPrice, fromDate, toDate);
     this.frame.add(this.graphPanel);
     this.frame.pack();
     this.frame.revalidate();
