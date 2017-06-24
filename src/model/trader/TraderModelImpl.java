@@ -73,7 +73,7 @@ public class TraderModelImpl implements TraderModel {
     return basket
             .keySet()
             .stream()
-            .collect(Collectors.toMap(k -> k.getSymbol(), k -> basket.get(k)));
+            .collect(Collectors.toMap(StockSingle::getSymbol, basket::get));
   }
 
   @Override
@@ -89,8 +89,8 @@ public class TraderModelImpl implements TraderModel {
       closingPrices
               .entrySet()
               .stream()
-              .forEach(e -> this.highestPrice = e.getValue() > this.highestPrice ?
-                      e.getValue() : this.highestPrice);
+              .forEach(e -> this.highestPrice = e.getValue() > this.highestPrice
+                      ? e.getValue() : this.highestPrice);
 
       data.put(name, closingPrices);
     }

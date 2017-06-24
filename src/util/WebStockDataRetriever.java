@@ -44,10 +44,7 @@ public class WebStockDataRetriever implements StockDataRetriever {
     URL url = new URL("https://download.finance.yahoo.com/d/quotes.csv?"
             + "s=" + stockSymbol + "&f=n&e=.csv");
 
-    String output = new Scanner(url.openStream()).next();
-
-
-    return output;
+    return new Scanner(url.openStream()).next();
   }
 
   /**
@@ -81,7 +78,7 @@ public class WebStockDataRetriever implements StockDataRetriever {
             + toDate + "+" + toYear);
 
     String output = "";
-    Map<Integer, PriceRecord> prices = new TreeMap<Integer, PriceRecord>();
+    Map<Integer, PriceRecord> prices = new TreeMap<>();
     Scanner sc = new Scanner(url.openStream());
     //get first line of labels
     output = sc.next();

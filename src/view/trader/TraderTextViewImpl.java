@@ -10,15 +10,29 @@ import java.util.Map;
 public class TraderTextViewImpl implements TraderTextView {
   private final Appendable out;
 
+  /**
+   * Instantiates a trader text view.
+   *
+   * @param out output for view.
+   */
   public TraderTextViewImpl(Appendable out) {
     this.out = out;
   }
 
+  /**
+   * Appends text to the output.
+   * @param text to be appended.
+   * @throws IOException described by its message.
+   */
   @Override
   public void append(String text) throws IOException {
     this.out.append(text);
   }
 
+  /**
+   * Prints the menu for the user.
+   * @throws Exception described by its message.
+   */
   @Override
   public void printMenu() throws Exception {
     this.out.append("c - Create new stock or basket\n");
@@ -31,6 +45,11 @@ public class TraderTextViewImpl implements TraderTextView {
     this.out.append("Select: ");
   }
 
+  /**
+   * Prints a representation of a stock basket.
+   * @param basket to be printed.
+   * @throws IOException described by its message.
+   */
   @Override
   public void printBasket(Map<String, Integer> basket) throws IOException {
     basket.forEach((key, value) -> {
@@ -42,6 +61,11 @@ public class TraderTextViewImpl implements TraderTextView {
     });
   }
 
+  /**
+   * Prints all baskets passed to it.
+   * @param baskets to be printed.
+   * @throws Exception described by its message.
+   */
   public void printAllBaskets(Map<String, Map<String, Integer>> baskets) throws Exception {
     baskets.keySet().forEach(k -> {
       try {

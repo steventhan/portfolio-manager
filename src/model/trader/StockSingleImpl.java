@@ -171,6 +171,15 @@ public class StockSingleImpl extends StockAbstract implements StockSingle {
     return this.getMovingAverages(new CustomDate(fromDate), new CustomDate(toDate), days);
   }
 
+  /**
+   * Returns a representation of the moving averages for each day in the given range.
+   *
+   * @param fromDate date range start.
+   * @param toDate   date range end.
+   * @param days     number of days to average over.
+   * @return a representation of the moving averages for a stock or basket present for each day
+   * @throws Exception described by its message.
+   */
   public Map<String, Double> getMovingAverages(CustomDate fromDate, CustomDate toDate, int days)
           throws Exception {
 
@@ -199,39 +208,6 @@ public class StockSingleImpl extends StockAbstract implements StockSingle {
     }
 
     return result;
-  }
-
-  private boolean isBuyingOpportunityUsingMovingAverage(CustomDate date) throws Exception {
-    CustomDate pastDate = date.getXDaysBeforeOrAfter(-400);
-    TreeMap<Integer, PriceRecord> priceRecords;
-    double total = 0;
-    double fiftyDaysMovingAverage = 0;
-    double twoHundredsDaysMovingAverage = 0;
-    int i = 1;
-
-    priceRecords = (TreeMap<Integer, PriceRecord>) this.retriever.getHistoricalPrices(this.symbol,
-            pastDate.getDay(), pastDate.getMonth(), pastDate.getYear(),
-            date.getDay(), date.getMonth(), date.getYear());
-
-    for (Integer n : priceRecords.descendingKeySet()) {
-      total += priceRecords.get(n).getClosePrice();
-      if (i == 200) {
-        twoHundredsDaysMovingAverage = total / i;
-        break;
-      }
-      if (i == 50) {
-        fiftyDaysMovingAverage = total / i;
-      }
-      i++;
-    }
-
-    if (total == 0 || priceRecords.get(date.toKeyInt()) == null) {
-      throw new StockPriceNotFound("Stock price not found");
-    }
-    if (fiftyDaysMovingAverage == 0 || twoHundredsDaysMovingAverage == 0) {
-      throw new IllegalArgumentException("Not enough data to calculate moving day average");
-    }
-    return fiftyDaysMovingAverage > twoHundredsDaysMovingAverage;
   }
 
   /**

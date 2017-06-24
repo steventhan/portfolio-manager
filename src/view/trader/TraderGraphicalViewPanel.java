@@ -1,11 +1,9 @@
 package view.trader;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.*;
 import java.util.Map;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * Created by steven on 21/06/2017.
@@ -44,6 +42,7 @@ public class TraderGraphicalViewPanel extends JPanel {
 
   /**
    * Plots a record on the graphical view.
+   *
    * @param name name of record.
    * @param data record's data.
    */
