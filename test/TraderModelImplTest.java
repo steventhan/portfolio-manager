@@ -203,9 +203,9 @@ public class TraderModelImplTest {
 
     Map<String, Double> temp = this.model.getMovingAveragesForOne("basket-one",
             "2017-06-20", "2017-06-22", 50);
-    assertEquals(2041.488, temp.get("2017-06-22"), 0.01);
-    assertEquals(2076.368, temp.get("2017-06-21"), 0.01);
-    assertEquals(2111.365, temp.get("2017-06-20"), 0.01);
+    assertEquals(2133.6458, temp.get("2017-06-22"), 0.01);
+    assertEquals(2127.5126, temp.get("2017-06-21"), 0.01);
+    assertEquals(2122.1004, temp.get("2017-06-20"), 0.01);
   }
 
   @Test
