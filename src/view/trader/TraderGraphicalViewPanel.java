@@ -1,12 +1,14 @@
 package view.trader;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 /**
- * Created by steven on 21/06/2017.
+ * Graphical view for trader application.
  */
 public class TraderGraphicalViewPanel extends JPanel {
   private TraderGraph graph;
