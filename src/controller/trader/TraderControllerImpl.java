@@ -12,7 +12,6 @@ import view.trader.TraderView;
 /**
  * An implementation of TraderController interface.
  */
-//TODO: automate test by reading from and writing to file(s)
 public class TraderControllerImpl implements TraderController {
   private final TraderModel model;
   private final TraderView view;
@@ -157,7 +156,7 @@ public class TraderControllerImpl implements TraderController {
     }
 
     this.currentGraphHighestPrice = this.model.getHighestPrice();
-    this.view.setupPanel(this.currentGraphHighestPrice);
+    this.view.setupPanel(this.currentGraphHighestPrice, this.fromDate, this.toDate);
 
     for (String k : priceData.keySet()) {
       this.view.plotRecord(k, priceData.get(k));

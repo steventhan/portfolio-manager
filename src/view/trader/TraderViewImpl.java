@@ -56,7 +56,7 @@ public class TraderViewImpl implements TraderView {
   }
 
   @Override
-  public void setupPanel(double highestPrice) {
-    this.graphicalView.setupPanel(highestPrice);
+  public void setupPanel(double highestPrice, String fromDate, String toDate) {
+    this.graphicalView.setupPanel(highestPrice, fromDate, toDate);
   }
 }
