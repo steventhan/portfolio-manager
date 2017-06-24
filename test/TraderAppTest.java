@@ -26,19 +26,21 @@ public class TraderAppTest {
 
   @Before
   public void setUp() throws Exception {
-    this.mainMenu = "c - Create new stock or basket\n" +
-            "a - Add new share to a basket\n" +
-            "p - Print the stock basket\n" +
-            "t - Trend of stock\n" +
-            "l - Plot\nq - Quit\n" +
-            "Select: ";
+    this.mainMenu = "c - Create new stock or basket\n"
+            + "a - Add new share to a basket\n"
+            + "p - Print the stock basket\n"
+            + "t - Trend of stock\n"
+            + "l - Plot\n"
+            + "r - Remove stock entity by name\n"
+            + "q - Quit\n"
+            + "Select: ";
 
     this.createPrompt = "Enter stock symbol or basket name \n" +
             "(if the string is a valid \n" +
             "stock symbol, it's assumed to be stock, \n" +
             "otherwise a basket will be created): \n";
 
-    this.printPrompt= "Enter basket name to print: ";
+    this.printPrompt = "Enter basket name to print: ";
     this.addPrompt = "Enter basket name to add: Enter stock symbol: Amount: \n";
   }
 
@@ -206,12 +208,5 @@ public class TraderAppTest {
     assertTrue(out.toString().contains("Start date has to be before end date, and end date " +
             "cannot be in the future"));
   }
-  // make test read from file
-  // make test write to file
-
-  // instantiate a model
-  // instantiate a view
-  // instantiate a controller with the above three and make sure outputs are what was expected
-  // go through each input in the menu
 }
 
