@@ -34,13 +34,12 @@ _Submit all your source files, including the ones given to you that your code en
     * remove a plot
     * plot the closing prices of one or more stocks/baskets simultaneously
     * plot the 50-day and/or 200-day averages of one or more stocks/baskets with the plot of their closing prices
-    *
 
 * each plot should have a different color
 * NOTE: &quot;plots of the prices vs. dates in a specified date range&quot;
 * there should be a legend showing the meaning of each color
     * stock ticker symbol or basket name
-    * closing prices, or number of day average*
+    * closing prices, or number of day average
 * changes to what the graphical view shows should cause it to automatically refresh the plots
 
 ##TODO List
@@ -57,14 +56,3 @@ _Submit all your source files, including the ones given to you that your code en
     Font rotatedFont = font.deriveFont(affineTransform);
     gTransform.setFont(rotatedFont);</pre>
 
-Highest price on 2017-06-22 should be 85.6751
-"BAC" 22.93
-"CHK"  4.50
-"TWTR" 18.15
-"INTC" 34.36
-"WFC" 52.49
-"HAL" 41.90
-"A" 60.61
-"PWC" 85.6751
-
-Highest price between 2016-01-01 and 2017-01-01 is
