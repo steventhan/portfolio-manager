@@ -13,6 +13,8 @@ import model.trader.TraderModelImpl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.fail;
 
 
 /**
@@ -282,8 +284,12 @@ public class TraderModelImplTest {
 
   @Test
   public void trendsUp() throws Exception {
-    //TODO: test this -- just do math and check for correct result
-    assertTrue(this.hashCode() != 0);
+    assertFalse(this.model.trendsUp("basket-one", "2017-06-02", "2017-06-22"));
+    try {
+      this.model.trendsUp("basket-two", "2015-02-02", "2016-02-27");
+      fail();
+    } catch (IllegalArgumentException e) {
+      // Pass
+    }
   }
-
 }
