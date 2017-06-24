@@ -22,7 +22,7 @@ public class TraderGraphicalViewPanel extends JPanel {
   private static final int xOffset = 50;
   private static final int yOffset = 0;
   private static final Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN,
-          Color.BLUE, Color.MAGENTA, Color.PINK, Color.CYAN, Color.GRAY};
+    Color.BLUE, Color.MAGENTA, Color.PINK, Color.CYAN, Color.GRAY};
 
   private int colorIndx;
 
