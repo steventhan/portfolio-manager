@@ -8,6 +8,9 @@ import java.util.Map;
  */
 public interface TraderGraphicalView {
   void setupPanel(double highestPrice, String fromDate, String toDate);
+
   void plotRecord(String name, Map<String, Double> data);
+
   void exit();
+
 }

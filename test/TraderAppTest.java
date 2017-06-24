@@ -38,10 +38,10 @@ public class TraderAppTest {
             + "q - Quit\n"
             + "Select: ";
 
-    this.createPrompt = "Enter stock symbol or basket name \n" +
-            "(if the string is a valid \n" +
-            "stock symbol, it's assumed to be stock, \n" +
-            "otherwise a basket will be created): \n";
+    this.createPrompt = "Enter stock symbol or basket name \n"
+            + "(if the string is a valid \n"
+            + "stock symbol, it's assumed to be stock, \n"
+            + "otherwise a basket will be created): \n";
 
     this.printPrompt = "Enter basket name to print: ";
     this.addPrompt = "Enter basket name to add: Enter stock symbol: Amount: \n";
@@ -113,12 +113,12 @@ public class TraderAppTest {
 
   @Test
   public void testCreateBasketAddAndPrintManyItems() throws Exception {
-    in = new StringReader("c\nrandom\n" +
-            "a\nrandom\naapl\n10\n" +
-            "a\nrandom\namzn\n1\n" +
-            "a\nrandom\namd\n15\n" +
-            "p\nrandom\n" +
-            "q\n");
+    in = new StringReader("c\nrandom\n"
+            + "a\nrandom\naapl\n10\n"
+            + "a\nrandom\namzn\n1\n"
+            + "a\nrandom\namd\n15\n"
+            + "p\nrandom\n"
+            + "q\n");
     out = new StringBuffer();
     String amzn = "amzn: 1 share\n";
     String aapl = "aapl: 10 shares\n";
@@ -208,8 +208,8 @@ public class TraderAppTest {
             new TraderViewImpl(new TraderGraphicalViewImpl(),
                     new TraderTextViewImpl(out)), in).start();
 
-    assertTrue(out.toString().contains("Start date has to be before end date, and end date " +
-            "cannot be in the future"));
+    assertTrue(out.toString().contains("Start date has to be before end date, and end date "
+            + "cannot be in the future"));
   }
 
   @Test

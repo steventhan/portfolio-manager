@@ -1,6 +1,5 @@
 package model.trader;
 
-import java.net.Inet4Address;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -157,8 +156,18 @@ public class StockSingleImpl extends StockAbstract implements StockSingle {
     return result;
   }
 
+  /**
+   * Returns a representation of the moving averages for each day in the given range.
+   *
+   * @param fromDate date range start.
+   * @param toDate   date range end.
+   * @param days     number of days to average over.
+   * @return a representation of the moving averages for a stock or basket present for each day
+   * @throws Exception described by its message.
+   */
   @Override
-  public Map<String, Double> getMovingAverages(String fromDate, String toDate, int days) throws Exception {
+  public Map<String, Double> getMovingAverages(String fromDate, String toDate, int days)
+          throws Exception {
     return this.getMovingAverages(new CustomDate(fromDate), new CustomDate(toDate), days);
   }
 
@@ -233,7 +242,6 @@ public class StockSingleImpl extends StockAbstract implements StockSingle {
    */
   @Override
   public boolean isBuyingOpportunity(String strDate) throws Exception {
-//    return this.isBuyingOpportunityUsingMovingAverage(new CustomDate(strDate));
     return this.getMovingAverages(strDate, strDate, 50).get(strDate)
             > this.getMovingAverages(strDate, strDate, 200).get(strDate);
   }

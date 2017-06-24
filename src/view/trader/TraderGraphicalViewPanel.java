@@ -1,9 +1,11 @@
 package view.trader;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 /**
  * Created by steven on 21/06/2017.
@@ -19,10 +21,15 @@ public class TraderGraphicalViewPanel extends JPanel {
   private static final int height = 700;
   private static final int xOffset = 50;
   private static final int yOffset = 0;
-  private final static Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN,
+  private static final Color[] colors = {Color.RED, Color.ORANGE, Color.YELLOW, Color.GREEN,
           Color.BLUE, Color.MAGENTA, Color.PINK, Color.CYAN, Color.GRAY};
   private int colorIndx;
 
+  /**
+   * Constructs the main panel for the graphical view.
+   *
+   * @param highestPrice used to scale window.
+   */
   public TraderGraphicalViewPanel(double highestPrice, String fromDate, String toDate) {
     super();
     this.graph = new TraderGraph(this.getPreferredSize().width - 200,
@@ -41,6 +48,11 @@ public class TraderGraphicalViewPanel extends JPanel {
     return new Dimension(width, height);
   }
 
+  /**
+   * Plots a record on the graphical view.
+   * @param name name of record.
+   * @param data record's data.
+   */
   public void plotRecord(String name, Map<String, Double> data) {
     this.legend.addLegendItem(name, colors[this.colorIndx]);
     this.graph.plotRecord(data, colors[this.colorIndx]);

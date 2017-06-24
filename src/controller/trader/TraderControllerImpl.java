@@ -24,6 +24,13 @@ public class TraderControllerImpl implements TraderController {
     this(model, view, new InputStreamReader(System.in));
   }
 
+  /**
+   * Constructs an instance of the trader controller.
+   *
+   * @param model classes to maintain and manipulate data.
+   * @param view  classes to display information to the user.
+   * @param in    source of user input.
+   */
   public TraderControllerImpl(TraderModel model, TraderView view, Readable in) {
     this.model = model;
     this.view = view;
@@ -34,10 +41,10 @@ public class TraderControllerImpl implements TraderController {
   }
 
   private void createNewStockOrBasket(Scanner sc) throws Exception {
-    this.view.append("Enter stock symbol or basket name \n" +
-            "(if the string is a valid \n" +
-            "stock symbol, it's assumed to be stock, \n" +
-            "otherwise a basket will be created): ");
+    this.view.append("Enter stock symbol or basket name \n"
+            + "(if the string is a valid \n"
+            + "stock symbol, it's assumed to be stock, \n"
+            + "otherwise a basket will be created): ");
     String basketOrStockName = sc.nextLine();
     try {
       this.model.createStockBasket(basketOrStockName);
@@ -133,9 +140,9 @@ public class TraderControllerImpl implements TraderController {
   }
 
   private void plotEverything() throws Exception {
-    Map<String,Map<String, Double>> priceData;
-    Map<String,Map<String, Double>> avg50;
-    Map<String,Map<String, Double>> avg200;
+    Map<String, Map<String, Double>> priceData;
+    Map<String, Map<String, Double>> avg50;
+    Map<String, Map<String, Double>> avg200;
     priceData = new TreeMap<>();
     avg50 = new TreeMap<>();
     avg200 = new TreeMap<>();
@@ -206,6 +213,10 @@ public class TraderControllerImpl implements TraderController {
         case "q":
           this.view.exit();
           return;
+
+        default:
+          // no action intended
+          break;
       }
       this.view.append("\n");
     }

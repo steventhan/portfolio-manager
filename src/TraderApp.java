@@ -5,9 +5,15 @@ import view.trader.TraderTextViewImpl;
 import view.trader.TraderViewImpl;
 
 /**
- * Created by steven on 18/06/2017.
+ * Main class for the tader application.
  */
 public class TraderApp {
+  /**
+   * Main method to start the trader application and hand control over to the controller.
+   *
+   * @param args unused.
+   * @throws Exception described by its message.
+   */
   public static void main(String[] args) throws Exception {
     new TraderControllerImpl(new TraderModelImpl(),
             new TraderViewImpl(new TraderGraphicalViewImpl(),

@@ -1,7 +1,8 @@
 package view.trader;
 
 import java.util.Map;
-import javax.swing.*;
+
+import javax.swing.JFrame;
 
 /**
  * Graphical view for the stock trader application.
@@ -37,6 +38,9 @@ public class TraderGraphicalViewImpl implements TraderGraphicalView {
     this.frame.repaint();
   }
 
+  /**
+   * Exits the application.
+   */
   public void exit() {
     if (this.frame != null) {
       this.frame.dispose();

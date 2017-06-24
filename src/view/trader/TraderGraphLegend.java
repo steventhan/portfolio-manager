@@ -1,6 +1,7 @@
 package view.trader;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 /**
@@ -14,6 +15,12 @@ public class TraderGraphLegend extends BufferedImage {
     this.yInitial = this.getHeight();
   }
 
+  /**
+   * Adds an item to the legend.
+   *
+   * @param str   information about the item.
+   * @param color color of string.
+   */
   public void addLegendItem(String str, Color color) {
     Graphics2D g2d = this.createGraphics();
     this.yInitial = this.yInitial - 15;
