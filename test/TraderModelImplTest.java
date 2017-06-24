@@ -28,6 +28,7 @@ public class TraderModelImplTest {
 
   /**
    * Initialize data that can be used for each test case.
+   *
    * @throws Exception described by its message.
    */
   @Before
@@ -210,8 +211,55 @@ public class TraderModelImplTest {
 
   @Test
   public void getPlotData() throws Exception {
-    //todo exception for same day
-    assertTrue(this.hashCode() != 0);
+    TraderModel tempModel = new TraderModelImpl();
+    tempModel.createStockBasket("new-basket-one");
+
+    tempModel.createStockBasket("BAC");
+    tempModel.createStockBasket("CHK");
+    tempModel.createStockBasket("TWTR");
+    tempModel.createStockBasket("INTC");
+
+    Map<String, Map<String, Double>> expected = new HashMap<>();
+    Map<String, Double> expectedOne = new HashMap<>();
+    Map<String, Double> expectedTwo = new HashMap<>();
+    Map<String, Double> expectedThree = new HashMap<>();
+    Map<String, Double> expectedFour = new HashMap<>();
+
+    expectedOne.put("2017-06-23", 22.82);
+    expectedOne.put("2017-06-22", 22.93);
+    expectedOne.put("2017-06-21", 23.13);
+    expectedOne.put("2017-06-20", 23.49);
+    expectedOne.put("2017-06-19", 23.91);
+
+    expectedTwo.put("2017-06-23", 4.57);
+    expectedTwo.put("2017-06-22", 4.5);
+    expectedTwo.put("2017-06-21", 4.52);
+    expectedTwo.put("2017-06-20", 4.91);
+    expectedTwo.put("2017-06-19", 4.99);
+
+    expectedThree.put("2017-06-23", 18.5);
+    expectedThree.put("2017-06-22", 18.15);
+    expectedThree.put("2017-06-21", 17.78);
+    expectedThree.put("2017-06-20", 16.91);
+    expectedThree.put("2017-06-19", 17.06);
+
+    expectedFour.put("2017-06-23", 34.19);
+    expectedFour.put("2017-06-22", 34.36);
+    expectedFour.put("2017-06-21", 34.58);
+    expectedFour.put("2017-06-20", 34.86);
+    expectedFour.put("2017-06-19", 35.51);
+
+    expected.put("BAC", expectedOne);
+    expected.put("CHK", expectedTwo);
+    expected.put("TWTR", expectedThree);
+    expected.put("INTC", expectedFour);
+
+    for (String stockNames : expected.keySet()) {
+      for (String date : expected.get(stockNames).keySet()) {
+        assertEquals(expected.get(stockNames).get(date),
+                tempModel.getPlotData("2017-06-19", "2017-06-23").get(stockNames).get(date), 0.01);
+      }
+    }
   }
 
   @Test
