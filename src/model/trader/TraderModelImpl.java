@@ -117,14 +117,14 @@ public class TraderModelImpl implements TraderModel {
                                                      String toDate, int days)
           throws Exception {
     Map<String, Double> data;
-    data = this.basketExist(symbolOrBasketName) ?
-            this.stockBasketMap.get(symbolOrBasketName).getMovingAverages(fromDate, toDate, days)
+    data = this.basketExist(symbolOrBasketName)
+            ? this.stockBasketMap.get(symbolOrBasketName).getMovingAverages(fromDate, toDate, days)
             : new StockSingleImpl(symbolOrBasketName).getMovingAverages(fromDate, toDate, days);
 
     data.entrySet()
             .stream()
-            .forEach(e -> this.highestPrice = e.getValue() > this.highestPrice ?
-                    e.getValue() : this.highestPrice);
+            .forEach(e -> this.highestPrice = e.getValue() > this.highestPrice
+                    ? e.getValue() : this.highestPrice);
 
     return data;
 
