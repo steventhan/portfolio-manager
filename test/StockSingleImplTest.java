@@ -8,32 +8,34 @@ import java.util.Map;
 import custom.util.CustomDate;
 import custom.util.NewStockRetriever;
 import custom.util.WebRetrieverSingleton;
+import model.trader.StockSingle;
+import model.trader.StockSingleImpl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * JUnit tests for StockSingle.
+ * JUnit tests for StockSingleImpl.
  */
-public class StockSingleTest {
+public class StockSingleImplTest {
 
   /**
    * Necessary empty constructor to throw exception.
    *
    * @throws Exception if there is one.
    */
-  public StockSingleTest() throws Exception {
+  public StockSingleImplTest() throws Exception {
     // empty constructor to document that this class throws an exception.
   }
 
   private NewStockRetriever retriever;
 
   // intialize constants for testing
-  private final IStockSingle verizon = new StockSingle("VZ");
+  private final StockSingle verizon = new StockSingleImpl("VZ");
   // 6/13/2017  5/5/2017  2/14/2017  12/25/2016  12/23/2016
   // 46.450001    46.69        48.27        #N/A       53.68
-  private final IStockSingle UPS = new StockSingle("UPS");
+  private final StockSingle UPS = new StockSingleImpl("UPS");
   //  6/13/2017  5/5/2017  2/14/2017  12/25/2016  12/23/2016
   // 109.809998    107.43     108.99        #N/A      115.97
   private final CustomDate today = new CustomDate();
@@ -64,41 +66,41 @@ public class StockSingleTest {
   @Test
   public void testConstructor() throws Exception {
     // legal constructor arguments
-    new StockSingle("A");
-    new StockSingle("A", this.retriever);
+    new StockSingleImpl("A");
+    new StockSingleImpl("A", this.retriever);
 
     // illegal constructor arguments
 
     try { // empty string
-      new StockSingle("");
+      new StockSingleImpl("");
       Assert.fail();
     } catch (Exception e) {
       // pass
     }
 
     try { // null symbol
-      new StockSingle(null);
+      new StockSingleImpl(null);
       Assert.fail();
     } catch (Exception e) {
       // pass
     }
 
     try { // null symbol
-      new StockSingle(null, this.retriever);
+      new StockSingleImpl(null, this.retriever);
       Assert.fail();
     } catch (Exception e) {
       // pass
     }
 
     try { // no such symbol
-      new StockSingle("AAA");
+      new StockSingleImpl("AAA");
       Assert.fail();
     } catch (Exception e) {
       // pass
     }
 
     try { // null retriever
-      new StockSingle("A", null);
+      new StockSingleImpl("A", null);
       Assert.fail();
     } catch (Exception e) {
       // pass
@@ -107,9 +109,9 @@ public class StockSingleTest {
 
   @Test
   public void testGetName() throws Exception {
-    assertEquals("\"Verizon", new StockSingle("VZ").getName());
-    assertEquals("\"United", new StockSingle("UPS").getName());
-    assertEquals("\"Apple", new StockSingle("AAPL").getName());
+    assertEquals("\"Verizon", new StockSingleImpl("VZ").getName());
+    assertEquals("\"United", new StockSingleImpl("UPS").getName());
+    assertEquals("\"Apple", new StockSingleImpl("AAPL").getName());
   }
 
   @Test

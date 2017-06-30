@@ -1,9 +1,11 @@
+package model.trader;
+
 import java.util.Map;
 
 /**
  * Interface for methods common to a single stock.
  */
-public interface IStockSingle extends IStock {
+public interface StockSingle extends Stock {
 
   /**
    * Get historical (closing) prices for a stock for a certain date range.
@@ -15,6 +17,18 @@ public interface IStockSingle extends IStock {
    * @throws IllegalArgumentException if dates not valid.
    */
   Map<String, Double> getClosingPrices(String fromDate, String toDate) throws Exception;
+
+  /**
+   * Get moving averages for a stock for a certain date range.
+   *
+   * @param fromDate from date
+   * @param toDate end date
+   * @param days number of days moving averages
+   * @return a Map&ltString, Double&gt with its keys as date, and values as moving averages
+   *         on the date.
+   * @throws Exception there's a problem communicating with server
+   */
+  Map<String, Double> getMovingAverages(String fromDate, String toDate, int days) throws Exception;
 
   /**
    * Determines if there is a buying opportunity for a certain stock on a certain day.
@@ -30,5 +44,12 @@ public interface IStockSingle extends IStock {
    * @return the symbol as String
    */
   String getSymbol();
+
+  /**
+   * Gets company name.
+   *
+   * @return the company name as String
+   */
+  String getName();
 
 }

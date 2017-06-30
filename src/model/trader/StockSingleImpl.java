@@ -1,3 +1,7 @@
+package model.trader;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -8,9 +12,9 @@ import custom.util.WebRetrieverSingleton;
 import util.PriceRecord;
 
 /**
- * Implementation of IStock.
+ * Implementation of Stock.
  */
-public class StockSingle extends StockAbstract implements IStockSingle {
+public class StockSingleImpl extends StockAbstract implements StockSingle {
   private final String symbol; // stock symbol
   private final String name; // company name
   private final NewStockRetriever retriever;
@@ -21,7 +25,7 @@ public class StockSingle extends StockAbstract implements IStockSingle {
    * @param symbol stock.
    * @throws Exception if no symbol.
    */
-  public StockSingle(String symbol) throws Exception {
+  public StockSingleImpl(String symbol) throws Exception {
     this(symbol, WebRetrieverSingleton.getInstance());
   }
 
@@ -33,7 +37,7 @@ public class StockSingle extends StockAbstract implements IStockSingle {
    * @param retriever retriever to be used to retrieve stock price
    * @throws Exception if no symbol.
    */
-  public StockSingle(String symbol, NewStockRetriever retriever) throws Exception {
+  public StockSingleImpl(String symbol, NewStockRetriever retriever) throws Exception {
     super();
     this.symbol = symbol;
     this.retriever = retriever;
@@ -69,8 +73,8 @@ public class StockSingle extends StockAbstract implements IStockSingle {
    */
   @Override
   public boolean equals(Object o) {
-    return this == o || (o instanceof StockSingle
-            && this.symbol.equals(((StockSingle) o).getSymbol()));
+    return this == o || (o instanceof StockSingleImpl
+            && this.symbol.equals(((StockSingleImpl) o).getSymbol()));
   }
 
   /**
@@ -113,9 +117,9 @@ public class StockSingle extends StockAbstract implements IStockSingle {
   }
 
   /**
-   * Gets this symbol's hashcode to help the map lookup operation within a StockBasket.
+   * Gets this symbol's hashcode to help the map lookup operation within a StockBasketImpl.
    *
-   * @return this StockSingle's symbol's hashcode.
+   * @return this StockSingleImpl's symbol's hashcode.
    */
   @Override
   public int hashCode() {
@@ -152,37 +156,58 @@ public class StockSingle extends StockAbstract implements IStockSingle {
     return result;
   }
 
-  private boolean isBuyingOpportunityUsingMovingAverage(CustomDate date) throws Exception {
-    CustomDate pastDate = date.getXDaysBeforeOrAfter(-400);
+  /**
+   * Returns a representation of the moving averages for each day in the given range.
+   *
+   * @param fromDate date range start.
+   * @param toDate   date range end.
+   * @param days     number of days to average over.
+   * @return a representation of the moving averages for a stock or basket present for each day
+   * @throws Exception described by its message.
+   */
+  @Override
+  public Map<String, Double> getMovingAverages(String fromDate, String toDate, int days)
+          throws Exception {
+    return this.getMovingAverages(new CustomDate(fromDate), new CustomDate(toDate), days);
+  }
+
+  /**
+   * Returns a representation of the moving averages for each day in the given range.
+   *
+   * @param fromDate date range start.
+   * @param toDate   date range end.
+   * @param days     number of days to average over.
+   * @return a representation of the moving averages for a stock or basket present for each day
+   * @throws Exception described by its message.
+   */
+  public Map<String, Double> getMovingAverages(CustomDate fromDate, CustomDate toDate, int days)
+          throws Exception {
+
+    CustomDate pastDate = fromDate.getXDaysBeforeOrAfter(-(days * 2));
+    Map<String, Double> result = new TreeMap<>();
     TreeMap<Integer, PriceRecord> priceRecords;
-    double total = 0;
-    double fiftyDaysMovingAverage = 0;
-    double twoHundredsDaysMovingAverage = 0;
-    int i = 1;
 
-    priceRecords = (TreeMap) this.retriever.getHistoricalPrices(this.symbol, pastDate.getDay(),
-            pastDate.getMonth(), pastDate.getYear(), date.getDay(),
-            date.getMonth(), date.getYear());
+    priceRecords = (TreeMap<Integer, PriceRecord>) this.retriever.getHistoricalPrices(this.symbol,
+            pastDate.getDay(), pastDate.getMonth(), pastDate.getYear(),
+            toDate.getDay(), toDate.getMonth(), toDate.getYear());
 
-    for (Integer n : priceRecords.descendingKeySet()) {
-      total += priceRecords.get(n).getClosePrice();
-      if (i == 200) {
-        twoHundredsDaysMovingAverage = total / i;
-        break;
+    List<Integer> keySet = new ArrayList<>(priceRecords.descendingKeySet());
+    int i = 0;
+
+    while (toDate.compareTo(fromDate) >= 0) {
+      if (priceRecords.get(toDate.toKeyInt()) != null) {
+        double total = 0;
+        int currentDay = keySet.get(i);
+        for (int j = i; j < (days + i); j++) {
+          total += priceRecords.get(keySet.get(j)).getClosePrice();
+        }
+        result.put(new CustomDate(String.valueOf(currentDay)).toString(), total / days);
+        i++;
       }
-      if (i == 50) {
-        fiftyDaysMovingAverage = total / i;
-      }
-      i++;
+      toDate = toDate.getXDaysBeforeOrAfter(-1);
     }
 
-    if (total == 0 || priceRecords.get(date.toKeyInt()) == null) {
-      throw new StockPriceNotFound("Stock price not found");
-    }
-    if (fiftyDaysMovingAverage == 0 || twoHundredsDaysMovingAverage == 0) {
-      throw new IllegalArgumentException("Not enough data to calculate moving day average");
-    }
-    return fiftyDaysMovingAverage > twoHundredsDaysMovingAverage;
+    return result;
   }
 
   /**
@@ -193,11 +218,12 @@ public class StockSingle extends StockAbstract implements IStockSingle {
    */
   @Override
   public boolean isBuyingOpportunity(String strDate) throws Exception {
-    return this.isBuyingOpportunityUsingMovingAverage(new CustomDate(strDate));
+    return this.getMovingAverages(strDate, strDate, 50).get(strDate)
+            > this.getMovingAverages(strDate, strDate, 200).get(strDate);
   }
 
   /**
-   * Gets a String representation of StockSingle object.
+   * Gets a String representation of StockSingleImpl object.
    *
    * @return a String representation.
    */

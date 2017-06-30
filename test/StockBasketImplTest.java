@@ -1,3 +1,4 @@
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -6,40 +7,44 @@ import java.util.HashMap;
 import java.util.Map;
 
 import custom.util.StockPriceNotFound;
+import model.trader.StockBasket;
+import model.trader.StockSingle;
+import model.trader.StockBasketImpl;
+import model.trader.StockSingleImpl;
 
 /**
- * JUnit tests for StockBasket.
+ * JUnit tests for StockBasketImpl.
  */
-public class StockBasketTest {
-  StockBasket sb1;
-  StockBasket sb2;
-  StockBasket sb3;
-  StockBasket sb4;
+public class StockBasketImplTest {
+  private StockBasket sb1;
+  private StockBasket sb2;
+  private StockBasket sb3;
+  private StockBasket sb4;
 
   /**
    * Creates stock baskets for testing purposes.
    */
   @Before
   public void setup() throws Exception {
-    this.sb1 = new StockBasket();
+    this.sb1 = new StockBasketImpl();
 
     // using HashMap because, order doesn't matter
-    Map<IStockSingle, Integer> temp = new HashMap<>();
-    temp.put(new StockSingle("MMM"), 3);
-    temp.put(new StockSingle("ATVI"), 4);
-    temp.put(new StockSingle("ADBE"), 5);
-    temp.put(new StockSingle("A"), 6);
-    temp.put(new StockSingle("VZ"), 7);
-    temp.put(new StockSingle("UPS"), 8);
-    this.sb2 = new StockBasket(temp);
+    Map<StockSingle, Integer> temp = new HashMap<>();
+    temp.put(new StockSingleImpl("MMM"), 3);
+    temp.put(new StockSingleImpl("ATVI"), 4);
+    temp.put(new StockSingleImpl("ADBE"), 5);
+    temp.put(new StockSingleImpl("A"), 6);
+    temp.put(new StockSingleImpl("VZ"), 7);
+    temp.put(new StockSingleImpl("UPS"), 8);
+    this.sb2 = new StockBasketImpl(temp);
 
-    this.sb3 = new StockBasket();
+    this.sb3 = new StockBasketImpl();
     this.sb3.add("AAPL", 3);
     this.sb3.add("MSFT", 5);
     this.sb3.add("FB", 7);
     this.sb3.add("GOOGL", 9);
 
-    this.sb4 = new StockBasket();
+    this.sb4 = new StockBasketImpl();
     this.sb4.add("GE", 9);
     this.sb4.add("VZ", 20);
     this.sb4.add("DIS", 14);
@@ -65,9 +70,9 @@ public class StockBasketTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testConstructorIllegal() {
-    Map<IStockSingle, Integer> temp = null;
+    Map<StockSingle, Integer> temp = null;
     //noinspection ConstantConditions
-    new StockBasket(temp);
+    new StockBasketImpl(temp);
   }
 
   @Test

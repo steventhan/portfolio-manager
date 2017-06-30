@@ -1,7 +1,9 @@
+package model.trader;
+
 /**
  * Interface for all methods that a stock must implement.
  */
-public interface IStock {
+public interface Stock {
 
   /**
    * Looks up the price of a stock on a certain day.

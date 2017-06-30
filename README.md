@@ -1,65 +1,58 @@
-# neu-cs5004-hw5
-## Assignment 5: Investing Application
-:moneybag: :dollar: :pound: :euro: :yen: :money_with_wings: :yen: :euro: :pound: :dollar: :moneybag:
+#Assignment 6
 
-### Assignment Requirements
+##What to Submit
 
-* Look up the price of a stock or basket on a certain day
-* Determine if there is a buying opportunity for a certain stock on a certain day
-* Get historical (closing) prices for a stock for a certain date range.
-    * Historical prices are available only for business days.
-* Create a basket of stocks comprising of shares of one or more stocks.
-    * Determine its price on a certain date.
-* Determine if a stock or a basket trends up during a certain date range.
+_Submit all your source files, including the ones given to you that your code ends up using. You should also submit a screenshot of your graphical view that plots the closing price and 50-day average of the Wells Fargo Inc. (WFC) from January 1 2015 to January 1 2017._
 
-### FYI
+##Assignment Requirements
+* create two views and a controller for your stock model
+* each view should still emanate from a common interface
+* put all your view classes in the view.trader package,
+* put all your model classes in the model.trader package
+* and your model code from the previous assignment in the model.trader package
+* do not move the util package classes
 
-* *IStock* is the super interface for *IStockSingle* and *IBasketStockDataRecord*.
-* Queries should work with anything that implements the *NewStockRetriever* interface.
+* print a menu of options
+    * allow the user to choose an option
+    * provide additional data depending on the chosen option
+    * process the input
+    * display the results, if any
+    * reprint the menu
 
-### Optional
+* *the menu options:*
+    * Create a new basket and give it a specific name.
+    * Add shares of stocks to an existing basket using its ticker symbol.
+    * Print the contents and value of an existing basket.
+    * Ask for the trend of a particular stock within a specific date range.
+    * Quit the program
 
-* Be able to pass different NewStockRetrievers to implementations of IStocks
-* In the interest of implementing a Map<Strings, Stocks> in the controller, override the hasCode() and equals() methods later.
-* Try out different investment strategies: periodically investing a fixed amount of money, buying and selling to maintain a specific balance in a basket, etc.
-* Graph the outputs
-* Interactivity
+* test the controller by sending it inputs then checking that the correct data is sent to the view
+* test the view by looking at it verifying that it prints what you expect it to
 
-### TODO
+* more menu options for the graphical view:
+    * create a blank graphical view
+    * remove a plot
+    * plot the closing prices of one or more stocks/baskets simultaneously
+    * plot the 50-day and/or 200-day averages of one or more stocks/baskets with the plot of their closing prices
 
-* Resolve internal TODO list items
-* Resolve all failing tests
-* Review documentation. Document all methods that require documentation.
-* Change access to methods once testing is finished
-* @steventhan to write StockSingle class
-* @steventhan to write test for Basket class
-* @matthiasdenu to write Basket class
-* @matthiasdenu to write test for Stock class
-* @steventhan to look at java.util.Date class
-* <del>Decide how to do the 5 things</del>
-* <del>Implement StockSingle like Expression from assignment 4, i.e. cannot change query once it is made, you would need to make a new query</del>
-* <del>Actually query something!</del>
-* <del>Make interface from model to controller</del> (IStock)
-* <del>Decide how to implement getPriceOnDay()</del>
+* each plot should have a different color
+* NOTE: &quot;plots of the prices vs. dates in a specified date range&quot;
+* there should be a legend showing the meaning of each color
+    * stock ticker symbol or basket name
+    * closing prices, or number of day average
+* changes to what the graphical view shows should cause it to automatically refresh the plots
 
-### Emoji Meanings
-_more than emoji one may be used at a time_
-#### Frequent
-* :construction: work in progress
-* :heavy_check_mark: task completed
-* :smile: working code
-* :black_nib: documentation, style edits, and logistics
-* :thought_balloon: brainstorming
-* :recycle: major refactoring
-* :warning: untested code
-* :exclamation: broken code
-#### Infrequent
-* :scream: panic mode
-* :godmode: god mode
-* :zzz: going to bed
-* :trollface: "I like my way better"
+##TODO List
+* TODO document and review all public methods
+* todo make sure exceptions are handled correctly
+* todo if time permits draw an x-axis
+* todo if time permits update tests for model classes
 
-
-
-
+    <pre>// create a rotated transform and draw x-axis values
+    Graphics2D gTransform = (Graphics2D) g;
+    Font font = new Font(null, Font.PLAIN, 10);
+    AffineTransform affineTransform = new AffineTransform();
+    affineTransform.rotate(Math.toRadians(270), 0, 0);
+    Font rotatedFont = font.deriveFont(affineTransform);
+    gTransform.setFont(rotatedFont);</pre>
 
