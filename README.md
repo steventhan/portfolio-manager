@@ -1,10 +1,4 @@
-#Assignment 6
-
-##What to Submit
-
-_Submit all your source files, including the ones given to you that your code ends up using. You should also submit a screenshot of your graphical view that plots the closing price and 50-day average of the Wells Fargo Inc. (WFC) from January 1 2015 to January 1 2017._
-
-##Assignment Requirements
+## Features
 * create two views and a controller for your stock model
 * each view should still emanate from a common interface
 * put all your view classes in the view.trader package,
@@ -42,7 +36,7 @@ _Submit all your source files, including the ones given to you that your code en
     * closing prices, or number of day average
 * changes to what the graphical view shows should cause it to automatically refresh the plots
 
-##TODO List
+## TODO List
 * TODO document and review all public methods
 * todo make sure exceptions are handled correctly
 * todo if time permits draw an x-axis
